@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book an Appointment</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.5/main.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.5/main.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.5/locales-all.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <style>
+        #calendar-container {
+            max-width: 800px;
+            margin: auto;
+        }
+        #sidebar {
+            position: fixed;
+            top: 0;
+            right: -350px;
+            width: 350px;
+            height: 100%;
+            background: white;
+            box-shadow: -2px 0 5px rgba(0, 0, 0, 0.2);
+            padding: 20px;
+            transition: right 0.3s ease-in-out;
+        }
+        #sidebar.active {
+            right: 0;
+        }
+        .close-btn {
+            cursor: pointer;
+            float: right;
+            font-size: 20px;
+        }
+    </style>
+</head>
+<!-- Confirmation Modal -->
+<div class="modal fade" id="confirmationModal" tabindex="-1" aria-labelledby="confirmationTitle" aria-hidden="true">
+  <div class="modal-dialog">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h5 class="modal-title" id="confirmationTitle">Appointment Scheduled!</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body" id="confirmationBody">
+              <!-- Confirmation details will be injected here -->
+          </div>
+          <div class="modal-footer">
+              <button type="button" class="btn btn-success" id="addToCalendarBtn">Add to Google Calendar</button>
+              <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Back to Appointments</button>
+          </div>
+      </div>
+  </div>
+</div>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">Determan Tech Help</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="reviews.html">Reviews</a></li>
+                    <li class="nav-item"><a class="nav-link" href="appointments.html">Appointments</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    
+    <div class="container mt-5">
+        <h2 class="text-center">Book an Appointment</h2>
+        
+        <div id="calendar-container">
+            <div id="calendar"></div>
+        </div>
+
+        <div id="sidebar">
+            <span class="close-btn" onclick="closeSidebar()">×</span>
+            <h3 id="appointment-title">Confirm Your Appointment</h3>
+            <form id="bookingForm">
+                <div class="mb-3">
+                    <label for="name" class="form-label">Name</label>
+                    <input type="text" class="form-control" id="name" required>
+                </div>
+                <div class="mb-3">
+                    <label for="email" class="form-label">Email</label>
+                    <input type="email" class="form-control" id="email" required>
+                </div>
+                <div class="mb-3">
+                    <label for="problem" class="form-label">Describe Your Problem</label>
+                    <textarea class="form-control" id="problem" rows="3" required></textarea>
+                </div>
+                <div class="mb-3">
+                    <label for="location" class="form-label">Preferred Location</label>
+                    <input type="text" class="form-control" id="location" placeholder="(e.g., Online, In-person)" required>
+                </div>
+                <input type="hidden" id="selectedDate">
+                <button type="submit" class="btn btn-primary w-100">Submit</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var calendarEl = document.getElementById('calendar');
+            var calendar = new FullCalendar.Calendar(calendarEl, {
+                initialView: 'timeGridWeek',
+                selectable: true,
+                businessHours: {
+                    daysOfWeek: [1, 2, 3, 4, 5],
+                    startTime: '09:00',
+                    endTime: '17:00'
+                },
+                slotMinTime: '09:00',
+                slotMaxTime: '17:00',
+                allDaySlot: false,
+                select: function(info) {
+                    document.getElementById('selectedDate').value = info.startStr;
+                    document.getElementById('appointment-title').innerText = `Confirm Your Appointment for ${info.start.toLocaleString()}`;
+                    openSidebar();
+                },
+                events: '/get-busy-times',
+                height: 'auto'
+            });
+            calendar.render();
+
+            document.getElementById('bookingForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    const appointmentDetails = {
+        name: document.getElementById('name').value,
+        email: document.getElementById('email').value,
+        date: document.getElementById('selectedDate').value,
+        problem: document.getElementById('problem').value,
+        location: document.getElementById('location').value
+    };
+
+    fetch('http://localhost:5001/add-event', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(appointmentDetails)
+    }).then(response => response.json())
+      .then(data => {
+          showConfirmationScreen(appointmentDetails);
+          closeSidebar();
+          calendar.refetchEvents();
+      })
+      .catch(error => console.error('Error:', error));
+});
+function showConfirmationScreen(details) {
+    document.getElementById('confirmationBody').innerHTML = `
+        <p><strong>Time:</strong> ${new Date(details.date).toLocaleString()}</p>
+        <p><strong>Name:</strong> ${details.name}</p>
+        <p><strong>Email:</strong> ${details.email}</p>
+        <p><strong>Problem:</strong> ${details.problem}</p>
+        <p><strong>Location:</strong> ${details.location}</p>
+    `;
+
+    document.getElementById('addToCalendarBtn').onclick = function () {
+        addToGoogleCalendar(details.date, details.name, details.problem, details.location);
+    };
+
+    var confirmationModal = new bootstrap.Modal(document.getElementById('confirmationModal'));
+    confirmationModal.show();
+}
+
+
+function addToGoogleCalendar(date, name, problem, location) {
+    const startDate = new Date(date).toISOString();
+    const endDate = new Date(new Date(date).getTime() + 60 * 60000).toISOString();
+    
+    const googleCalendarUrl = `https://www.google.com/calendar/render?action=TEMPLATE&text=Tech+Help+with+${encodeURIComponent(name)}&dates=${startDate.replace(/[-:]/g, "").split(".")[0]}/${endDate.replace(/[-:]/g, "").split(".")[0]}&details=${encodeURIComponent("Problem: " + problem + "\\nLocation: " + location)}`;
+    
+    window.open(googleCalendarUrl, "_blank");
+}
+
+        });
+
+        function openSidebar() {
+            document.getElementById('sidebar').classList.add('active');
+        }
+
+        function closeSidebar() {
+            document.getElementById('sidebar').classList.remove('active');
+        }
+    </script>
+</body>
+</html>
