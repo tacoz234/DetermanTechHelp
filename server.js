@@ -77,6 +77,16 @@ app.post('/add-event', async (req, res) => {
         console.error('Error adding event:', error);
         res.status(500).json({ error: 'Error adding event' });
     }
+
+    const event = {
+        summary: `Tech Help with ${name}`,
+        description: `Problem: ${problem}\nEmail: ${email}`,
+        location: location, // ✅ Now correctly saves the selected location
+        start: { dateTime: date, timeZone: 'America/New_York' },
+        end: { dateTime: new Date(new Date(date).getTime() + 60 * 60000), timeZone: 'America/New_York' },
+        reminders: { useDefault: true }
+    };
+    
 });
 
 

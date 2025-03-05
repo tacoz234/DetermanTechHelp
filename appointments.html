@@ -99,9 +99,9 @@
                 </div>
                 <div class="mb-3">
                     <label for="location" class="form-label">Preferred Location</label>
-                    <input type="text" class="form-control" id="location" placeholder="(e.g., Online, In-person)"
-                        required>
-                </div>
+                    <input type="text" class="form-control" id="location" placeholder="Search for a location..." required>
+                    <div id="location-results" class="list-group"></div>
+                </div>                
                 <input type="hidden" id="selectedDate">
                 <button type="submit" class="btn btn-primary w-100">Submit</button>
             </form>
@@ -196,6 +196,33 @@
         }
 
     </script>
+    <script>
+        document.getElementById('location').addEventListener('input', function() {
+            let query = this.value;
+            
+            if (query.length > 2) { // Only search after 3+ characters
+                fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${query}`)
+                .then(response => response.json())
+                .then(data => {
+                    let resultsDiv = document.getElementById('location-results');
+                    resultsDiv.innerHTML = ''; // Clear previous results
+                    
+                    data.forEach(place => {
+                        let resultItem = document.createElement('button');
+                        resultItem.classList.add('list-group-item', 'list-group-item-action');
+                        resultItem.innerText = place.display_name;
+                        resultItem.onclick = function() {
+                            document.getElementById('location').value = place.display_name;
+                            resultsDiv.innerHTML = ''; // Hide results after selection
+                        };
+                        resultsDiv.appendChild(resultItem);
+                    });
+                })
+                .catch(error => console.error('Error fetching locations:', error));
+            }
+        });
+    </script>
+    
 </body>
 
 </html>
