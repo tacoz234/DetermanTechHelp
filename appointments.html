@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -14,6 +15,7 @@
             max-width: 800px;
             margin: auto;
         }
+
         #sidebar {
             position: fixed;
             top: 0;
@@ -25,9 +27,11 @@
             padding: 20px;
             transition: right 0.3s ease-in-out;
         }
+
         #sidebar.active {
             right: 0;
         }
+
         .close-btn {
             cursor: pointer;
             float: right;
@@ -37,21 +41,21 @@
 </head>
 <!-- Confirmation Modal -->
 <div class="modal fade" id="confirmationModal" tabindex="-1" aria-labelledby="confirmationTitle" aria-hidden="true">
-  <div class="modal-dialog">
-      <div class="modal-content">
-          <div class="modal-header">
-              <h5 class="modal-title" id="confirmationTitle">Appointment Scheduled!</h5>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="modal-body" id="confirmationBody">
-              <!-- Confirmation details will be injected here -->
-          </div>
-          <div class="modal-footer">
-              <button type="button" class="btn btn-success" id="addToCalendarBtn">Add to Google Calendar</button>
-              <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Back to Appointments</button>
-          </div>
-      </div>
-  </div>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="confirmationTitle">Appointment Scheduled!</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" id="confirmationBody">
+                <!-- Confirmation details will be injected here -->
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success" id="addToCalendarBtn">Add to Google Calendar</button>
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Back to Appointments</button>
+            </div>
+        </div>
+    </div>
 </div>
 
 <body>
@@ -63,17 +67,16 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
-                    <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
                     <li class="nav-item"><a class="nav-link" href="reviews.html">Reviews</a></li>
                     <li class="nav-item"><a class="nav-link" href="appointments.html">Appointments</a></li>
                 </ul>
             </div>
         </div>
     </nav>
-    
+
     <div class="container mt-5">
         <h2 class="text-center">Book an Appointment</h2>
-        
+
         <div id="calendar-container">
             <div id="calendar"></div>
         </div>
@@ -96,7 +99,8 @@
                 </div>
                 <div class="mb-3">
                     <label for="location" class="form-label">Preferred Location</label>
-                    <input type="text" class="form-control" id="location" placeholder="(e.g., Online, In-person)" required>
+                    <input type="text" class="form-control" id="location" placeholder="(e.g., Online, In-person)"
+                        required>
                 </div>
                 <input type="hidden" id="selectedDate">
                 <button type="submit" class="btn btn-primary w-100">Submit</button>
@@ -105,79 +109,56 @@
     </div>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             var calendarEl = document.getElementById('calendar');
             var calendar = new FullCalendar.Calendar(calendarEl, {
                 initialView: 'timeGridWeek',
                 selectable: true,
                 businessHours: {
-                    daysOfWeek: [1, 2, 3, 4, 5],
+                    daysOfWeek: [1, 2, 3, 4, 5], // Monday - Friday
                     startTime: '09:00',
                     endTime: '17:00'
                 },
                 slotMinTime: '09:00',
                 slotMaxTime: '17:00',
                 allDaySlot: false,
-                select: function(info) {
+                select: function (info) {
                     document.getElementById('selectedDate').value = info.startStr;
-                    document.getElementById('appointment-title').innerText = `Confirm Your Appointment for ${info.start.toLocaleString()}`;
+                    document.getElementById('appointment-title').innerText = `Confirm Your Appointment for ${new Date(info.start).toLocaleString()}`;
                     openSidebar();
                 },
-                events: '/get-busy-times',
+                events: 'http://localhost:5001/get-busy-times',
                 height: 'auto'
             });
             calendar.render();
 
-            document.getElementById('bookingForm').addEventListener('submit', function(e) {
-    e.preventDefault();
-    
-    const appointmentDetails = {
-        name: document.getElementById('name').value,
-        email: document.getElementById('email').value,
-        date: document.getElementById('selectedDate').value,
-        problem: document.getElementById('problem').value,
-        location: document.getElementById('location').value
-    };
+            document.getElementById('bookingForm').addEventListener('submit', function (e) {
+                e.preventDefault();
 
-    fetch('http://localhost:5001/add-event', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(appointmentDetails)
-    }).then(response => response.json())
-      .then(data => {
-          showConfirmationScreen(appointmentDetails);
-          closeSidebar();
-          calendar.refetchEvents();
-      })
-      .catch(error => console.error('Error:', error));
-});
-function showConfirmationScreen(details) {
-    document.getElementById('confirmationBody').innerHTML = `
-        <p><strong>Time:</strong> ${new Date(details.date).toLocaleString()}</p>
-        <p><strong>Name:</strong> ${details.name}</p>
-        <p><strong>Email:</strong> ${details.email}</p>
-        <p><strong>Problem:</strong> ${details.problem}</p>
-        <p><strong>Location:</strong> ${details.location}</p>
-    `;
+                const appointmentDetails = {
+                    name: document.getElementById('name').value,
+                    email: document.getElementById('email').value,
+                    date: document.getElementById('selectedDate').value,
+                    problem: document.getElementById('problem').value,
+                    location: document.getElementById('location').value
+                };
 
-    document.getElementById('addToCalendarBtn').onclick = function () {
-        addToGoogleCalendar(details.date, details.name, details.problem, details.location);
-    };
-
-    var confirmationModal = new bootstrap.Modal(document.getElementById('confirmationModal'));
-    confirmationModal.show();
-}
-
-
-function addToGoogleCalendar(date, name, problem, location) {
-    const startDate = new Date(date).toISOString();
-    const endDate = new Date(new Date(date).getTime() + 60 * 60000).toISOString();
-    
-    const googleCalendarUrl = `https://www.google.com/calendar/render?action=TEMPLATE&text=Tech+Help+with+${encodeURIComponent(name)}&dates=${startDate.replace(/[-:]/g, "").split(".")[0]}/${endDate.replace(/[-:]/g, "").split(".")[0]}&details=${encodeURIComponent("Problem: " + problem + "\\nLocation: " + location)}`;
-    
-    window.open(googleCalendarUrl, "_blank");
-}
-
+                fetch('http://localhost:5001/add-event', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(appointmentDetails)
+                }).then(response => response.json())
+                    .then(data => {
+                        if (data.message) {
+                            showConfirmationScreen(appointmentDetails);
+                            closeSidebar();
+                            calendar.refetchEvents(); // Refresh calendar to show new appointment
+                        } else {
+                            alert("Failed to schedule appointment. Please try again.");
+                        }
+                    })
+                    .catch(error => console.error('Error:', error));
+            });
         });
 
         function openSidebar() {
@@ -187,6 +168,34 @@ function addToGoogleCalendar(date, name, problem, location) {
         function closeSidebar() {
             document.getElementById('sidebar').classList.remove('active');
         }
+
+        function showConfirmationScreen(details) {
+            document.getElementById('confirmationBody').innerHTML = `
+        <p><strong>Time:</strong> ${new Date(details.date).toLocaleString()}</p>
+        <p><strong>Name:</strong> ${details.name}</p>
+        <p><strong>Email:</strong> ${details.email}</p>
+        <p><strong>Problem:</strong> ${details.problem}</p>
+        <p><strong>Location:</strong> ${details.location}</p>
+    `;
+
+            document.getElementById('addToCalendarBtn').onclick = function () {
+                addToGoogleCalendar(details.date, details.name, details.problem, details.location);
+            };
+
+            var confirmationModal = new bootstrap.Modal(document.getElementById('confirmationModal'));
+            confirmationModal.show();
+        }
+
+        function addToGoogleCalendar(date, name, problem, location) {
+            const startDate = new Date(date).toISOString();
+            const endDate = new Date(new Date(date).getTime() + 60 * 60000).toISOString();
+
+            const googleCalendarUrl = `https://www.google.com/calendar/render?action=TEMPLATE&text=Tech+Help+with+${encodeURIComponent(name)}&dates=${startDate.replace(/[-:]/g, "").split(".")[0]}/${endDate.replace(/[-:]/g, "").split(".")[0]}&details=${encodeURIComponent("Problem: " + problem + "\\nLocation: " + location)}`;
+
+            window.open(googleCalendarUrl, "_blank");
+        }
+
     </script>
 </body>
+
 </html>
