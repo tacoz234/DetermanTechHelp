@@ -1,19 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Reviews - Determan Tech Help</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css"></script>
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+
+        .review-card {
+            background: #fff;
+            border-left: 5px solid #007bff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .review-text {
+            font-size: 1.1rem;
+            font-style: italic;
+        }
+
+        .review-author {
+            font-weight: bold;
+            margin-top: 10px;
+            text-align: right;
+            color: #555;
+        }
+    </style>
 </head>
+
 <body>
+    <!-- Navigation Bar -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container">
             <a class="navbar-brand" href="index.html">Determan Tech Help</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse" id="#navbarNav">
+            <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item"><a class="nav-link" href="reviews.html">Reviews</a></li>
                     <li class="nav-item"><a class="nav-link" href="appointments.html">Appointments</a></li>
@@ -22,25 +51,66 @@
         </div>
     </nav>
 
+    <!-- Main Content -->
     <div class="container mt-5">
-        <h2>Customer Reviews</h2>
-        <div class="card mb-3">
-            <div class="card-body">
-                <p class="card-text">"Fantastic service! Quick and efficient!" - John D.</p>
-            </div>
-        </div>
-        <div class="card mb-3">
-            <div class="card-body">
-                <p class="card-text">"Highly recommend for tech support!" - Sarah K.</p>
-            </div>
-        </div>
-        <div class="card mb-3">
-            <div class="card-body">
-                <p class="card-text">"Very knowledgeable and helpful!" - Mike T.</p>
+        <h2 class="text-center text-primary"><i class="bi bi-star-fill"></i> Customer Reviews</h2>
+        <p class="text-center text-muted">See what people are saying about Determan Tech Help!</p>
+
+        <div class="row mt-4">
+            <div class="col-md-8 offset-md-2">
+                <!-- Review Cards -->
+                <div class="review-card mb-4">
+                    <p class="review-text">"It was very quick and easy and I didn’t have to do anything—he did all the
+                        work!"</p>
+                    <p class="review-author">- James McIntosh</p>
+                </div>
+
+                <div class="review-card mb-4">
+                    <p class="review-text">"Knew what he was doing and solved my problem without difficulty."</p>
+                    <p class="review-author">- Josh</p>
+                </div>
+
+                <div class="review-card mb-4">
+                    <p class="review-text">"Cole was precise, knowledgeable, and fixed my issue quickly. His rate is
+                        very reasonable. I would give him 5 stars!"</p>
+                    <p class="review-author">- Bonnie E</p>
+                </div>
+
+                <div class="review-card mb-4">
+                    <p class="review-text">"Cole was prompt, courteous, and knowledgeable. It’s nice having someone in
+                        the neighborhood. Very reasonable rates!"</p>
+                    <p class="review-author">- Donna</p>
+                </div>
+
+                <div class="review-card mb-4">
+                    <p class="review-text">"He methodically worked through a complex issue until he found the solution.
+                        We were thrilled!"</p>
+                    <p class="review-author">- Jim</p>
+                </div>
+
+                <div class="review-card mb-4">
+                    <p class="review-text">"Cole helped me with a long list of computer annoyances—very patient and
+                        helpful!"</p>
+                    <p class="review-author">- Anonymous</p>
+                </div>
+
+                <div class="review-card mb-4">
+                    <p class="review-text">"Cole was very professional, knowledgeable, and friendly. He upgraded my
+                        desktop, installed new software, and gave great advice on purchasing a laptop!"</p>
+                    <p class="review-author">- Anonymous</p>
+                </div>
+
+                <div class="review-card mb-4">
+                    <p class="review-text">"Cole just helped my husband set up and learn about his new Apple Watch. He
+                        is patient, knowledgeable, and a pleasure to work with."</p>
+                    <p class="review-author">- Anonymous</p>
+                </div>
             </div>
         </div>
     </div>
 
+    <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
+
 </html>
