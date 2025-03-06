@@ -2,38 +2,41 @@ require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const { google } = require('googleapis');
+const nodemailer = require('nodemailer');
 
 const app = express();
 app.use(express.json());
-app.use(cors()); // ✅ Allows frontend requests
+app.use(cors());
 
+// Google Calendar Setup
 const { OAuth2 } = google.auth;
-
 const oauth2Client = new OAuth2(
     process.env.CLIENT_ID,
     process.env.CLIENT_SECRET,
     process.env.REDIRECT_URI
 );
-
-oauth2Client.setCredentials({
-    refresh_token: process.env.REFRESH_TOKEN
-});
-
+oauth2Client.setCredentials({ refresh_token: process.env.REFRESH_TOKEN });
 const calendar = google.calendar({ version: 'v3', auth: oauth2Client });
 
-const nodemailer = require('nodemailer');
+// Google Sheets Setup for Reviews
+const sheets = google.sheets({ version: 'v4', auth: new google.auth.GoogleAuth({
+    credentials: {
+        client_email: process.env.GOOGLE_SERVICE_ACCOUNT,
+        private_key: process.env.GOOGLE_PRIVATE_KEY.replace(/\\n/g, '\n'),
+    },
+    scopes: ['https://www.googleapis.com/auth/spreadsheets']
+})});
 
+// Email Setup
 const transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
-        user: process.env.EMAIL_USER, // Your email
-        pass: process.env.EMAIL_PASS  // Your app password (not regular password)
+        user: process.env.EMAIL_USER,
+        pass: process.env.EMAIL_PASS
     }
 });
 
-
-
-// ✅ Route to Add an Event
+// ✅ Route to Add an Event to Google Calendar
 app.post('/add-event', async (req, res) => {
     try {
         const { name, email, date, problem, location } = req.body;
@@ -48,62 +51,38 @@ app.post('/add-event', async (req, res) => {
 
         const response = await calendar.events.insert({ calendarId: 'primary', resource: event });
 
-        console.log('Event Created:', response.data);
-
-        // 📧 Send confirmation email
+        // Send Confirmation Email
         const mailOptions = {
             from: process.env.EMAIL_USER,
             to: email,
             subject: `Appointment Confirmation - Determan Tech Help`,
             text: `Hi ${name},\n\nYour appointment has been scheduled!\n\n📅 Date & Time: ${new Date(date).toLocaleString()}
             📍 Location: ${location}
-            📝 Problem: ${problem}\n\nIf you have any questions, feel free to reply to this email.\n\nThanks!\nDeterman Tech Help`
+            📝 Problem: ${problem}\n\nThanks!\nDeterman Tech Help`
         };
 
         transporter.sendMail(mailOptions, (error, info) => {
-            if (error) {
-                console.error("Error sending email:", error);
-            } else {
-                console.log("Email sent:", info.response);
-            }
+            if (error) console.error("Error sending email:", error);
+            else console.log("Email sent:", info.response);
         });
 
-        res.json({
-            message: 'Appointment added to Google Calendar!',
-            eventId: response.data.id
-        });
-
+        res.json({ message: 'Appointment added to Google Calendar!', eventId: response.data.id });
     } catch (error) {
         console.error('Error adding event:', error);
         res.status(500).json({ error: 'Error adding event' });
     }
-
-    const event = {
-        summary: `Tech Help with ${name}`,
-        description: `Problem: ${problem}\nEmail: ${email}`,
-        location: location, // ✅ Now correctly saves the selected location
-        start: { dateTime: date, timeZone: 'America/New_York' },
-        end: { dateTime: new Date(new Date(date).getTime() + 60 * 60000), timeZone: 'America/New_York' },
-        reminders: { useDefault: true }
-    };
-    
 });
 
-
-// ✅ Route to Fetch Busy Times
+// ✅ Route to Fetch Busy Times from Google Calendar
 app.get('/get-busy-times', async (req, res) => {
     try {
-        console.log("Fetching busy times...");
-
         const events = await calendar.events.list({
-            calendarId: 'primary',  // Ensure it's using the correct calendar
+            calendarId: 'primary',
             timeMin: new Date().toISOString(),
             maxResults: 50,
             singleEvents: true,
             orderBy: 'startTime'
         });
-
-        console.log("Fetched events:", events.data.items); // Log all fetched events
 
         const busyTimes = events.data.items.map(event => ({
             title: 'Busy',
@@ -114,7 +93,6 @@ app.get('/get-busy-times', async (req, res) => {
             display: 'background'
         }));
 
-        console.log("Returning busy times:", busyTimes);
         res.json(busyTimes);
     } catch (error) {
         console.error('Error fetching busy times:', error);
@@ -122,6 +100,41 @@ app.get('/get-busy-times', async (req, res) => {
     }
 });
 
+// ✅ Route to Add a Review to Google Sheets
+app.post('/add-review', async (req, res) => {
+    try {
+        const { name, review } = req.body;
+        console.log("Received request body:", req.body);
+        await sheets.spreadsheets.values.append({
+            spreadsheetId: process.env.GOOGLE_SHEETS_ID,
+            range: 'Sheet1!A:B',
+            valueInputOption: 'RAW',
+            requestBody: { values: [[name, review]] }
+        });
 
+        res.json({ message: 'Review added successfully!' });
+    } catch (error) {
+        console.error('Error adding review:', error);
+        res.status(500).json({ error: 'Error adding review' });
+    }
+});
 
-app.listen(5001, () => console.log('Server running on port 5001'));
+// ✅ Route to Fetch Reviews from Google Sheets
+app.get('/get-reviews', async (req, res) => {
+    try {
+        const response = await sheets.spreadsheets.values.get({
+            spreadsheetId: process.env.GOOGLE_SHEETS_ID,
+            range: 'Sheet1!A:B'
+        });
+
+        const reviews = response.data.values.map(row => ({ name: row[0], review: row[1] }));
+        res.json(reviews);
+    } catch (error) {
+        console.error('Error fetching reviews:', error);
+        res.status(500).json({ error: 'Error fetching reviews' });
+    }
+});
+
+// Start Server
+const PORT = 5001;
+app.listen(PORT, () => console.log(`✅ Server running on port ${PORT}`));
