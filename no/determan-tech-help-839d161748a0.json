@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "determan-tech-help",
+  "private_key_id": "839d161748a076691ac4abce31b39ae3f6560e66",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQDM6K1kDx3ExKHC\n9V7nOCggXs6PaedeNJw8pOE5xFtBS8dxYy+U+ZfP96G4w7RGpkGtqZ+YF4929PWu\ndkiOZCqnGtVk3aI0/ZIl5lhBs5zwgUEwSN8qk2T1LK6qaHExM6VU1dyei1oiuI7X\nWIcCqpkU0T7qIJN9NV8B4WSC8sRLBdRWe6dh22OatVh5a62wpPAutQjV3STTsAg8\nA0pt2/k6eaT+ZV6orbmxsU/3kJudWkOXPhArlz9yyHYlDDETRwcgdWZ6TFwe0SMF\nlqYIh+INSNCn1L0VPnKQjOgmbkEYfI1A1tFUG1VKBkdu1Jge9C7DcDOFK4BPJEEZ\nsA1hK1I/AgMBAAECggEAAOnaorMPOBTY/xmr73jzHi3TWuqnHZGQzr5nbflU9NC7\nK2NnT2aLdDcPkVd3WByeogEQapOppTyd/xtHjdxJdQ7sEPPh/hLRUiTu6Mq9sjQe\npRyguLuz0Vn+egOsLtgi7mK5BeXreXMm2TPrqing3n8OT5SPQ8Qh+naq8DXX2oPC\nl0Wl18ureBq9Jd/sG9ThWbx5NfB2LEDDmh1OJnDxr38274yBzQP2gZMJvCI2kYpz\nXLZBszPg8ygvps4Q5KZE60kFEZ2WpC5L2FI4fzBs89355ZYdq430nWz6yzI3Iqaf\ng9YGGWRWh3ypF66Tu50Lbui/IWNzFoanQi107z31OQKBgQD2IGQ2aGUHAQBSrL0j\nsbhBYNwIL8hTtzIa2zjwWNWGlGDTrRRD6WUZx2a1O7UPHnF0hGYqIYO5cb4RnDZx\nX+SSHJ2i5GGrzc2T/HwhKOZWPzyNXenZzT1l/Yof66emW1TZWwQTr45RYCwPv9ek\n3Bha8aEa6xYitsjtwk4sLXX6OQKBgQDVIP/ULpupLLp/M5M+thAChrySd+3fhtxk\npj0Mwm7AiY+/2slG+eejYyuFHb8v1TMUcamJV7K25QdZAWpioif7nKY9aBHkpzq8\nyaqrXB8DJsD4K/gZKj+yIus5ZiPsMqIUwUfFmjzDz7EcqLS8xOELNRn6QRPtBfa/\n/md6EqcQNwKBgQCIQSxZNnffZb2BB2H59bP0daO54IH9Xmidl4kw/WzQASqNZL7Y\nTcgLemkwoao9gXP7tiQ85Krgqcg4RYuaPiTygmb+O4KasudBKsCpNtQ1IPLrq/b+\n/XElGjQyMapxHRSe85URNNoL0LrzyRefi7zr8+JlXYm2lAwuG6hdKpmqeQKBgQC7\nySegPLDKjq6EBV1nk+LnVvAv3Zupp5no1NBVvbr3yjzuPke6UdbXDzn5QAyEiMVI\n7h0C9lJw87tVoPmrjlTMTWnsERYy8WW/kbDe63wnuq2r/JHNGnyk6D95g5WDN9m3\nj9U9NnjzzruvFLaq3I2s4kzRQyXbYbXX1MA3vteUYQKBgAUPaxCg0akJqhKkweDQ\n/sDfWJStjqXRV/XXLPFcaxYhHnezbVKgBzL9PNJVCxfrFvfnJq3MdAX98pmTf0sM\ngB/EOq1x/Ukfd+ma3zxWKPrA6b8hG6nKOLyrD8DlJeGT72suzcFAD7MdBwkCzHxb\nu/tZ5tVU0pNAbjgFuO3TccMA\n-----END PRIVATE KEY-----\n",
+  "client_email": "googlesheetsapi@determan-tech-help.iam.gserviceaccount.com",
+  "client_id": "105262177269821852959",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/googlesheetsapi%40determan-tech-help.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}
