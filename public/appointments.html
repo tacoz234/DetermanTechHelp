@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Book an Appointment</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/main.min.css" rel="stylesheet">
+  <link rel="icon" type="image/png" href="images/techhelp_background.png">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="loading-overlay" style="display:none;position:fixed;z-index:9999;top:0;left:0;width:100vw;height:100vh;background:rgba(255,255,255,0.9);text-align:center;padding-top:20vh;font-size:1.5em;">
+    Please wait around 15 seconds to 1 minute.
+  </div>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+      <a class="navbar-brand" href="index.html">Determan Tech Help</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="reviews.html">Reviews</a></li>
+          <li class="nav-item"><a class="nav-link" href="appointments.html">Appointments</a></li>
+          <li class="nav-item"><a class="nav-link" href="services.html">Services</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container mt-5">
+    <h2 class="text-center">Book an Appointment</h2>
+    <div id="calendar"></div>
+    <div id="booking-form" style="display:none;">
+      <form id="appointmentForm">
+        <input type="hidden" id="selected-date" />
+        <div id="selected-time-display" style="margin-bottom: 1em; font-weight: bold;"></div>
+
+        <label for="name">Name:</label>
+        <input type="text" id="name" required class="form-control" /><br>
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" required class="form-control" /><br>
+
+        <label for="location">Location:</label>
+        <input type="text" id="location" required class="form-control" /><br>
+
+        <label for="service">Service Needed:</label>
+        <select id="service" class="form-control">
+          <option value="House Call">House Call</option>
+          <option value="Device Setup">Device Setup</option>
+          <option value="Software Help">Software Help</option>
+          <option value="Other">Other</option>
+        </select><br>
+
+        <label for="questions">Questions/Comments:</label>
+        <textarea id="questions" rows="4" class="form-control"></textarea><br>
+
+        <button type="submit" class="btn btn-primary w-100">Submit Appointment Request</button>
+      </form>
+    </div>
+    <div id="confirmation-message" style="display:none; margin-top:2em;"></div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.js"></script>
+  <script src="appointments.js"></script>
+</body>
+</html>

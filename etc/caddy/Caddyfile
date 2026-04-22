@@ -1,0 +1,11 @@
+determantechhelp.com, www.determantechhelp.com {
+    encode gzip
+    reverse_proxy 127.0.0.1:5001
+}
+
+noxcuses.me, www.noxcuses.me {
+    root * /DATA/noxcuses/NoXcuses
+    file_server
+    try_files {path} /index.html
+    encode gzip
+}
