@@ -187,5 +187,37 @@ app.get('/get-google-api-key', (req, res) => {
     }
 });
 
+// ✅ Route to Handle Contact Form
+app.post('/contact', async (req, res) => {
+    try {
+        const { name, email, subject, message } = req.body;
+        
+        if (!name || !email || !message) {
+            return res.status(400).json({ error: "Missing required fields (name, email, message)." });
+        }
+
+        const mailOptions = {
+            from: process.env.EMAIL_USER,
+            to: process.env.EMAIL_USER, // Send to yourself
+            replyTo: email,
+            subject: `New Contact Form Message: ${subject || 'No Subject'}`,
+            text: `Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`
+        };
+
+        transporter.sendMail(mailOptions, (error, info) => {
+            if (error) {
+                console.error("Error sending contact email:", error);
+                return res.status(500).json({ error: "Failed to send message." });
+            }
+            console.log("Contact email sent:", info.response);
+            res.json({ message: "Your message has been sent successfully!" });
+        });
+
+    } catch (error) {
+        console.error("Contact route error:", error);
+        res.status(500).json({ error: "Server error." });
+    }
+});
+
 // ✅ Start Server
 app.listen(5001, '0.0.0.0', () => console.log('Server running on port 5001'));
