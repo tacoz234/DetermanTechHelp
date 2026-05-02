@@ -154,6 +154,7 @@ document.addEventListener('DOMContentLoaded', async function () {
         }
 
         function handleTimeSelection(start, end) {
+          console.log("Time selected:", start);
           const options = { hour: 'numeric', minute: 'numeric', hour12: true };
           const startTime = start.toLocaleTimeString('en-US', options);
           const endTime = end.toLocaleTimeString('en-US', options);
@@ -176,6 +177,7 @@ document.addEventListener('DOMContentLoaded', async function () {
           }
         }
 
+        console.log("Initializing Quick Book dates...");
         generateDates();
 
       } catch (error) {
