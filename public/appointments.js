@@ -148,37 +148,60 @@ document.addEventListener('DOMContentLoaded', async function () {
     }
   });
   
-  async function loadGooglePlacesScript() {
-    try {
-      const res = await fetch('/get-google-api-key');
-      if (!res.ok) throw new Error('Failed to fetch API key');
-      const data = await res.json();
-      const apiKey = data.apiKey;
-    
-      const script = document.createElement('script');
-      script.src = `https://maps.googleapis.com/maps/api/js?key=${apiKey}&libraries=places&callback=initMap&loading=async`;
-      script.async = true;
-      script.defer = true;
-      script.onerror = () => console.warn("Google Maps failed to load, address autocomplete disabled.");
-    
-      window.initMap = function () {
-        const locationInput = document.getElementById('location');
-        if (locationInput && window.google && window.google.maps && window.google.maps.places) {
-          new google.maps.places.Autocomplete(locationInput, {
-            types: ['address'],
-            componentRestrictions: { country: 'us' }
-          });
+  // Open-source address autocomplete using Photon (OpenStreetMap)
+  const locationInput = document.getElementById('location');
+  const resultsContainer = document.getElementById('location-results');
+
+  if (locationInput && resultsContainer) {
+    let timeout = null;
+
+    locationInput.addEventListener('input', () => {
+      clearTimeout(timeout);
+      const query = locationInput.value.trim();
+
+      if (query.length < 3) {
+        resultsContainer.style.display = 'none';
+        return;
+      }
+
+      timeout = setTimeout(async () => {
+        try {
+          const res = await fetch(`https://photon.komoot.io/api/?q=${encodeURIComponent(query)}&limit=5`);
+          const data = await res.json();
+          
+          resultsContainer.innerHTML = '';
+          if (data.features.length > 0) {
+            data.features.forEach(feature => {
+              const props = feature.properties;
+              const address = [props.name, props.street, props.city, props.state]
+                .filter(Boolean)
+                .join(', ');
+              
+              const div = document.createElement('div');
+              div.className = 'result-item';
+              div.innerText = address;
+              div.addEventListener('click', () => {
+                locationInput.value = address;
+                resultsContainer.style.display = 'none';
+              });
+              resultsContainer.appendChild(div);
+            });
+            resultsContainer.style.display = 'block';
+          } else {
+            resultsContainer.style.display = 'none';
+          }
+        } catch (err) {
+          console.error('Autocomplete error:', err);
         }
-        delete window.initMap;
-      };
-    
-      document.head.appendChild(script);
-    } catch (err) {
-      console.warn("Could not initialize Google Places:", err);
-    }
+      }, 300);
+    });
+
+    // Close dropdown when clicking outside
+    document.addEventListener('click', (e) => {
+      if (!locationInput.contains(e.target) && !resultsContainer.contains(e.target)) {
+        resultsContainer.style.display = 'none';
+      }
+    });
   }
-  
-  document.addEventListener('DOMContentLoaded', function () {
-    loadGooglePlacesScript();
-  });
+});
   
