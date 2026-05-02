@@ -172,6 +172,10 @@ document.addEventListener('DOMContentLoaded', async function () {
           if (data.features.length > 0) {
             data.features.forEach(feature => {
               const props = feature.properties;
+              
+              // Only show US results
+              if (props.country !== 'United States' && props.countrycode !== 'US') return;
+
               const address = [props.name, props.street, props.city, props.state]
                 .filter(Boolean)
                 .join(', ');
