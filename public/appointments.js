@@ -112,7 +112,11 @@ document.addEventListener('DOMContentLoaded', async function () {
     }
 
     // Load dates immediately!
+    console.log("Attempting to load dates...");
     generateDates();
+    
+    // Backup: Try again after a split second in case the DOM was slow
+    setTimeout(generateDates, 500);
 
     // --- Calendar & Busy Times Loading ---
     if (calendarEl) {
