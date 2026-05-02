@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', async function () {
   
     if (calendarEl) {
       try {
-        const res = await fetch('https://determantechhelp.com/get-busy-times');
+        const res = await fetch('/get-busy-times');
         const busyTimes = await res.json();
   
         const busyDays = new Set();
@@ -109,7 +109,7 @@ document.addEventListener('DOMContentLoaded', async function () {
         const start = formData.date;
         const end = new Date(new Date(start).getTime() + 60 * 60 * 1000).toISOString();
   
-        const response = await fetch('https://determantechhelp.com/add-event', {
+        const response = await fetch('/add-event', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
@@ -121,37 +121,22 @@ document.addEventListener('DOMContentLoaded', async function () {
           })                    
         });
   
-        const message = await response.text();
+        const result = await response.json();
         // Build appointment details for confirmation
         const confirmationDiv = document.getElementById('confirmation-message');
         if (confirmationDiv) {
-          // Parse the selected date/time for display and Google Calendar link
           const startDate = new Date(formData.date);
-          const endDate = new Date(startDate.getTime() + 60 * 60 * 1000);
-          const pad = n => n.toString().padStart(2, '0');
-          const formatForGCal = d =>
-            d.getUTCFullYear() +
-            pad(d.getUTCMonth() + 1) +
-            pad(d.getUTCDate()) + 'T' +
-            pad(d.getUTCHours()) + pad(d.getUTCMinutes()) + '00Z';
-          const gcalStart = formatForGCal(startDate);
-          const gcalEnd = formatForGCal(endDate);
-          const gcalUrl =
-            'https://calendar.google.com/calendar/render?action=TEMPLATE' +
-            '&text=' + encodeURIComponent('Tech Support Appointment: Cole Determan') +
-            '&dates=' + gcalStart + '/' + gcalEnd +
-            '&details=' + encodeURIComponent('Service: ' + formData.service + '\nProblem: ' + formData.notes + '\nLocation: ' + formData.location) +
-            '&location=' + encodeURIComponent(formData.location) +
-            '&sf=true&output=xml';
           confirmationDiv.innerHTML =
-            `<div class="alert alert-success"><h4>Appointment Booked!</h4>
-            <p><strong>Name:</strong> ${formData.name}<br>
-            <strong>Email:</strong> ${formData.email}<br>
-            <strong>Date & Time:</strong> ${startDate.toLocaleString()}<br>
-            <strong>Location:</strong> ${formData.location}<br>
-            <strong>Service:</strong> ${formData.service}<br>
-            <strong>Questions/Comments:</strong> ${formData.notes}</p>
-            <a href="${gcalUrl}" target="_blank" class="btn btn-success">Add to Google Calendar</a>
+            `<div class="alert alert-success">
+                <h4>Request Submitted!</h4>
+                <p>Hi ${formData.name}, your request for <strong>${startDate.toLocaleString()}</strong> has been sent.</p>
+                <p style="color: #ffcc00; font-weight: bold;">⚠️ Note: This is NOT a confirmed appointment yet.</p>
+                <p>Cole will review your request and send a final confirmation email shortly.</p>
+                <hr style="border-top: 1px solid var(--glass-border); margin: 1rem 0;">
+                <p style="font-size: 0.9rem; opacity: 0.8;">
+                    <strong>Location:</strong> ${formData.location}<br>
+                    <strong>Problem:</strong> ${formData.notes}
+                </p>
             </div>`;
           confirmationDiv.style.display = 'block';
         }
@@ -164,7 +149,7 @@ document.addEventListener('DOMContentLoaded', async function () {
   });
   
   async function loadGooglePlacesScript() {
-    const res = await fetch('https://api.determantechhelp.com:8443/get-google-api-key');
+    const res = await fetch('/get-google-api-key');
     const data = await res.json();
     const apiKey = data.apiKey;
   
