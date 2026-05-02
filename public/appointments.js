@@ -70,10 +70,11 @@ document.addEventListener('DOMContentLoaded', async function () {
             date.setDate(today.getDate() + i);
             
             const card = document.createElement('div');
-            card.className = 'booking-card fade-in';
+            card.className = 'booking-card'; // Removed fade-in to ensure immediate visibility
+            card.style.border = '1px solid #0070f3'; // Forced bright border for debugging
             card.innerHTML = `
-                <h3>${date.toLocaleDateString('en-US', { weekday: 'short' })}</h3>
-                <p>${date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}</p>
+                <h3 style="color: white; margin-bottom: 5px;">${date.toLocaleDateString('en-US', { weekday: 'short' })}</h3>
+                <p style="color: rgba(255,255,255,0.7); margin: 0;">${date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}</p>
             `;
             
             card.addEventListener('click', () => {
