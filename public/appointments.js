@@ -146,7 +146,6 @@ document.addEventListener('DOMContentLoaded', async function () {
         }
       });
     }
-  });
   
   // Open-source address autocomplete using Photon (OpenStreetMap)
   const locationInput = document.getElementById('location');
