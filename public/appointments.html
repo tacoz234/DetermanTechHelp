@@ -190,19 +190,24 @@
         /* Date & Time Grids */
         .date-grid, .time-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
             gap: 1.5rem;
             margin-bottom: 3rem;
+            min-height: 100px;
         }
 
         .booking-card {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid var(--glass-border);
-            padding: 2rem 1rem;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            padding: 2.5rem 1rem;
             border-radius: 20px;
             text-align: center;
             cursor: pointer;
             transition: var(--transition);
+            color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
         }
 
         .booking-card:hover {
