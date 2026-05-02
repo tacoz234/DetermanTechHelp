@@ -58,7 +58,11 @@ document.addEventListener('DOMContentLoaded', async function () {
 
     // --- Simple View Logic ---
     function generateDates() {
-        if (!dateCardsContainer) return;
+        if (!dateCardsContainer) {
+            console.error("CRITICAL: date-cards container not found!");
+            return;
+        }
+        console.log("Generating Quick Book dates for container:", dateCardsContainer);
         dateCardsContainer.innerHTML = '';
         const today = new Date();
         for (let i = 1; i <= 7; i++) {
@@ -73,12 +77,14 @@ document.addEventListener('DOMContentLoaded', async function () {
             `;
             
             card.addEventListener('click', () => {
+                console.log("Date card clicked:", date);
                 document.querySelectorAll('.date-grid .booking-card').forEach(c => c.classList.remove('active'));
                 card.classList.add('active');
                 generateTimeSlots(date);
             });
             dateCardsContainer.appendChild(card);
         }
+        console.log("Successfully appended 7 date cards.");
     }
 
     function generateTimeSlots(selectedDate) {
