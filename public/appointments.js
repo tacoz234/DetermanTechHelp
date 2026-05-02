@@ -165,7 +165,8 @@ document.addEventListener('DOMContentLoaded', async function () {
 
       timeout = setTimeout(async () => {
         try {
-          const res = await fetch(`https://photon.komoot.io/api/?q=${encodeURIComponent(query)}&limit=5`);
+          // Added lat/lon bias for Lake Barcroft, VA (38.85, -77.16) to prioritize local results
+          const res = await fetch(`https://photon.komoot.io/api/?q=${encodeURIComponent(query)}&lat=38.85&lon=-77.16&limit=5`);
           const data = await res.json();
           
           resultsContainer.innerHTML = '';
@@ -176,15 +177,22 @@ document.addEventListener('DOMContentLoaded', async function () {
               // Only show US results
               if (props.country !== 'United States' && props.countrycode !== 'US') return;
 
-              const address = [props.name, props.street, props.city, props.state]
+              // Build the address string: Prioritize House Number + Street
+              const mainAddress = [props.housenumber, props.street || props.name]
+                .filter(Boolean)
+                .join(' ');
+              
+              const cityState = [props.city || props.town, props.state]
                 .filter(Boolean)
                 .join(', ');
+
+              const fullAddress = [mainAddress, cityState].filter(Boolean).join(', ');
               
               const div = document.createElement('div');
               div.className = 'result-item';
-              div.innerText = address;
+              div.innerText = fullAddress;
               div.addEventListener('click', () => {
-                locationInput.value = address;
+                locationInput.value = fullAddress;
                 resultsContainer.style.display = 'none';
               });
               resultsContainer.appendChild(div);
