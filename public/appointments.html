@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -15,20 +16,25 @@
             border: 1px solid var(--glass-border);
             color: white;
         }
-        .fc-theme-standard td, .fc-theme-standard th {
+
+        .fc-theme-standard td,
+        .fc-theme-standard th {
             border: 1px solid var(--glass-border) !important;
         }
+
         .fc-toolbar-title {
             font-family: 'Outfit', sans-serif !important;
             font-weight: 800 !important;
             text-transform: uppercase;
         }
+
         .fc-button {
             background: var(--accent-color) !important;
             border: none !important;
             border-radius: 8px !important;
             font-weight: 600 !important;
         }
+
         .form-control {
             background: rgba(255, 255, 255, 0.05) !important;
             border: 1px solid var(--glass-border) !important;
@@ -37,11 +43,13 @@
             padding: 1rem !important;
             margin-bottom: 1.5rem;
         }
+
         .form-control:focus {
             background: rgba(255, 255, 255, 0.1) !important;
             border-color: var(--accent-color) !important;
             box-shadow: 0 0 10px var(--accent-glow) !important;
         }
+
         label {
             display: block;
             margin-bottom: 0.5rem;
@@ -50,9 +58,11 @@
         }
     </style>
 </head>
+
 <body>
 
-    <div id="loading-overlay" style="display:none;position:fixed;z-index:9999;top:0;left:0;width:100vw;height:100vh;background:rgba(10,10,12,0.95);text-align:center;padding-top:40vh;font-size:1.5em;color:white;">
+    <div id="loading-overlay"
+        style="display:none;position:fixed;z-index:9999;top:0;left:0;width:100vw;height:100vh;background:rgba(10,10,12,0.95);text-align:center;padding-top:40vh;font-size:1.5em;color:white;">
         <div style="margin-bottom: 1rem;">Connecting to Secure Calendar...</div>
         <div style="font-size: 0.9rem; opacity: 0.6;">Please wait around 15 seconds to 1 minute.</div>
     </div>
@@ -75,7 +85,7 @@
     <main>
         <section class="hero" style="height: 50vh;">
             <div class="hero-bg">
-                <img src="hero-bg.png" alt="Tech Support Background">
+                <!-- <img src="hero-bg.png" alt="Tech Support Background"> -->
             </div>
             <div class="hero-content">
                 <h1>Book your <br><span>Appointment</span></h1>
@@ -88,11 +98,14 @@
                 <div id="calendar"></div>
             </div>
 
-            <div id="booking-form" class="glass fade-in" style="display:none; padding: 4rem; max-width: 800px; margin-left: auto; margin-right: auto;">
+            <div id="booking-form" class="glass fade-in"
+                style="display:none; padding: 4rem; max-width: 800px; margin-left: auto; margin-right: auto;">
                 <h2 style="margin-bottom: 2rem;">Appointment Details</h2>
                 <form id="appointmentForm">
                     <input type="hidden" id="selected-date" />
-                    <div id="selected-time-display" style="margin-bottom: 2rem; font-weight: 800; font-size: 1.5rem; color: var(--accent-color);"></div>
+                    <div id="selected-time-display"
+                        style="margin-bottom: 2rem; font-weight: 800; font-size: 1.5rem; color: var(--accent-color);">
+                    </div>
 
                     <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;">
                         <div>
@@ -101,12 +114,14 @@
                         </div>
                         <div>
                             <label for="email">Email</label>
-                            <input type="email" id="email" required class="form-control" placeholder="john@example.com" />
+                            <input type="email" id="email" required class="form-control"
+                                placeholder="john@example.com" />
                         </div>
                     </div>
 
                     <label for="location">Location</label>
-                    <input type="text" id="location" required class="form-control" placeholder="123 Street, Lake Barcroft" />
+                    <input type="text" id="location" required class="form-control"
+                        placeholder="123 Street, Lake Barcroft" />
 
                     <label for="service">Service Needed</label>
                     <select id="service" class="form-control">
@@ -117,12 +132,17 @@
                     </select>
 
                     <label for="questions">Questions/Comments</label>
-                    <textarea id="questions" rows="4" class="form-control" placeholder="Tell me more about your issue..."></textarea>
+                    <textarea id="questions" rows="4" class="form-control"
+                        placeholder="Tell me more about your issue..."></textarea>
 
-                    <button type="submit" class="btn" style="width: 100%; border: none; cursor: pointer; padding: 1.5rem;">Submit Appointment Request</button>
+                    <button type="submit" class="btn"
+                        style="width: 100%; border: none; cursor: pointer; padding: 1.5rem;">Submit Appointment
+                        Request</button>
                 </form>
             </div>
-            <div id="confirmation-message" class="glass fade-in" style="display:none; margin-top:2rem; padding: 3rem; text-align: center; color: var(--accent-color); font-weight: 800; font-size: 1.5rem;"></div>
+            <div id="confirmation-message" class="glass fade-in"
+                style="display:none; margin-top:2rem; padding: 3rem; text-align: center; color: var(--accent-color); font-weight: 800; font-size: 1.5rem;">
+            </div>
         </section>
     </main>
 
@@ -131,7 +151,8 @@
             <div class="footer-info">
                 <div class="footer-logo">Determan Tech</div>
                 <p>Reliable tech support for the Lake Barcroft community.</p>
-                <p>Email: <a href="mailto:determantechhelp@gmail.com" style="color: var(--accent-color);">determantechhelp@gmail.com</a></p>
+                <p>Email: <a href="mailto:determantechhelp@gmail.com"
+                        style="color: var(--accent-color);">determantechhelp@gmail.com</a></p>
                 <p>Phone: (571) 279-8040</p>
             </div>
             <div class="footer-links">
@@ -169,4 +190,5 @@
         document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
     </script>
 </body>
+
 </html>

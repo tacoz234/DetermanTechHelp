@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,6 +8,7 @@
     <link rel="icon" type="image/png" href="images/techhelp_background.png">
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
     <nav id="navbar">
@@ -27,7 +29,7 @@
     <main>
         <section class="hero" style="height: 60vh;">
             <div class="hero-bg">
-                <img src="hero-bg.png" alt="Tech Support Background">
+                <!-- <img src="hero-bg.png" alt="Tech Support Background"> -->
             </div>
             <div class="hero-content">
                 <h1>Customer <br><span>Reviews</span></h1>
@@ -40,18 +42,26 @@
                 <!-- Review Cards will be injected here -->
             </div>
 
-            <div class="glass" style="margin-top: 5rem; padding: 3rem; max-width: 800px; margin-left: auto; margin-right: auto;">
+            <div class="glass"
+                style="margin-top: 5rem; padding: 3rem; max-width: 800px; margin-left: auto; margin-right: auto;">
                 <h2 style="margin-bottom: 2rem;">Leave a Review</h2>
                 <form id="review-form">
                     <div style="margin-bottom: 1.5rem;">
-                        <label for="review-name" style="display: block; margin-bottom: 0.5rem; color: var(--text-secondary);">Your Name</label>
-                        <input type="text" id="review-name" required style="width: 100%; padding: 1rem; background: rgba(255,255,255,0.05); border: 1px solid var(--glass-border); border-radius: 8px; color: white; outline: none;">
+                        <label for="review-name"
+                            style="display: block; margin-bottom: 0.5rem; color: var(--text-secondary);">Your
+                            Name</label>
+                        <input type="text" id="review-name" required
+                            style="width: 100%; padding: 1rem; background: rgba(255,255,255,0.05); border: 1px solid var(--glass-border); border-radius: 8px; color: white; outline: none;">
                     </div>
                     <div style="margin-bottom: 1.5rem;">
-                        <label for="review-text" style="display: block; margin-bottom: 0.5rem; color: var(--text-secondary);">Your Review</label>
-                        <textarea id="review-text" rows="4" required style="width: 100%; padding: 1rem; background: rgba(255,255,255,0.05); border: 1px solid var(--glass-border); border-radius: 8px; color: white; outline: none;"></textarea>
+                        <label for="review-text"
+                            style="display: block; margin-bottom: 0.5rem; color: var(--text-secondary);">Your
+                            Review</label>
+                        <textarea id="review-text" rows="4" required
+                            style="width: 100%; padding: 1rem; background: rgba(255,255,255,0.05); border: 1px solid var(--glass-border); border-radius: 8px; color: white; outline: none;"></textarea>
                     </div>
-                    <button type="submit" class="btn" style="width: 100%; border: none; cursor: pointer;">Submit Review</button>
+                    <button type="submit" class="btn" style="width: 100%; border: none; cursor: pointer;">Submit
+                        Review</button>
                 </form>
             </div>
         </section>
@@ -62,7 +72,8 @@
             <div class="footer-info">
                 <div class="footer-logo">Determan Tech</div>
                 <p>Reliable tech support for the Lake Barcroft community.</p>
-                <p>Email: <a href="mailto:determantechhelp@gmail.com" style="color: var(--accent-color);">determantechhelp@gmail.com</a></p>
+                <p>Email: <a href="mailto:determantechhelp@gmail.com"
+                        style="color: var(--accent-color);">determantechhelp@gmail.com</a></p>
                 <p>Phone: (571) 279-8040</p>
             </div>
             <div class="footer-links">
@@ -116,7 +127,7 @@
             });
         }, { threshold: 0.1 });
 
-        document.getElementById("review-form").addEventListener("submit", function(event) {
+        document.getElementById("review-form").addEventListener("submit", function (event) {
             event.preventDefault();
             const name = document.getElementById("review-name").value.trim();
             const text = document.getElementById("review-text").value.trim();
@@ -126,16 +137,17 @@
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify({ name, text })
                 })
-                .then(response => response.json())
-                .then(() => {
-                    fetchReviews();
-                    document.getElementById("review-form").reset();
-                })
-                .catch(error => console.error("Error adding review:", error));
+                    .then(response => response.json())
+                    .then(() => {
+                        fetchReviews();
+                        document.getElementById("review-form").reset();
+                    })
+                    .catch(error => console.error("Error adding review:", error));
             }
         });
 
         document.addEventListener("DOMContentLoaded", fetchReviews);
     </script>
 </body>
+
 </html>
