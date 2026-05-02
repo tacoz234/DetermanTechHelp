@@ -9,6 +9,30 @@ document.addEventListener('DOMContentLoaded', async function () {
       loadingOverlay.style.display = 'block';
     }
   
+    // --- View Switching Logic ---
+    const showSimpleBtn = document.getElementById('show-simple');
+    const showCalendarBtn = document.getElementById('show-calendar');
+    const simpleView = document.getElementById('simple-view');
+    const calendarView = document.getElementById('calendar-view');
+
+    if (showSimpleBtn && showCalendarBtn) {
+      showSimpleBtn.addEventListener('click', () => {
+        showSimpleBtn.classList.add('active');
+        showCalendarBtn.classList.remove('active');
+        simpleView.classList.add('active');
+        calendarView.classList.remove('active');
+      });
+
+      showCalendarBtn.addEventListener('click', () => {
+        showCalendarBtn.classList.add('active');
+        showSimpleBtn.classList.remove('active');
+        calendarView.classList.add('active');
+        simpleView.classList.remove('active');
+        // Trigger calendar resize/render when shown
+        setTimeout(() => window.dispatchEvent(new Event('resize')), 100);
+      });
+    }
+
     if (calendarEl) {
       try {
         const res = await fetch('/get-busy-times');
@@ -23,8 +47,7 @@ document.addEventListener('DOMContentLoaded', async function () {
         const events = busyTimes.map(slot => {
           const start = new Date(slot.start);
           const end = new Date(slot.end);
-          // Add one more block (e.g., 1 hour) after the appointment
-          const extendedEnd = new Date(end.getTime() + 60 * 60 * 1000); // adjust block size as needed
+          const extendedEnd = new Date(end.getTime() + 60 * 60 * 1000);
           return {
             start: start.toISOString(),
             end: extendedEnd.toISOString(),
@@ -45,7 +68,6 @@ document.addEventListener('DOMContentLoaded', async function () {
           dayHeaderFormat: { weekday: 'short' },
           events,
           select: function (info) {
-            // Only check for overlap with events
             const overlapping = events.some(event => {
               return (
                 info.start < new Date(event.end) &&
@@ -58,29 +80,104 @@ document.addEventListener('DOMContentLoaded', async function () {
               return;
             }
   
-            const options = { hour: 'numeric', minute: 'numeric', hour12: true };
-            const startTime = info.start.toLocaleTimeString('en-US', options);
-            const endTime = info.end.toLocaleTimeString('en-US', options);
-            const selectedDateStr = info.start.toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
-  
-            const timeDisplayString = `Selected Slot: ${selectedDateStr}, ${startTime} - ${endTime}`;
-            const selectedTimeDisplay = document.getElementById('selected-time-display');
-            if (selectedTimeDisplay) {
-              selectedTimeDisplay.innerHTML = timeDisplayString;
-            }
-  
-            const bookingForm = document.getElementById('booking-form');
-            if (bookingForm) {
-              bookingForm.style.display = 'block';
-            }
-            const selectedDateInput = document.getElementById('selected-date');
-            if (selectedDateInput) {
-              selectedDateInput.value = info.startStr;
-            }
+            handleTimeSelection(info.start, info.end);
           }
         });
   
         calendar.render();
+
+        // --- Simple View Date/Time Generation ---
+        const dateCardsContainer = document.getElementById('date-cards');
+        const timeSelection = document.getElementById('time-selection');
+        const timeSlotsContainer = document.getElementById('time-slots');
+
+        function generateDates() {
+          dateCardsContainer.innerHTML = '';
+          const today = new Date();
+          for (let i = 1; i <= 7; i++) {
+            const date = new Date(today);
+            date.setDate(today.getDate() + i);
+            
+            const card = document.createElement('div');
+            card.className = 'booking-card fade-in';
+            card.innerHTML = `
+              <h3>${date.toLocaleDateString('en-US', { weekday: 'short' })}</h3>
+              <p>${date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}</p>
+            `;
+            
+            card.addEventListener('click', () => {
+              document.querySelectorAll('.date-grid .booking-card').forEach(c => c.classList.remove('active'));
+              card.classList.add('active');
+              generateTimeSlots(date);
+            });
+            
+            dateCardsContainer.appendChild(card);
+          }
+        }
+
+        function generateTimeSlots(selectedDate) {
+          timeSelection.style.display = 'block';
+          timeSlotsContainer.innerHTML = '';
+          
+          const startHour = 9; // 9 AM
+          const endHour = 19;  // 7 PM
+          
+          for (let hour = startHour; hour <= endHour; hour++) {
+            const slotStart = new Date(selectedDate);
+            slotStart.setHours(hour, 0, 0, 0);
+            const slotEnd = new Date(slotStart);
+            slotEnd.setHours(hour + 1, 0, 0, 0);
+
+            // Check if this slot overlaps with any busy times
+            const isBusy = events.some(event => {
+              return (
+                slotStart < new Date(event.end) &&
+                slotEnd > new Date(event.start)
+              );
+            });
+
+            if (!isBusy) {
+              const btn = document.createElement('div');
+              btn.className = 'booking-card fade-in';
+              btn.style.padding = '1rem';
+              btn.innerHTML = `<h3>${slotStart.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', hour12: true })}</h3>`;
+              
+              btn.addEventListener('click', () => {
+                handleTimeSelection(slotStart, slotEnd);
+              });
+              
+              timeSlotsContainer.appendChild(btn);
+            }
+          }
+          
+          timeSelection.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+
+        function handleTimeSelection(start, end) {
+          const options = { hour: 'numeric', minute: 'numeric', hour12: true };
+          const startTime = start.toLocaleTimeString('en-US', options);
+          const endTime = end.toLocaleTimeString('en-US', options);
+          const selectedDateStr = start.toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+
+          const timeDisplayString = `Selected Slot: ${selectedDateStr}, ${startTime} - ${endTime}`;
+          const selectedTimeDisplay = document.getElementById('selected-time-display');
+          if (selectedTimeDisplay) {
+            selectedTimeDisplay.innerHTML = timeDisplayString;
+          }
+
+          const bookingForm = document.getElementById('booking-form');
+          if (bookingForm) {
+            bookingForm.style.display = 'block';
+            bookingForm.scrollIntoView({ behavior: 'smooth' });
+          }
+          const selectedDateInput = document.getElementById('selected-date');
+          if (selectedDateInput) {
+            selectedDateInput.value = start.toISOString();
+          }
+        }
+
+        generateDates();
+
       } catch (error) {
         console.error("Error loading calendar or busy times:", error);
         calendarEl.innerHTML = "<p>Could not load appointment calendar. Please try refreshing the page.</p>";
