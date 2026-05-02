@@ -149,27 +149,33 @@ document.addEventListener('DOMContentLoaded', async function () {
   });
   
   async function loadGooglePlacesScript() {
-    const res = await fetch('/get-google-api-key');
-    const data = await res.json();
-    const apiKey = data.apiKey;
-  
-    const script = document.createElement('script');
-    script.src = `https://maps.googleapis.com/maps/api/js?key=${apiKey}&libraries=places&callback=initMap`;
-    script.async = true;
-    script.defer = true;
-  
-    window.initMap = function () {
-      const locationInput = document.getElementById('location');
-      if (locationInput && window.google && window.google.maps && window.google.maps.places) {
-        new google.maps.places.Autocomplete(locationInput, {
-          types: ['address'],
-          componentRestrictions: { country: 'us' }
-        });
-      }
-      delete window.initMap;
-    };
-  
-    document.head.appendChild(script);
+    try {
+      const res = await fetch('/get-google-api-key');
+      if (!res.ok) throw new Error('Failed to fetch API key');
+      const data = await res.json();
+      const apiKey = data.apiKey;
+    
+      const script = document.createElement('script');
+      script.src = `https://maps.googleapis.com/maps/api/js?key=${apiKey}&libraries=places&callback=initMap`;
+      script.async = true;
+      script.defer = true;
+      script.onerror = () => console.warn("Google Maps failed to load, address autocomplete disabled.");
+    
+      window.initMap = function () {
+        const locationInput = document.getElementById('location');
+        if (locationInput && window.google && window.google.maps && window.google.maps.places) {
+          new google.maps.places.Autocomplete(locationInput, {
+            types: ['address'],
+            componentRestrictions: { country: 'us' }
+          });
+        }
+        delete window.initMap;
+      };
+    
+      document.head.appendChild(script);
+    } catch (err) {
+      console.warn("Could not initialize Google Places:", err);
+    }
   }
   
   document.addEventListener('DOMContentLoaded', function () {
