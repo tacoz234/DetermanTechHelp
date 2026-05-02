@@ -15,6 +15,7 @@
             border-radius: 24px;
             border: 1px solid var(--glass-border);
             color: white;
+            margin-bottom: 2rem;
         }
 
         .fc-theme-standard td,
@@ -35,26 +36,71 @@
             font-weight: 600 !important;
         }
 
+        /* Modern Form Styling */
+        .appointment-form-container {
+            padding: 4rem;
+            margin-top: 2rem;
+        }
+
+        .selected-slot-badge {
+            background: rgba(0, 112, 243, 0.1);
+            border: 1px solid var(--accent-color);
+            padding: 1.5rem;
+            border-radius: 12px;
+            margin-bottom: 3rem;
+            color: var(--accent-color);
+            font-weight: 700;
+            font-size: 1.2rem;
+            text-align: center;
+        }
+
+        .form-group {
+            margin-bottom: 2rem;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
         .form-control {
+            width: 100%;
             background: rgba(255, 255, 255, 0.05) !important;
             border: 1px solid var(--glass-border) !important;
-            border-radius: 8px !important;
+            border-radius: 12px !important;
             color: white !important;
-            padding: 1rem !important;
-            margin-bottom: 1.5rem;
+            padding: 1.25rem !important;
+            font-family: inherit;
+            font-size: 1rem;
+            transition: var(--transition);
         }
 
         .form-control:focus {
-            background: rgba(255, 255, 255, 0.1) !important;
+            outline: none;
             border-color: var(--accent-color) !important;
-            box-shadow: 0 0 10px var(--accent-glow) !important;
+            background: rgba(255, 255, 255, 0.08) !important;
+            box-shadow: 0 0 20px var(--accent-glow) !important;
         }
 
         label {
             display: block;
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.75rem;
             color: var(--text-secondary);
             font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            letter-spacing: 0.05em;
+        }
+
+        @media (max-width: 768px) {
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+            .appointment-form-container {
+                padding: 2rem;
+            }
         }
     </style>
 </head>
@@ -101,43 +147,45 @@
             <div id="booking-form" class="glass fade-in"
                 style="display:none; padding: 4rem; max-width: 800px; margin-left: auto; margin-right: auto;">
                 <h2 style="margin-bottom: 2rem;">Appointment Details</h2>
+            <div id="booking-form" class="glass appointment-form-container" style="display: none;">
+                <h2 class="mb-4">Appointment Details</h2>
+                <div id="selected-time-display" class="selected-slot-badge"></div>
                 <form id="appointmentForm">
-                    <input type="hidden" id="selected-date" />
-                    <div id="selected-time-display"
-                        style="margin-bottom: 2rem; font-weight: 800; font-size: 1.5rem; color: var(--accent-color);">
-                    </div>
-
-                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;">
-                        <div>
+                    <input type="hidden" id="selected-date">
+                    
+                    <div class="form-row">
+                        <div class="form-group">
                             <label for="name">Name</label>
-                            <input type="text" id="name" required class="form-control" placeholder="John Doe" />
+                            <input type="text" class="form-control" id="name" placeholder="John Doe" required>
                         </div>
-                        <div>
+                        <div class="form-group">
                             <label for="email">Email</label>
-                            <input type="email" id="email" required class="form-control"
-                                placeholder="john@example.com" />
+                            <input type="email" class="form-control" id="email" placeholder="john@example.com" required>
                         </div>
                     </div>
 
-                    <label for="location">Location</label>
-                    <input type="text" id="location" required class="form-control"
-                        placeholder="123 Street, Lake Barcroft" />
+                    <div class="form-group">
+                        <label for="location">Location</label>
+                        <input type="text" class="form-control" id="location" placeholder="123 Street, Lake Barcroft" required>
+                    </div>
 
-                    <label for="service">Service Needed</label>
-                    <select id="service" class="form-control">
-                        <option value="House Call">House Call</option>
-                        <option value="Device Setup">Device Setup</option>
-                        <option value="Software Help">Software Help</option>
-                        <option value="Other">Other</option>
-                    </select>
+                    <div class="form-group">
+                        <label for="service">Service Needed</label>
+                        <select class="form-control" id="service" required>
+                            <option value="General Tech Support">General Tech Support</option>
+                            <option value="Network/WiFi Troubleshooting">Network/WiFi Troubleshooting</option>
+                            <option value="Device Setup">Device Setup</option>
+                            <option value="House Call">House Call</option>
+                            <option value="Other">Other (Specify in comments)</option>
+                        </select>
+                    </div>
 
-                    <label for="questions">Questions/Comments</label>
-                    <textarea id="questions" rows="4" class="form-control"
-                        placeholder="Tell me more about your issue..."></textarea>
+                    <div class="form-group">
+                        <label for="questions">Questions/Comments</label>
+                        <textarea class="form-control" id="questions" rows="3" placeholder="Tell me more about your issue..."></textarea>
+                    </div>
 
-                    <button type="submit" class="btn"
-                        style="width: 100%; border: none; cursor: pointer; padding: 1.5rem;">Submit Appointment
-                        Request</button>
+                    <button type="submit" class="btn w-100" style="padding: 1.5rem;">Submit Appointment Request</button>
                 </form>
             </div>
             <div id="confirmation-message" class="glass fade-in"
