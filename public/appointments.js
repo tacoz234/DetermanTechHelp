@@ -81,6 +81,13 @@ document.addEventListener('DOMContentLoaded', async function () {
                 console.log("Date card clicked:", date);
                 document.querySelectorAll('.date-grid .booking-card').forEach(c => c.classList.remove('active'));
                 card.classList.add('active');
+                
+                // Hide form and clear previous selection when date changes
+                const bookingForm = document.getElementById('booking-form');
+                if (bookingForm) bookingForm.style.display = 'none';
+                const selectedTimeDisplay = document.getElementById('selected-time-display');
+                if (selectedTimeDisplay) selectedTimeDisplay.innerHTML = '';
+                
                 generateTimeSlots(date);
             });
             dateCardsContainer.appendChild(card);
@@ -108,10 +115,14 @@ document.addEventListener('DOMContentLoaded', async function () {
 
             if (!isBusy) {
                 const btn = document.createElement('div');
-                btn.className = 'booking-card fade-in';
+                btn.className = 'booking-card'; // Removed fade-in to ensure immediate visibility
                 btn.style.padding = '1rem';
                 btn.innerHTML = `<h3>${slotStart.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', hour12: true })}</h3>`;
-                btn.addEventListener('click', () => handleTimeSelection(slotStart, slotEnd));
+                btn.addEventListener('click', () => {
+                    document.querySelectorAll('.time-grid .booking-card').forEach(c => c.classList.remove('active'));
+                    btn.classList.add('active');
+                    handleTimeSelection(slotStart, slotEnd);
+                });
                 timeSlotsContainer.appendChild(btn);
             }
         }
