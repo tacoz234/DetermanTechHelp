@@ -23,11 +23,16 @@
                 <a href="appointments.html">Appointments</a>
                 <a href="contact.html">Contact</a>
             </div>
+            <div class="menu-toggle" id="mobile-menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
         </div>
     </nav>
 
     <main>
-        <section class="hero" style="height: 60vh;">
+        <section class="hero" style="min-height: 60vh;">
             <div class="hero-bg">
                 <!-- <img src="hero-bg.png" alt="Tech Support Background"> -->
             </div>
@@ -147,6 +152,23 @@
         });
 
         document.addEventListener("DOMContentLoaded", fetchReviews);
+
+        // Mobile Menu Toggle
+        const menuToggle = document.getElementById('mobile-menu');
+        const navLinks = document.querySelector('.nav-links');
+
+        menuToggle.addEventListener('click', () => {
+            menuToggle.classList.toggle('active');
+            navLinks.classList.toggle('active');
+        });
+
+        // Close menu when clicking a link
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                menuToggle.classList.remove('active');
+                navLinks.classList.remove('active');
+            });
+        });
     </script>
 </body>
 

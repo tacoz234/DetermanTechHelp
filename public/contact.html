@@ -24,6 +24,11 @@
                 <a href="appointments.html">Appointments</a>
                 <a href="contact.html" style="opacity: 1; color: var(--accent-color);">Contact</a>
             </div>
+            <div class="menu-toggle" id="mobile-menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
         </div>
     </nav>
 
@@ -177,6 +182,23 @@
         document.querySelectorAll('section').forEach(section => {
             section.classList.add('fade-in');
             observer.observe(section);
+        });
+
+        // Mobile Menu Toggle
+        const menuToggle = document.getElementById('mobile-menu');
+        const navLinks = document.querySelector('.nav-links');
+
+        menuToggle.addEventListener('click', () => {
+            menuToggle.classList.toggle('active');
+            navLinks.classList.toggle('active');
+        });
+
+        // Close menu when clicking a link
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                menuToggle.classList.remove('active');
+                navLinks.classList.remove('active');
+            });
         });
     </script>
 </body>
