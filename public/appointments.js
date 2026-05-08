@@ -1,193 +1,251 @@
-// appointments.js for determantechhelp.com (same logic as mcintoshpowerwash, API endpoints updated)
-
+// appointments.js for determantechhelp.com
 document.addEventListener('DOMContentLoaded', async function () {
     const calendarEl = document.getElementById('calendar');
     const loadingOverlay = document.getElementById('loading-overlay');
     const appointmentForm = document.getElementById('appointmentForm');
-  
-    if (loadingOverlay) {
-      loadingOverlay.style.display = 'block';
+    const dateCardsContainer = document.getElementById('date-cards');
+    const timeSelection = document.getElementById('time-selection');
+    const timeSlotsContainer = document.getElementById('time-slots');
+    
+    let calendarEvents = [];
+
+    // --- Core Navigation ---
+    const showSimpleBtn = document.getElementById('show-simple');
+    const showCalendarBtn = document.getElementById('show-calendar');
+    const simpleView = document.getElementById('simple-view');
+    const calendarView = document.getElementById('calendar-view');
+
+    if (showSimpleBtn && showCalendarBtn) {
+        showSimpleBtn.addEventListener('click', () => {
+            showSimpleBtn.classList.add('active');
+            showCalendarBtn.classList.remove('active');
+            simpleView.classList.add('active');
+            calendarView.classList.remove('active');
+        });
+
+        showCalendarBtn.addEventListener('click', () => {
+            showCalendarBtn.classList.add('active');
+            showSimpleBtn.classList.remove('active');
+            calendarView.classList.add('active');
+            simpleView.classList.remove('active');
+            setTimeout(() => window.dispatchEvent(new Event('resize')), 100);
+        });
     }
-  
-    if (calendarEl) {
-      try {
-        const res = await fetch('https://determantechhelp.com/get-busy-times');
-        const busyTimes = await res.json();
-  
-        const busyDays = new Set();
-        busyTimes.forEach(slot => {
-          const date = new Date(slot.start).toISOString().split('T')[0];
-          busyDays.add(date);
-        });
-  
-        const events = busyTimes.map(slot => {
-          const start = new Date(slot.start);
-          const end = new Date(slot.end);
-          // Add one more block (e.g., 1 hour) after the appointment
-          const extendedEnd = new Date(end.getTime() + 60 * 60 * 1000); // adjust block size as needed
-          return {
-            start: start.toISOString(),
-            end: extendedEnd.toISOString(),
-            display: 'background',
-            color: '#ff9999'
-          };
-        });
-  
-        const calendar = new FullCalendar.Calendar(calendarEl, {
-          initialView: 'timeGridWeek',
-          selectable: true,
-          slotMinTime: '09:00:00',
-          slotMaxTime: '20:00:00',
-          allDaySlot: false,
-          height: 'auto',
-          expandRows: true,
-          weekends: true,
-          dayHeaderFormat: { weekday: 'short' },
-          events,
-          select: function (info) {
-            // Only check for overlap with events
-            const overlapping = events.some(event => {
-              return (
-                info.start < new Date(event.end) &&
-                info.end > new Date(event.start)
-              );
-            });
-            if (overlapping) {
-              alert("❌ This time slot is unavailable.");
-              calendar.unselect();
-              return;
-            }
-  
-            const options = { hour: 'numeric', minute: 'numeric', hour12: true };
-            const startTime = info.start.toLocaleTimeString('en-US', options);
-            const endTime = info.end.toLocaleTimeString('en-US', options);
-            const selectedDateStr = info.start.toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
-  
-            const timeDisplayString = `Selected Slot: ${selectedDateStr}, ${startTime} - ${endTime}`;
-            const selectedTimeDisplay = document.getElementById('selected-time-display');
-            if (selectedTimeDisplay) {
-              selectedTimeDisplay.innerHTML = timeDisplayString;
-            }
-  
-            const bookingForm = document.getElementById('booking-form');
-            if (bookingForm) {
-              bookingForm.style.display = 'block';
-            }
-            const selectedDateInput = document.getElementById('selected-date');
-            if (selectedDateInput) {
-              selectedDateInput.value = info.startStr;
-            }
-          }
-        });
-  
-        calendar.render();
-      } catch (error) {
-        console.error("Error loading calendar or busy times:", error);
-        calendarEl.innerHTML = "<p>Could not load appointment calendar. Please try refreshing the page.</p>";
-      } finally {
-        if (loadingOverlay) {
-          loadingOverlay.style.display = 'none';
+
+    // --- Common Functions ---
+    function handleTimeSelection(start, end) {
+        const options = { hour: 'numeric', minute: 'numeric', hour12: true };
+        const startTime = start.toLocaleTimeString('en-US', options);
+        const endTime = end.toLocaleTimeString('en-US', options);
+        const selectedDateStr = start.toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+
+        const timeDisplayString = `Selected Slot: ${selectedDateStr}, ${startTime} - ${endTime}`;
+        const selectedTimeDisplay = document.getElementById('selected-time-display');
+        if (selectedTimeDisplay) {
+            selectedTimeDisplay.innerHTML = timeDisplayString;
         }
-      }
-    } else if (loadingOverlay) {
-      loadingOverlay.style.display = 'none';
-    }
-  
-    if (appointmentForm) {
-      appointmentForm.addEventListener('submit', async function (e) {
-        e.preventDefault();
-  
-        const formData = {
-          name: document.getElementById('name').value,
-          email: document.getElementById('email').value,
-          date: document.getElementById('selected-date').value,
-          service: document.getElementById('service').value,
-          notes: document.getElementById('questions').value,
-          location: document.getElementById('location').value,
-        };
-  
-        const start = formData.date;
-        const end = new Date(new Date(start).getTime() + 60 * 60 * 1000).toISOString();
-  
-        const response = await fetch('https://determantechhelp.com/add-event', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            name: formData.name,
-            email: formData.email,
-            date: start, // send as 'date' not 'start'
-            problem: formData.notes, // backend expects 'problem', not 'notes'
-            location: formData.location
-          })                    
-        });
-  
-        const message = await response.text();
-        // Build appointment details for confirmation
-        const confirmationDiv = document.getElementById('confirmation-message');
-        if (confirmationDiv) {
-          // Parse the selected date/time for display and Google Calendar link
-          const startDate = new Date(formData.date);
-          const endDate = new Date(startDate.getTime() + 60 * 60 * 1000);
-          const pad = n => n.toString().padStart(2, '0');
-          const formatForGCal = d =>
-            d.getUTCFullYear() +
-            pad(d.getUTCMonth() + 1) +
-            pad(d.getUTCDate()) + 'T' +
-            pad(d.getUTCHours()) + pad(d.getUTCMinutes()) + '00Z';
-          const gcalStart = formatForGCal(startDate);
-          const gcalEnd = formatForGCal(endDate);
-          const gcalUrl =
-            'https://calendar.google.com/calendar/render?action=TEMPLATE' +
-            '&text=' + encodeURIComponent('Tech Support Appointment: Cole Determan') +
-            '&dates=' + gcalStart + '/' + gcalEnd +
-            '&details=' + encodeURIComponent('Service: ' + formData.service + '\nProblem: ' + formData.notes + '\nLocation: ' + formData.location) +
-            '&location=' + encodeURIComponent(formData.location) +
-            '&sf=true&output=xml';
-          confirmationDiv.innerHTML =
-            `<div class="alert alert-success"><h4>Appointment Booked!</h4>
-            <p><strong>Name:</strong> ${formData.name}<br>
-            <strong>Email:</strong> ${formData.email}<br>
-            <strong>Date & Time:</strong> ${startDate.toLocaleString()}<br>
-            <strong>Location:</strong> ${formData.location}<br>
-            <strong>Service:</strong> ${formData.service}<br>
-            <strong>Questions/Comments:</strong> ${formData.notes}</p>
-            <a href="${gcalUrl}" target="_blank" class="btn btn-success">Add to Google Calendar</a>
-            </div>`;
-          confirmationDiv.style.display = 'block';
-        }
+
         const bookingForm = document.getElementById('booking-form');
         if (bookingForm) {
-          bookingForm.style.display = 'none';
+            bookingForm.style.display = 'block';
+            bookingForm.scrollIntoView({ behavior: 'smooth' });
         }
-      });
+        const selectedDateInput = document.getElementById('selected-date');
+        if (selectedDateInput) {
+            selectedDateInput.value = start.toISOString();
+        }
     }
-  });
-  
-  async function loadGooglePlacesScript() {
-    const res = await fetch('https://api.determantechhelp.com:8443/get-google-api-key');
-    const data = await res.json();
-    const apiKey = data.apiKey;
-  
-    const script = document.createElement('script');
-    script.src = `https://maps.googleapis.com/maps/api/js?key=${apiKey}&libraries=places&callback=initMap`;
-    script.async = true;
-    script.defer = true;
-  
-    window.initMap = function () {
-      const locationInput = document.getElementById('location');
-      if (locationInput && window.google && window.google.maps && window.google.maps.places) {
-        new google.maps.places.Autocomplete(locationInput, {
-          types: ['address'],
-          componentRestrictions: { country: 'us' }
+
+    // --- Simple View Logic ---
+    function generateDates() {
+        if (!dateCardsContainer) {
+            console.error("CRITICAL: date-cards container not found!");
+            return;
+        }
+        console.log("Generating Quick Book dates for container:", dateCardsContainer);
+        dateCardsContainer.innerHTML = '';
+        const today = new Date();
+        for (let i = 1; i <= 7; i++) {
+            const date = new Date(today);
+            date.setDate(today.getDate() + i);
+            
+            const card = document.createElement('div');
+            card.className = 'booking-card'; // Removed fade-in to ensure immediate visibility
+            card.style.border = '1px solid #0070f3'; // Forced bright border for debugging
+            card.innerHTML = `
+                <h3 style="color: white; margin-bottom: 5px;">${date.toLocaleDateString('en-US', { weekday: 'short' })}</h3>
+                <p style="color: rgba(255,255,255,0.7); margin: 0;">${date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}</p>
+            `;
+            
+            card.addEventListener('click', () => {
+                console.log("Date card clicked:", date);
+                document.querySelectorAll('.date-grid .booking-card').forEach(c => c.classList.remove('active'));
+                card.classList.add('active');
+                generateTimeSlots(date);
+            });
+            dateCardsContainer.appendChild(card);
+        }
+        console.log("Successfully appended 7 date cards.");
+    }
+
+    function generateTimeSlots(selectedDate) {
+        if (!timeSelection || !timeSlotsContainer) return;
+        timeSelection.style.display = 'block';
+        timeSlotsContainer.innerHTML = '';
+        
+        const startHour = 9; 
+        const endHour = 19;  
+        
+        for (let hour = startHour; hour <= endHour; hour++) {
+            const slotStart = new Date(selectedDate);
+            slotStart.setHours(hour, 0, 0, 0);
+            const slotEnd = new Date(slotStart);
+            slotEnd.setHours(hour + 1, 0, 0, 0);
+
+            const isBusy = calendarEvents.some(event => {
+                return (slotStart < new Date(event.end) && slotEnd > new Date(event.start));
+            });
+
+            if (!isBusy) {
+                const btn = document.createElement('div');
+                btn.className = 'booking-card fade-in';
+                btn.style.padding = '1rem';
+                btn.innerHTML = `<h3>${slotStart.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', hour12: true })}</h3>`;
+                btn.addEventListener('click', () => handleTimeSelection(slotStart, slotEnd));
+                timeSlotsContainer.appendChild(btn);
+            }
+        }
+        timeSelection.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+
+    // Load dates immediately!
+    console.log("Attempting to load dates...");
+    generateDates();
+    
+    // Backup: Try again after a split second in case the DOM was slow
+    setTimeout(generateDates, 500);
+
+    // --- Calendar & Busy Times Loading ---
+    if (calendarEl) {
+        if (loadingOverlay) loadingOverlay.style.display = 'block';
+        try {
+            const res = await fetch('/get-busy-times');
+            const busyTimes = await res.json();
+            
+            calendarEvents = busyTimes.map(slot => {
+                const start = new Date(slot.start);
+                const end = new Date(slot.end);
+                return {
+                    start: start.toISOString(),
+                    end: new Date(end.getTime() + 60 * 60 * 1000).toISOString(),
+                    display: 'background',
+                    color: '#ff9999'
+                };
+            });
+
+            const calendar = new FullCalendar.Calendar(calendarEl, {
+                initialView: 'timeGridWeek',
+                selectable: true,
+                slotMinTime: '09:00:00',
+                slotMaxTime: '20:00:00',
+                allDaySlot: false,
+                height: 'auto',
+                expandRows: true,
+                weekends: true,
+                dayHeaderFormat: { weekday: 'short' },
+                events: calendarEvents,
+                select: function (info) {
+                    const isBusy = calendarEvents.some(event => {
+                        return (info.start < new Date(event.end) && info.end > new Date(event.start));
+                    });
+                    if (isBusy) {
+                        alert("❌ This time slot is unavailable.");
+                        calendar.unselect();
+                        return;
+                    }
+                    handleTimeSelection(info.start, info.end);
+                }
+            });
+            calendar.render();
+        } catch (error) {
+            console.error("Error loading busy times:", error);
+        } finally {
+            if (loadingOverlay) loadingOverlay.style.display = 'none';
+        }
+    }
+
+    // --- Form Submission ---
+    if (appointmentForm) {
+        appointmentForm.addEventListener('submit', async function (e) {
+            e.preventDefault();
+            const formData = {
+                name: document.getElementById('name').value,
+                email: document.getElementById('email').value,
+                date: document.getElementById('selected-date').value,
+                service: document.getElementById('service').value,
+                notes: document.getElementById('questions').value,
+                location: document.getElementById('location').value,
+            };
+
+            const response = await fetch('/add-event', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    name: formData.name,
+                    email: formData.email,
+                    date: formData.date,
+                    problem: formData.notes,
+                    location: formData.location
+                })                    
+            });
+
+            const confirmationDiv = document.getElementById('confirmation-message');
+            if (confirmationDiv) {
+                const startDate = new Date(formData.date);
+                confirmationDiv.innerHTML = `
+                    <div class="alert alert-success">
+                        <h4>Request Submitted!</h4>
+                        <p>Hi ${formData.name}, your request for <strong>${startDate.toLocaleString()}</strong> has been sent.</p>
+                        <p style="color: #ffcc00; font-weight: bold;">⚠️ Note: This is NOT a confirmed appointment yet.</p>
+                        <p>Cole will review your request and send a final confirmation email shortly.</p>
+                    </div>`;
+                confirmationDiv.style.display = 'block';
+                const bookingForm = document.getElementById('booking-form');
+                if (bookingForm) bookingForm.style.display = 'none';
+            }
         });
-      }
-      delete window.initMap;
-    };
-  
-    document.head.appendChild(script);
-  }
-  
-  document.addEventListener('DOMContentLoaded', function () {
-    loadGooglePlacesScript();
-  });
-  
+    }
+
+    // --- Location Autocomplete ---
+    const locationInput = document.getElementById('location');
+    const resultsContainer = document.getElementById('location-results');
+    if (locationInput && resultsContainer) {
+        let timeout = null;
+        locationInput.addEventListener('input', () => {
+            clearTimeout(timeout);
+            const query = locationInput.value.trim();
+            if (query.length < 3) { resultsContainer.style.display = 'none'; return; }
+            timeout = setTimeout(async () => {
+                try {
+                    const res = await fetch(`https://photon.komoot.io/api/?q=${encodeURIComponent(query)}&lat=38.85&lon=-77.16&limit=5`);
+                    const data = await res.json();
+                    resultsContainer.innerHTML = '';
+                    data.features.forEach(feature => {
+                        const props = feature.properties;
+                        if (props.country !== 'United States' && props.countrycode !== 'US') return;
+                        const fullAddress = [([props.housenumber, props.street || props.name].filter(Boolean).join(' ')), ([props.city || props.town, props.state].filter(Boolean).join(', '))].filter(Boolean).join(', ');
+                        const div = document.createElement('div');
+                        div.className = 'result-item';
+                        div.innerText = fullAddress;
+                        div.addEventListener('click', () => { locationInput.value = fullAddress; resultsContainer.style.display = 'none'; });
+                        resultsContainer.appendChild(div);
+                    });
+                    resultsContainer.style.display = data.features.length ? 'block' : 'none';
+                } catch (err) { console.error('Autocomplete error:', err); }
+            }, 300);
+        });
+        document.addEventListener('click', (e) => {
+            if (!locationInput.contains(e.target) && !resultsContainer.contains(e.target)) resultsContainer.style.display = 'none';
+        });
+    }
+});

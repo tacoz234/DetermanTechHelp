@@ -64,50 +64,131 @@ const transporter = nodemailer.createTransport({
     }
 });
 
-// ✅ Route to Add an Event
+// ✅ Route to Add an Event (Now as a Request)
 app.post('/add-event', async (req, res) => {
     try {
-        console.log("Received request:", req.body);
+        console.log("Received appointment request:", req.body);
         const { name, email, date, problem, location } = req.body;
         if (!name || !email || !date || !problem || !location) {
             return res.status(400).json({ error: "Missing required fields." });
         }
 
         const event = {
-            summary: `Tech Support - ${name}`,
-            description: `Problem: ${problem}\nLocation: ${location}\nEmail: ${email}`,
+            summary: `[PENDING] Tech Support - ${name}`,
+            description: `CUSTOMER_EMAIL: ${email}\nProblem: ${problem}\nLocation: ${location}`,
             location: location, 
             start: { dateTime: date, timeZone: 'America/New_York' },
             end: { dateTime: new Date(new Date(date).getTime() + 60 * 60000), timeZone: 'America/New_York' },
-            reminders: { useDefault: true }
+            reminders: { useDefault: true },
+            colorId: '5' // Yellow/Orange for pending
         };
 
         const response = await calendar.events.insert({ calendarId: 'primary', resource: event });
-        console.log('Event Created:', response.data);
+        const eventId = response.data.id;
+        console.log('Pending Event Created:', eventId);
 
-        // 📧 Send confirmation email
-        const mailOptions = {
+        // 📧 1. Send "Request Received" email to Customer
+        const customerMailOptions = {
             from: process.env.EMAIL_USER,
             to: email,
-            subject: `Appointment Confirmation - Determan Tech Help`,
-            // Ensure the text is a single, clean string literal using \n for newlines
-            text: `Hi ${name},\n\nYour appointment has been scheduled!\n\n📅 Date & Time: ${new Date(date).toLocaleString()}\n📍 Location: ${location}\n📝 Problem: ${problem}\n\nIf you have any questions, feel free to reply to this email.\n\nThanks!\nDeterman Tech Help`
+            subject: `Appointment Request Received - Determan Tech Help`,
+            text: `Hi ${name},\n\nI've received your appointment request for ${new Date(date).toLocaleString()}.\n\n⚠️ Please note: This is NOT a confirmed appointment yet. I will review my schedule and send you a final confirmation shortly.\n\nDetails:\n📍 Location: ${location}\n📝 Problem: ${problem}\n\nThanks!\nCole Determan`
         };
 
-        // Explicitly format the callback with braces to ensure clarity and avoid subtle parsing issues
-        transporter.sendMail(mailOptions, (error, info) => {
-            if (error) {
-                console.error("Error sending email:", error);
-            } else {
-                console.log("Email sent:", info.response);
-            }
-        });
+        // 📧 2. Send "Action Required" email to Cole (Owner)
+        const confirmLink = `https://determantechhelp.com/confirm-appointment?id=${eventId}&token=${process.env.ADMIN_TOKEN || 'secret'}`;
+        const denyLink = `https://determantechhelp.com/deny-appointment?id=${eventId}&token=${process.env.ADMIN_TOKEN || 'secret'}`;
+        
+        const ownerMailOptions = {
+            from: process.env.EMAIL_USER,
+            to: process.env.EMAIL_USER,
+            subject: `🚨 NEW APPOINTMENT REQUEST: ${name}`,
+            text: `New request from ${name} (${email})\n\nTime: ${new Date(date).toLocaleString()}\nLocation: ${location}\nProblem: ${problem}\n\n✅ CONFIRM: ${confirmLink}\n\n❌ DENY: ${denyLink}`
+        };
 
-        res.json({ message: 'Appointment added to Google Calendar!', eventId: response.data.id });
+        transporter.sendMail(customerMailOptions);
+        transporter.sendMail(ownerMailOptions);
+
+        res.json({ message: 'Request submitted! Please check your email for updates.', eventId: eventId });
 
     } catch (error) {
         console.error('Error adding event:', error);
-        res.status(500).json({ error: 'Error adding event', details: error.message });
+        res.status(500).json({ error: 'Error submitting request', details: error.message });
+    }
+});
+
+// ✅ Route to Confirm an Appointment
+app.get('/confirm-appointment', async (req, res) => {
+    const { id, token } = req.query;
+    if (token !== (process.env.ADMIN_TOKEN || 'secret')) {
+        return res.status(403).send("Unauthorized");
+    }
+
+    try {
+        const event = await calendar.events.get({ calendarId: 'primary', eventId: id });
+        const description = event.data.description;
+        const customerEmail = description.match(/CUSTOMER_EMAIL: (.*)\n/)?.[1];
+        const name = event.data.summary.replace('[PENDING] Tech Support - ', '');
+
+        // Update Calendar Event
+        await calendar.events.patch({
+            calendarId: 'primary',
+            eventId: id,
+            resource: {
+                summary: `CONFIRMED: Tech Support - ${name}`,
+                colorId: '10' // Green for confirmed
+            }
+        });
+
+        // 📧 Send Real Confirmation to Customer
+        if (customerEmail) {
+            const mailOptions = {
+                from: process.env.EMAIL_USER,
+                to: customerEmail,
+                subject: `Confirmed: Your Appointment with Determan Tech Help`,
+                text: `Hi ${name},\n\nGreat news! Your appointment has been CONFIRMED for ${new Date(event.data.start.dateTime).toLocaleString()}.\n\nSee you then!\n\nCole Determan\n(571) 279-8040`
+            };
+            transporter.sendMail(mailOptions);
+        }
+
+        res.send(`<h1>Appointment Confirmed!</h1><p>Confirmation email sent to ${customerEmail}.</p>`);
+    } catch (error) {
+        console.error("Confirm error:", error);
+        res.status(500).send("Error confirming appointment.");
+    }
+});
+
+// ✅ Route to Deny an Appointment
+app.get('/deny-appointment', async (req, res) => {
+    const { id, token } = req.query;
+    if (token !== (process.env.ADMIN_TOKEN || 'secret')) {
+        return res.status(403).send("Unauthorized");
+    }
+
+    try {
+        const event = await calendar.events.get({ calendarId: 'primary', eventId: id });
+        const description = event.data.description;
+        const customerEmail = description.match(/CUSTOMER_EMAIL: (.*)\n/)?.[1];
+        const name = event.data.summary.replace('[PENDING] Tech Support - ', '');
+
+        // Delete Event
+        await calendar.events.delete({ calendarId: 'primary', eventId: id });
+
+        // 📧 Send Denial to Customer
+        if (customerEmail) {
+            const mailOptions = {
+                from: process.env.EMAIL_USER,
+                to: customerEmail,
+                subject: `Update regarding your appointment request`,
+                text: `Hi ${name},\n\nI'm sorry, but I won't be able to make the requested time for your tech support appointment. Please feel free to book another time on the website or reply to this email to find a different slot.\n\nBest,\nCole Determan`
+            };
+            transporter.sendMail(mailOptions);
+        }
+
+        res.send(`<h1>Appointment Denied</h1><p>The event has been removed and the customer notified.</p>`);
+    } catch (error) {
+        console.error("Deny error:", error);
+        res.status(500).send("Error denying appointment.");
     }
 });
 
@@ -184,6 +265,38 @@ app.get('/get-google-api-key', (req, res) => {
         res.json({ apiKey: apiKey });
     } else {
         res.status(500).json({ error: 'Google API key not configured on the server.' });
+    }
+});
+
+// ✅ Route to Handle Contact Form
+app.post('/contact', async (req, res) => {
+    try {
+        const { name, email, subject, message } = req.body;
+        
+        if (!name || !email || !message) {
+            return res.status(400).json({ error: "Missing required fields (name, email, message)." });
+        }
+
+        const mailOptions = {
+            from: process.env.EMAIL_USER,
+            to: process.env.EMAIL_USER, // Send to yourself
+            replyTo: email,
+            subject: `New Contact Form Message: ${subject || 'No Subject'}`,
+            text: `Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`
+        };
+
+        transporter.sendMail(mailOptions, (error, info) => {
+            if (error) {
+                console.error("Error sending contact email:", error);
+                return res.status(500).json({ error: "Failed to send message." });
+            }
+            console.log("Contact email sent:", info.response);
+            res.json({ message: "Your message has been sent successfully!" });
+        });
+
+    } catch (error) {
+        console.error("Contact route error:", error);
+        res.status(500).json({ error: "Server error." });
     }
 });
 
