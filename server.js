@@ -7,6 +7,7 @@ const { google } = require('googleapis');
 const nodemailer = require('nodemailer');
 
 const app = express();
+app.enable('trust proxy');
 app.use(express.json());
 const corsOptions = {
     origin: 'https://determantechhelp.com', // only allow your frontend
@@ -15,6 +16,13 @@ const corsOptions = {
   };
   app.use(cors(corsOptions));
   
+// ✅ Force HTTPS Redirection
+app.use((req, res, next) => {
+    if (req.header('x-forwarded-proto') !== 'https' && req.header('x-forwarded-proto') !== undefined) {
+        return res.redirect(301, `https://${req.header('host')}${req.url}`);
+    }
+    next();
+});
 
 // ✅ Serve Static Files (Frontend)
 app.use((req, res, next) => {
