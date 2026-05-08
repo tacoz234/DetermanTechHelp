@@ -112,6 +112,7 @@ nav.scrolled {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    padding: 10rem 2rem 5rem;
     text-align: center;
     overflow: hidden;
 }
@@ -365,7 +366,22 @@ footer {
     }
     
     .hero h1 {
-        font-size: 4rem;
+        font-size: 3rem; /* Reduced from 4rem to prevent overlap on small screens */
+    }
+
+    .hero {
+        height: auto;
+        min-height: 70vh;
+        padding-top: 7rem;
+        padding-bottom: 3rem;
+    }
+
+    nav {
+        padding: 0.75rem 0;
+    }
+
+    .logo img {
+        height: 32px;
     }
 }
 /* Contact Page Specific */
