@@ -263,6 +263,18 @@ section {
     color: var(--text-secondary);
 }
 
+/* Responsive Card Utility */
+.responsive-card {
+    padding: 4rem;
+    width: 100%;
+}
+
+@media (max-width: 768px) {
+    .responsive-card {
+        padding: 2.5rem 1.5rem;
+    }
+}
+
 /* About Section */
 .about-section {
     display: grid;
