@@ -25,6 +25,15 @@ body {
     overflow-x: hidden;
 }
 
+input, select, textarea, button {
+    font-family: inherit;
+}
+
+select option {
+    background-color: #141416;
+    color: #ffffff;
+}
+
 /* Typography */
 h1, h2, h3 {
     font-weight: 800;
@@ -160,6 +169,8 @@ nav.scrolled {
     border-radius: 100px;
     box-shadow: 0 10px 30px var(--accent-glow);
     transition: var(--transition);
+    border: none;
+    cursor: pointer;
 }
 
 .btn:hover {
