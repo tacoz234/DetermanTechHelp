@@ -108,7 +108,7 @@ document.addEventListener('DOMContentLoaded', async function () {
 
             if (!isBusy) {
                 const btn = document.createElement('div');
-                btn.className = 'booking-card fade-in';
+                btn.className = 'booking-card'; // Removed fade-in to ensure immediate visibility
                 btn.style.padding = '1rem';
                 btn.innerHTML = `<h3>${slotStart.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', hour12: true })}</h3>`;
                 btn.addEventListener('click', () => handleTimeSelection(slotStart, slotEnd));
