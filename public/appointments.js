@@ -132,16 +132,20 @@ document.addEventListener('DOMContentLoaded', async function () {
             const res = await fetch('/get-busy-times');
             const busyTimes = await res.json();
             
-            calendarEvents = busyTimes.map(slot => {
-                const start = new Date(slot.start);
-                const end = new Date(slot.end);
-                return {
-                    start: start.toISOString(),
-                    end: new Date(end.getTime() + 60 * 60 * 1000).toISOString(),
-                    display: 'background',
-                    color: '#ff9999'
-                };
-            });
+            if (Array.isArray(busyTimes)) {
+                calendarEvents = busyTimes.map(slot => {
+                    const start = new Date(slot.start);
+                    const end = new Date(slot.end);
+                    return {
+                        start: start.toISOString(),
+                        end: new Date(end.getTime() + 60 * 60 * 1000).toISOString(),
+                        display: 'background',
+                        color: '#ff9999'
+                    };
+                });
+            } else {
+                console.error("Failed to load busy times, expected array but got:", busyTimes);
+            }
 
             const calendar = new FullCalendar.Calendar(calendarEl, {
                 initialView: 'timeGridWeek',
