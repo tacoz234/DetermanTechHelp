@@ -4,9 +4,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Services & Pricing | Determan Tech Help</title>
-    <link rel="icon" type="image/png" href="images/techhelp_background.png">
-    <link rel="stylesheet" href="style.css?v=1.1">
+    <title>Services &amp; Pricing | Determan Tech Help</title>
+    <meta name="description"
+        content="Clear, upfront pricing for expert tech assistance. Home Wi-Fi, computer repair, device setup, and custom PCs in Lake Barcroft.">
+    <link rel="icon" type="image/png" href="images/techhelp.png">
+    <link rel="stylesheet" href="style.css?v=2.0">
 </head>
 
 <body>
@@ -14,61 +16,127 @@
     <nav id="navbar">
         <div class="nav-container">
             <a href="index.html" class="logo">
-                <img src="images/techhelp_background.png" alt="Determan Tech Help">
-                <span>Determan Tech</span>
+                <img src="images/techhelp.png" alt="Determan Tech Help Logo">
+                <div class="logo-text">
+                    <span class="logo-title">Determan Tech</span>
+                    <span class="logo-sub">Friendly Local IT Support</span>
+                </div>
             </a>
-            <div class="nav-links">
-                <a href="services.html">Services</a>
-                <a href="reviews.html">Reviews</a>
-                <a href="appointments.html">Appointments</a>
-                <a href="contact.html">Contact</a>
+
+            <div class="nav-right">
+                <div class="nav-links">
+                    <a href="index.html">Home</a>
+                    <a href="services.html" class="active">Services</a>
+                    <a href="reviews.html">Reviews</a>
+                    <a href="appointments.html">Appointments</a>
+                    <a href="contact.html">Contact</a>
+                </div>
+
+                <a href="tel:5712798040" class="nav-call-btn">
+                    📞 (571) 279-8040
+                </a>
+
+                <button class="menu-toggle" id="menu-toggle" aria-label="Open Navigation Menu" aria-expanded="false">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Drawer Navigation -->
+        <div class="mobile-menu" id="mobile-menu">
+            <div class="mobile-menu-links">
+                <a href="index.html">Home</a>
+                <a href="services.html" class="active">Services &amp; Pricing</a>
+                <a href="reviews.html">Customer Reviews</a>
+                <a href="appointments.html">Book Appointment</a>
+                <a href="contact.html">Contact Me</a>
+            </div>
+            <div class="mobile-menu-action">
+                <p class="mobile-call-label">Need immediate help? Call or text:</p>
+                <a href="tel:5712798040" class="btn btn-call">
+                    📞 (571) 279-8040
+                </a>
             </div>
         </div>
     </nav>
 
     <main>
-        <section class="hero" style="height: 60vh;">
-            <div class="hero-bg">
-                <!-- <img src="hero-bg.png" alt="Tech Support Background"> -->
-            </div>
+        <section class="hero" style="min-height: 40vh; padding: 4rem 1.5rem 2.5rem;">
             <div class="hero-content">
-                <h1>Services <br>& <span>Pricing</span></h1>
-                <p>Transparent rates for premium tech assistance. Your satisfaction is my priority.</p>
+                <div class="badge">Clear &amp; Upfront Rates</div>
+                <h1>Services &amp; <span>Pricing</span></h1>
+                <p>Transparent rates for patient, high-quality tech assistance. No surprise fees, guaranteed satisfaction.</p>
             </div>
         </section>
 
-        <section id="services">
+        <section id="services" style="padding-top: 2rem;">
             <div class="services-grid">
-                <div class="service-card glass fade-in">
-                    <h3>Basic Tech Support</h3>
-                    <p>Help with email setup, software installation, printer issues, and general troubleshooting.</p>
-                    <h4 style="margin-top: 1.5rem; color: var(--accent-color);">$75 / Hour</h4>
+                <div class="service-card fade-in">
+                    <div>
+                        <h3>Basic Tech Support</h3>
+                        <p>Help with email issues, password recovery, software installation, printer connections, and general troubleshooting.</p>
+                    </div>
+                    <span class="service-price">$75 / Hour</span>
                 </div>
-                <div class="service-card glass fade-in">
-                    <h3>Device Setup</h3>
-                    <p>Full setup of cell phones, tablets, smart TVs, computers, and Wi-Fi routers in your home.</p>
-                    <h4 style="margin-top: 1.5rem; color: var(--accent-color);">$75 / Hour</h4>
+
+                <div class="service-card fade-in">
+                    <div>
+                        <h3>In-Home Device Setup</h3>
+                        <p>Complete unboxing, setup, and tutorial for smartphones, tablets, smart TVs, sound systems, and computers.</p>
+                    </div>
+                    <span class="service-price">$75 / Hour</span>
                 </div>
-                <div class="service-card glass fade-in">
-                    <h3>Custom PC Building</h3>
-                    <p>Fully custom PC build within a budget, parts preferences, and aesthetics.</p>
-                    <h4 style="margin-top: 1.5rem; color: var(--accent-color);">$50 / Hour</h4>
+
+                <div class="service-card fade-in">
+                    <div>
+                        <h3>Network &amp; Wi-Fi Optimization</h3>
+                        <p>Router setup, mesh Wi-Fi network configuration, eliminating dead zones, and securing your home internet.</p>
+                    </div>
+                    <span class="service-price">$75 / Hour</span>
                 </div>
-                <div class="service-card glass fade-in">
-                    <h3>Custom Website</h3>
-                    <p>Fully custom website using modern HTML, CSS, and JavaScript.</p>
-                    <h4 style="margin-top: 1.5rem; color: var(--accent-color);">$50 / Hour</h4>
+
+                <div class="service-card fade-in">
+                    <div>
+                        <h3>Custom PC Building &amp; Upgrades</h3>
+                        <p>Tailored computer builds for work, creative projects, or gaming within your parts budget and aesthetic preference.</p>
+                    </div>
+                    <span class="service-price">$50 / Hour</span>
+                </div>
+
+                <div class="service-card fade-in">
+                    <div>
+                        <h3>Custom Websites</h3>
+                        <p>Modern, responsive, fast-loading websites built from scratch for small businesses, community groups, or individuals.</p>
+                    </div>
+                    <span class="service-price">$50 / Hour</span>
+                </div>
+
+                <div class="service-card fade-in" style="background: var(--accent-light); border-color: var(--accent-border);">
+                    <div>
+                        <h3 style="color: var(--accent-color);">Ready to Get Started?</h3>
+                        <p>Have an issue not listed above? Just ask! I handle a wide variety of tech challenges with care and patience.</p>
+                    </div>
+                    <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
+                        <a href="appointments.html" class="btn" style="padding: 0.75rem 1.5rem; font-size: 0.95rem;">Book Online</a>
+                        <a href="tel:5712798040" class="btn btn-secondary" style="padding: 0.75rem 1.5rem; font-size: 0.95rem;">Call Cole</a>
+                    </div>
                 </div>
             </div>
 
-            <div class="glass fade-in" style="margin-top: 5rem; padding: 4rem; text-align: center;">
-                <h2 style="margin-bottom: 2rem;">Payment Methods</h2>
-                <p style="font-size: 1.25rem; color: var(--text-secondary); margin-bottom: 2rem;">Cash, Check, Apple
-                    Pay, Zelle, or Venmo accepted.</p>
-                <div style="display: flex; flex-direction: column; align-items: center; gap: 2rem;">
-                    <a href="https://venmo.com/Cole-Determan" class="btn" target="_blank">Pay via Venmo</a>
-                    <img src="images/venmo.png" alt="Venmo QR"
-                        style="max-width: 300px; border-radius: 16px; border: 1px solid var(--glass-border);">
+            <!-- Payment Methods -->
+            <div class="card fade-in" style="margin-top: 4rem; padding: 3rem 1.5rem; text-align: center;">
+                <h2>Accepted Payment Methods</h2>
+                <p style="font-size: 1.15rem; color: var(--text-secondary); max-width: 600px; margin: 0.5rem auto 2rem;">
+                    I make paying simple. Cash, Personal Check, Apple Pay, Zelle, or Venmo are gladly accepted.
+                </p>
+                <div style="display: flex; flex-direction: column; align-items: center; gap: 1.5rem;">
+                    <a href="https://venmo.com/Cole-Determan" class="btn" target="_blank" rel="noopener noreferrer">
+                        Pay via Venmo (@Cole-Determan)
+                    </a>
+                    <img src="images/venmo.png" alt="Cole Determan Venmo QR Code"
+                        style="max-width: 240px; width: 100%; border-radius: var(--radius-md); border: 1px solid var(--card-border); box-shadow: var(--shadow-sm);">
                 </div>
             </div>
         </section>
@@ -78,43 +146,29 @@
         <div class="footer-content">
             <div class="footer-info">
                 <div class="footer-logo">Determan Tech</div>
-                <p>Reliable tech support for the Lake Barcroft community.</p>
-                <p>Email: <a href="mailto:determantechhelp@gmail.com"
-                        style="color: var(--accent-color);">determantechhelp@gmail.com</a></p>
-                <p>Phone: (571) 279-8040</p>
+                <p>Reliable, patient tech support for Lake Barcroft and surrounding communities.</p>
+                <p>Email: <a href="mailto:determantechhelp@gmail.com">determantechhelp@gmail.com</a></p>
+                <p>Phone: <a href="tel:5712798040">(571) 279-8040</a></p>
             </div>
             <div class="footer-links">
-                <h4>Sitemap</h4>
+                <h4>Navigation</h4>
                 <ul>
                     <li><a href="index.html">Home</a></li>
-                    <li><a href="services.html">Services</a></li>
-                    <li><a href="reviews.html">Reviews</a></li>
-                    <li><a href="appointments.html">Appointments</a></li>
+                    <li><a href="services.html">Services &amp; Pricing</a></li>
+                    <li><a href="reviews.html">Customer Reviews</a></li>
+                    <li><a href="appointments.html">Book Appointment</a></li>
+                    <li><a href="contact.html">Contact Me</a></li>
                 </ul>
+            </div>
+            <div class="footer-links">
+                <h4>Payment &amp; Trust</h4>
+                <p style="font-size: 0.95rem; margin-bottom: 0.75rem;">Cash, Check, Apple Pay, Zelle, or Venmo accepted.</p>
+                <p style="font-size: 0.9rem; color: var(--text-muted);">© 2026 Determan Tech Help. All rights reserved.</p>
             </div>
         </div>
     </footer>
 
-    <script>
-        window.addEventListener('scroll', () => {
-            const nav = document.getElementById('navbar');
-            if (window.scrollY > 50) {
-                nav.classList.add('scrolled');
-            } else {
-                nav.classList.remove('scrolled');
-            }
-        });
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
-            });
-        }, { threshold: 0.1 });
-
-        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
-    </script>
+    <script src="nav.js"></script>
 </body>
 
 </html>

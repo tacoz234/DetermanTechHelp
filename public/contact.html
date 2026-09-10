@@ -4,10 +4,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact | Determan Tech Help</title>
-    <meta name="description" content="Get in touch with Cole Determan for premium tech support and IT solutions.">
-    <link rel="icon" type="image/png" href="images/techhelp_background.png">
-    <link rel="stylesheet" href="style.css?v=1.1">
+    <title>Contact Cole | Determan Tech Help</title>
+    <meta name="description"
+        content="Get in touch with Cole Determan for fast, friendly tech support in Lake Barcroft, VA. Call, text, or send a message.">
+    <link rel="icon" type="image/png" href="images/techhelp.png">
+    <link rel="stylesheet" href="style.css?v=2.0">
 </head>
 
 <body>
@@ -15,14 +16,48 @@
     <nav id="navbar">
         <div class="nav-container">
             <a href="index.html" class="logo">
-                <img src="images/techhelp_background.png" alt="Determan Tech Help">
-                <span>Determan Tech</span>
+                <img src="images/techhelp.png" alt="Determan Tech Help Logo">
+                <div class="logo-text">
+                    <span class="logo-title">Determan Tech</span>
+                    <span class="logo-sub">Friendly Local IT Support</span>
+                </div>
             </a>
-            <div class="nav-links">
-                <a href="services.html">Services</a>
-                <a href="reviews.html">Reviews</a>
-                <a href="appointments.html">Appointments</a>
-                <a href="contact.html" style="opacity: 1; color: var(--accent-color);">Contact</a>
+
+            <div class="nav-right">
+                <div class="nav-links">
+                    <a href="index.html">Home</a>
+                    <a href="services.html">Services</a>
+                    <a href="reviews.html">Reviews</a>
+                    <a href="appointments.html">Appointments</a>
+                    <a href="contact.html" class="active">Contact</a>
+                </div>
+
+                <a href="tel:5712798040" class="nav-call-btn">
+                    📞 (571) 279-8040
+                </a>
+
+                <button class="menu-toggle" id="menu-toggle" aria-label="Open Navigation Menu" aria-expanded="false">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Drawer Navigation -->
+        <div class="mobile-menu" id="mobile-menu">
+            <div class="mobile-menu-links">
+                <a href="index.html">Home</a>
+                <a href="services.html">Services &amp; Pricing</a>
+                <a href="reviews.html">Customer Reviews</a>
+                <a href="appointments.html">Book Appointment</a>
+                <a href="contact.html" class="active">Contact Me</a>
+            </div>
+            <div class="mobile-menu-action">
+                <p class="mobile-call-label">Need immediate help? Call or text:</p>
+                <a href="tel:5712798040" class="btn btn-call">
+                    📞 (571) 279-8040
+                </a>
             </div>
         </div>
     </nav>
@@ -30,43 +65,59 @@
     <main>
         <section class="contact-section">
             <div class="section-header">
-                <h1>Get in Touch</h1>
-                <p>Have a question or need urgent tech help? Send me a message and I'll get back to you as soon as possible.</p>
+                <div class="badge">Always Happy to Help</div>
+                <h1>Get in <span>Touch</span></h1>
+                <p>Have a question or need tech help? Feel free to call, text, or send a quick message below.</p>
             </div>
 
             <div class="contact-container">
+                <!-- Direct Contact Info Cards -->
                 <div class="contact-info-cards">
-                    <div class="info-card glass">
-                        <h4>Email Me</h4>
-                        <p><a href="mailto:determantechhelp@gmail.com">determantechhelp@gmail.com</a></p>
+                    <div class="info-card">
+                        <h4>Call or Text Anytime</h4>
+                        <p><a href="tel:5712798040">📞 (571) 279-8040</a></p>
+                        <p style="font-size: 0.95rem; font-weight: normal; color: var(--text-secondary); margin-top: 0.5rem;">
+                            Direct line to Cole. Leave a voicemail or text if I'm currently on a service call!
+                        </p>
                     </div>
-                    <div class="info-card glass">
-                        <h4>Call or Text</h4>
-                        <p><a href="tel:5712798040">(571) 279-8040</a></p>
+
+                    <div class="info-card">
+                        <h4>Send an Email</h4>
+                        <p><a href="mailto:determantechhelp@gmail.com">✉️ determantechhelp@gmail.com</a></p>
+                        <p style="font-size: 0.95rem; font-weight: normal; color: var(--text-secondary); margin-top: 0.5rem;">
+                            I respond to emails within a few hours.
+                        </p>
                     </div>
-                    <div class="info-card glass">
-                        <h4>Location</h4>
-                        <p>Lake Barcroft, VA & Surrounding Areas</p>
+
+                    <div class="info-card">
+                        <h4>Service Area</h4>
+                        <p>📍 Lake Barcroft, VA</p>
+                        <p style="font-size: 0.95rem; font-weight: normal; color: var(--text-secondary); margin-top: 0.5rem;">
+                            Serving Lake Barcroft, Falls Church, Annandale, Arlington, and nearby communities with friendly in-home visits.
+                        </p>
                     </div>
                 </div>
 
-                <div class="contact-form-container glass">
+                <!-- Contact Message Form -->
+                <div class="contact-form-container">
+                    <h2 style="margin-bottom: 0.5rem; font-size: 1.65rem;">Send a Message</h2>
+                    <p style="color: var(--text-secondary); margin-bottom: 1.75rem;">Fill out the form below and I will get back to you promptly.</p>
                     <form id="contact-form">
                         <div class="form-group">
                             <label for="name">Your Name</label>
-                            <input type="text" id="name" name="name" placeholder="John Doe" required>
+                            <input type="text" id="name" name="name" placeholder="e.g. Mary Johnson" required>
                         </div>
                         <div class="form-group">
                             <label for="email">Email Address</label>
-                            <input type="email" id="email" name="email" placeholder="john@example.com" required>
+                            <input type="email" id="email" name="email" placeholder="e.g. mary@example.com" required>
                         </div>
                         <div class="form-group">
-                            <label for="subject">Subject</label>
-                            <input type="text" id="subject" name="subject" placeholder="How can I help?">
+                            <label for="subject">Subject / What do you need help with?</label>
+                            <input type="text" id="subject" name="subject" placeholder="e.g. New iPad Setup or Slow Laptop">
                         </div>
                         <div class="form-group">
-                            <label for="message">Message</label>
-                            <textarea id="message" name="message" placeholder="Describe your tech issue or inquiry..." required></textarea>
+                            <label for="message">Message Details</label>
+                            <textarea id="message" name="message" placeholder="Please describe what is happening..." required></textarea>
                         </div>
                         <button type="submit" class="btn submit-btn">Send Message</button>
                         <div id="form-status"></div>
@@ -76,45 +127,34 @@
         </section>
     </main>
 
-    <footer>
+    <footer id="contact">
         <div class="footer-content">
             <div class="footer-info">
                 <div class="footer-logo">Determan Tech</div>
-                <p>Reliable tech support for the Lake Barcroft community.</p>
-                <p>Email: <a href="mailto:determantechhelp@gmail.com" style="color: var(--accent-color);">determantechhelp@gmail.com</a></p>
-                <p>Phone: (571) 279-8040</p>
+                <p>Reliable, patient tech support for Lake Barcroft and surrounding communities.</p>
+                <p>Email: <a href="mailto:determantechhelp@gmail.com">determantechhelp@gmail.com</a></p>
+                <p>Phone: <a href="tel:5712798040">(571) 279-8040</a></p>
             </div>
             <div class="footer-links">
-                <h4>Sitemap</h4>
+                <h4>Navigation</h4>
                 <ul>
                     <li><a href="index.html">Home</a></li>
-                    <li><a href="services.html">Services</a></li>
-                    <li><a href="reviews.html">Reviews</a></li>
-                    <li><a href="appointments.html">Appointments</a></li>
+                    <li><a href="services.html">Services &amp; Pricing</a></li>
+                    <li><a href="reviews.html">Customer Reviews</a></li>
+                    <li><a href="appointments.html">Book Appointment</a></li>
+                    <li><a href="contact.html">Contact Me</a></li>
                 </ul>
             </div>
             <div class="footer-links">
-                <h4>Legal</h4>
-                <ul>
-                    <li><a href="#">Privacy Policy</a></li>
-                    <li><a href="#">Terms of Service</a></li>
-                </ul>
+                <h4>Payment &amp; Trust</h4>
+                <p style="font-size: 0.95rem; margin-bottom: 0.75rem;">Cash, Check, Apple Pay, Zelle, or Venmo accepted.</p>
+                <p style="font-size: 0.9rem; color: var(--text-muted);">© 2026 Determan Tech Help. All rights reserved.</p>
             </div>
         </div>
     </footer>
 
+    <script src="nav.js"></script>
     <script>
-        // Navbar scroll effect
-        window.addEventListener('scroll', () => {
-            const nav = document.getElementById('navbar');
-            if (window.scrollY > 50) {
-                nav.classList.add('scrolled');
-            } else {
-                nav.classList.remove('scrolled');
-            }
-        });
-
-        // Form Submission Logic
         const contactForm = document.getElementById('contact-form');
         const formStatus = document.getElementById('form-status');
 
@@ -124,7 +164,7 @@
             const submitBtn = contactForm.querySelector('.submit-btn');
             const originalBtnText = submitBtn.innerText;
             
-            submitBtn.innerText = 'Sending...';
+            submitBtn.innerText = 'Sending Message...';
             submitBtn.disabled = true;
             formStatus.className = '';
             formStatus.innerText = '';
@@ -148,35 +188,21 @@
                 const result = await response.json();
 
                 if (response.ok) {
-                    formStatus.innerText = result.message || 'Message sent successfully!';
+                    formStatus.innerText = result.message || 'Thank you! Your message has been sent successfully.';
                     formStatus.classList.add('success');
                     contactForm.reset();
                 } else {
-                    formStatus.innerText = result.error || 'Failed to send message. Please try again.';
+                    formStatus.innerText = result.error || 'Failed to send message. Please call or text (571) 279-8040 directly.';
                     formStatus.classList.add('error');
                 }
             } catch (error) {
                 console.error('Submission error:', error);
-                formStatus.innerText = 'A network error occurred. Please try again later.';
+                formStatus.innerText = 'A network error occurred. Please call or text (571) 279-8040 directly.';
                 formStatus.classList.add('error');
             } finally {
                 submitBtn.innerText = originalBtnText;
                 submitBtn.disabled = false;
             }
-        });
-
-        // Animation observer
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
-            });
-        }, { threshold: 0.1 });
-
-        document.querySelectorAll('section').forEach(section => {
-            section.classList.add('fade-in');
-            observer.observe(section);
         });
     </script>
 </body>
