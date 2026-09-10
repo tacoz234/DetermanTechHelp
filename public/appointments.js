@@ -308,6 +308,11 @@ document.addEventListener('DOMContentLoaded', function () {
                     })                    
                 });
 
+                if (!response.ok) {
+                    const errData = await response.json().catch(() => ({}));
+                    throw new Error(errData.error || `Server responded with status ${response.status}`);
+                }
+
                 const confirmationDiv = document.getElementById('confirmation-message');
                 if (confirmationDiv) {
                     const startDate = new Date(formData.date);
@@ -336,7 +341,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 }
             } catch (err) {
                 console.error("Submission failed:", err);
-                alert("An error occurred while submitting your appointment request. Please call or text (571) 279-8040.");
+                alert(`There was an issue submitting your appointment request: ${err.message || 'Please try again'}.\n\nYou can also contact Cole directly at (571) 279-8040 or determantechhelp@gmail.com.`);
                 submitBtn.disabled = false;
                 submitBtn.innerText = originalBtnText;
             }

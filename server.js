@@ -87,43 +87,87 @@ app.post('/add-event', async (req, res) => {
             console.warn("Timezone validation error:", tzErr);
         }
 
-        const event = {
-            summary: `[PENDING] Tech Support - ${name}`,
-            description: `CUSTOMER_EMAIL: ${email}\nProblem: ${problem}\nLocation: ${location}`,
-            location: location, 
-            start: { dateTime: date, timeZone: 'America/New_York' },
-            end: { dateTime: new Date(new Date(date).getTime() + 60 * 60000), timeZone: 'America/New_York' },
-            reminders: { useDefault: true },
-            colorId: '5' // Yellow/Orange for pending
-        };
+        // Attempt Google Calendar event creation without letting failure block emails
+        let eventId = null;
+        let calendarSynced = false;
+        try {
+            const event = {
+                summary: `[PENDING] Tech Support - ${name}`,
+                description: `CUSTOMER_EMAIL: ${email}\nProblem: ${problem}\nLocation: ${location}`,
+                location: location, 
+                start: { dateTime: date, timeZone: 'America/New_York' },
+                end: { dateTime: new Date(new Date(date).getTime() + 60 * 60000), timeZone: 'America/New_York' },
+                reminders: { useDefault: true },
+                colorId: '5' // Yellow/Orange for pending
+            };
 
-        const response = await calendar.events.insert({ calendarId: 'primary', resource: event });
-        const eventId = response.data.id;
-        console.log('Pending Event Created:', eventId);
+            const calResponse = await calendar.events.insert({ calendarId: 'primary', resource: event });
+            eventId = calResponse.data?.id;
+            calendarSynced = true;
+            console.log('Pending Event Created in Google Calendar:', eventId);
+        } catch (calError) {
+            console.warn('Google Calendar sync skipped/failed (OAuth issue or offline). Proceeding with email notification:', calError.message || calError);
+        }
+
+        const formattedDate = new Date(date).toLocaleString('en-US', {
+            timeZone: 'America/New_York',
+            weekday: 'long',
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric',
+            hour: 'numeric',
+            minute: '2-digit'
+        });
 
         // 📧 1. Send "Request Received" email to Customer
         const customerMailOptions = {
-            from: process.env.EMAIL_USER,
+            from: `"Cole at Determan Tech Help" <${process.env.EMAIL_USER}>`,
             to: email,
+            replyTo: process.env.EMAIL_USER,
             subject: `Appointment Request Received - Determan Tech Help`,
-            text: `Hi ${name},\n\nI've received your appointment request for ${new Date(date).toLocaleString()}.\n\n⚠️ Please note: This is NOT a confirmed appointment yet. I will review my schedule and send you a final confirmation shortly.\n\nDetails:\n📍 Location: ${location}\n📝 Problem: ${problem}\n\nThanks!\nCole Determan`
+            text: `Hi ${name},\n\nI've received your appointment request for ${formattedDate}.\n\n⚠️ Please note: This is an appointment request, NOT a confirmed booking yet. I will review my schedule and send you a final confirmation shortly.\n\nDetails:\n📍 Location: ${location}\n📝 Service/Problem: ${problem}\n\nIf you need immediate assistance or have questions, reply directly to this email or call/text (571) 279-8040.\n\nBest,\nCole Determan\nDeterman Tech Help\nhttps://determantechhelp.com`
         };
 
-        // 📧 2. Send "Action Required" email to Cole (Owner)
-        const confirmLink = `https://determantechhelp.com/confirm-appointment?id=${eventId}&token=${process.env.ADMIN_TOKEN || 'secret'}`;
-        const denyLink = `https://determantechhelp.com/deny-appointment?id=${eventId}&token=${process.env.ADMIN_TOKEN || 'secret'}`;
+        // 📧 2. Send "Action Required" notification email to Cole (Owner at determantechhelp@gmail.com)
+        let actionLinks = '';
+        if (eventId) {
+            const confirmLink = `https://determantechhelp.com/confirm-appointment?id=${eventId}&token=${process.env.ADMIN_TOKEN || 'secret'}`;
+            const denyLink = `https://determantechhelp.com/deny-appointment?id=${eventId}&token=${process.env.ADMIN_TOKEN || 'secret'}`;
+            actionLinks = `\n\n✅ 1-CLICK CALENDAR CONFIRM: ${confirmLink}\n\n❌ 1-CLICK CALENDAR DENY: ${denyLink}`;
+        } else {
+            actionLinks = `\n\n⚠️ Calendar Note: Google Calendar sync was skipped (refresh token expired/disabled). Reply directly to this email to contact ${name}, or add manually to your calendar.`;
+        }
         
         const ownerMailOptions = {
-            from: process.env.EMAIL_USER,
+            from: `"Determan Tech Help Notifications" <${process.env.EMAIL_USER}>`,
             to: process.env.EMAIL_USER,
-            subject: `🚨 NEW APPOINTMENT REQUEST: ${name}`,
-            text: `New request from ${name} (${email})\n\nTime: ${new Date(date).toLocaleString()}\nLocation: ${location}\nProblem: ${problem}\n\n✅ CONFIRM: ${confirmLink}\n\n❌ DENY: ${denyLink}`
+            replyTo: email, // Directly reply to customer from Gmail
+            subject: `🚨 NEW APPOINTMENT REQUEST: ${name} (${formattedDate})`,
+            text: `New appointment request received from website:\n\n👤 Name: ${name}\n✉️ Email: ${email}\n📅 Requested Time: ${formattedDate}\n📍 Location: ${location}\n📝 Service/Problem: ${problem}${actionLinks}`
         };
 
-        transporter.sendMail(customerMailOptions);
-        transporter.sendMail(ownerMailOptions);
+        const emailResults = await Promise.allSettled([
+            transporter.sendMail(customerMailOptions),
+            transporter.sendMail(ownerMailOptions)
+        ]);
 
-        res.json({ message: 'Request submitted! Please check your email for updates.', eventId: eventId });
+        if (emailResults[0].status === 'fulfilled') {
+            console.log('Customer notification email sent successfully:', emailResults[0].value?.messageId);
+        } else {
+            console.error('Failed to send customer notification email:', emailResults[0].reason);
+        }
+
+        if (emailResults[1].status === 'fulfilled') {
+            console.log('Owner notification email sent successfully:', emailResults[1].value?.messageId);
+        } else {
+            console.error('Failed to send owner notification email:', emailResults[1].reason);
+        }
+
+        res.json({
+            message: 'Request submitted! Please check your email for updates.',
+            eventId: eventId || null,
+            calendarSynced
+        });
 
     } catch (error) {
         console.error('Error adding event:', error);
@@ -209,7 +253,6 @@ app.get('/deny-appointment', async (req, res) => {
 // ✅ Route to Fetch Busy Times
 app.get('/get-busy-times', async (req, res) => {
     try {
-        console.log("Fetching busy times...");
         const events = await calendar.events.list({
             calendarId: 'primary',
             timeMin: new Date().toISOString(),
@@ -218,7 +261,7 @@ app.get('/get-busy-times', async (req, res) => {
             orderBy: 'startTime'
         });
 
-        const busyTimes = events.data.items.map(event => ({
+        const busyTimes = (events.data.items || []).map(event => ({
             title: 'Busy',
             start: event.start.dateTime || event.start.date,
             end: event.end.dateTime || event.end.date,
@@ -229,9 +272,8 @@ app.get('/get-busy-times', async (req, res) => {
 
         res.json(busyTimes);
     } catch (error) {
-        console.error('Error fetching busy times:', error); 
-        console.error('Detailed error object:', error);
-        res.status(500).json({ error: 'Error fetching busy times', details: error.message });
+        console.warn('Google Calendar get-busy-times unavailable (using defaults):', error.message || error);
+        res.json([]);
     }
 });
 
