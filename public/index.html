@@ -4,11 +4,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Determan Tech Help | Modern IT Solutions</title>
+    <title>Determan Tech Help | Friendly Local Tech Support & IT Solutions</title>
     <meta name="description"
-        content="Premium tech support and IT solutions for Lake Barcroft and surrounding communities. Expert assistance from Cole Determan.">
-    <link rel="icon" type="image/png" href="images/techhelp_background.png">
-    <link rel="stylesheet" href="style.css?v=1.1">
+        content="Friendly, expert tech support and IT solutions for Lake Barcroft and surrounding communities. Computer repair, device setup, Wi-Fi help, and patient one-on-one training from Cole Determan.">
+    <link rel="icon" type="image/png" href="images/techhelp.png">
+    <link rel="stylesheet" href="style.css?v=2.0">
 </head>
 
 <body>
@@ -16,104 +16,161 @@
     <nav id="navbar">
         <div class="nav-container">
             <a href="index.html" class="logo">
-                <img src="images/techhelp_background.png" alt="Determan Tech Help">
-                <span>Determan Tech</span>
+                <img src="images/techhelp.png" alt="Determan Tech Help Logo">
+                <div class="logo-text">
+                    <span class="logo-title">Determan Tech</span>
+                    <span class="logo-sub">Friendly Local IT Support</span>
+                </div>
             </a>
-            <div class="nav-links">
-                <a href="services.html">Services</a>
-                <a href="reviews.html">Reviews</a>
-                <a href="appointments.html">Appointments</a>
-                <a href="contact.html">Contact</a>
+
+            <div class="nav-right">
+                <div class="nav-links">
+                    <a href="index.html" class="active">Home</a>
+                    <a href="services.html">Services</a>
+                    <a href="reviews.html">Reviews</a>
+                    <a href="appointments.html">Appointments</a>
+                    <a href="contact.html">Contact</a>
+                </div>
+
+                <a href="tel:5712798040" class="nav-call-btn">
+                    📞 (571) 279-8040
+                </a>
+
+                <button class="menu-toggle" id="menu-toggle" aria-label="Open Navigation Menu" aria-expanded="false">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Drawer Navigation -->
+        <div class="mobile-menu" id="mobile-menu">
+            <div class="mobile-menu-links">
+                <a href="index.html" class="active">Home</a>
+                <a href="services.html">Services &amp; Pricing</a>
+                <a href="reviews.html">Customer Reviews</a>
+                <a href="appointments.html">Book Appointment</a>
+                <a href="contact.html">Contact Me</a>
+            </div>
+            <div class="mobile-menu-action">
+                <p class="mobile-call-label">Need immediate help? Call or text:</p>
+                <a href="tel:5712798040" class="btn btn-call">
+                    📞 (571) 279-8040
+                </a>
             </div>
         </div>
     </nav>
 
     <main>
         <section class="hero">
-            <div class="hero-bg">
-                <!-- <img src="hero-bg.png" alt="Tech Support Background"> -->
-            </div>
             <div class="hero-content">
+                <div class="badge">📍 Lake Barcroft, VA &amp; Surrounding Communities</div>
                 <h1>Fixing your tech <br><span>at the speed of light.</span></h1>
-                <p>Expert, friendly tech assistance for your home and office. Based in Lake Barcroft, serving the
-                    community with passion and precision.</p>
-                <a href="appointments.html" class="btn">Book an Appointment</a>
+                <p>Expert, patient tech assistance for your home and office. From printers and Wi-Fi to new computer setup, I make technology simple and stress-free.</p>
+                <div class="hero-actions">
+                    <a href="appointments.html" class="btn">Book an Appointment</a>
+                    <a href="tel:5712798040" class="btn btn-secondary">📞 Call or Text (571) 279-8040</a>
+                </div>
             </div>
         </section>
 
         <section id="services">
             <div class="section-header">
-                <h2>My Services</h2>
+                <h2>How Can I Help You?</h2>
+                <p>Friendly, honest, and reliable tech services tailored to your needs.</p>
             </div>
             <div class="services-grid">
-                <div class="service-card glass">
-                    <h3>Custom PCs</h3>
-                    <p>Building and troubleshooting high-end PCs for gaming and professional use.</p>
+                <div class="service-card fade-in">
+                    <div>
+                        <h3>Device Setup &amp; Training</h3>
+                        <p>Patient setup of new phones, tablets, smart TVs, printers, and computers with clear, step-by-step guidance.</p>
+                    </div>
+                    <span class="service-price">$75 / Hour</span>
                 </div>
-                <div class="service-card glass">
-                    <h3>Device Setup</h3>
-                    <p>Setting up and troubleshooting new devices from the moment you open the box. printers, smart
-                        devices, and more.</p>
+                <div class="service-card fade-in">
+                    <div>
+                        <h3>Wi-Fi &amp; Internet Troubleshooting</h3>
+                        <p>Eliminate dead zones, boost your connection speed, and get all your household devices online smoothly.</p>
+                    </div>
+                    <span class="service-price">$75 / Hour</span>
                 </div>
-                <div class="service-card glass">
-                    <h3>Personal Websites</h3>
-                    <p>I can create a personalized, professional website for you or your business.</p>
+                <div class="service-card fade-in">
+                    <div>
+                        <h3>Computer Repair &amp; Custom PCs</h3>
+                        <p>Diagnose sluggish systems, remove malware, replace parts, or build high-performance computers.</p>
+                    </div>
+                    <span class="service-price">$50 / Hour</span>
                 </div>
-                <div class="service-card glass">
-                    <h3>Personalized Support</h3>
-                    <p>One-on-one training and support to help you master your devices and feel confident in the digital
-                        world.</p>
+                <div class="service-card fade-in">
+                    <div>
+                        <h3>Personal Websites</h3>
+                        <p>Clean, modern, and personalized websites designed for local businesses, portfolios, or hobbies.</p>
+                    </div>
+                    <span class="service-price">$50 / Hour</span>
                 </div>
+            </div>
+            <div style="text-align: center; margin-top: 3rem;">
+                <a href="services.html" class="btn btn-secondary">View All Services &amp; Pricing</a>
             </div>
         </section>
 
-        <section id="about" class="about-section">
-            <div class="about-img">
-                <img src="images/cole.jpg" alt="Cole Determan">
-            </div>
-            <div class="about-content">
-                <h2>About <br>Cole Determan</h2>
-                <p>I've been a resident of Lake Barcroft my entire life. Ever since I was young, I've had a deep passion
-                    for technology—ranging from basic home electronics to advanced computing systems.</p>
-                <p>Currently pursuing a Master's degree in Computer Science & Applications at Virginia Tech with a
-                    Bachelor's in Computer Science from James Madison University, I combine
-                    academic knowledge with years of hands-on experience to deliver reliable, knowledgeable, and
-                    friendly assistance to my neighbors.</p>
-                <a href="contact.html" class="btn"
-                    style="background: transparent; border: 1px solid var(--accent-color); box-shadow: none;">Get in
-                    Touch</a>
+        <section id="about">
+            <div class="about-section fade-in">
+                <div class="about-img">
+                    <img src="images/cole.jpg" alt="Cole Determan - Tech Support Specialist">
+                </div>
+                <div class="about-content">
+                    <h2>Hi, I'm Cole Determan</h2>
+                    <p>I've been a resident of Lake Barcroft my entire life. Ever since I was young, I've had a deep passion for technology—from everyday home electronics to advanced computing systems.</p>
+                    <p>Pursuing my Master's degree in Computer Science &amp; Applications at Virginia Tech with a Bachelor's in Computer Science from James Madison University, I combine deep technical expertise with years of hands-on experience to deliver patient, reliable, and friendly assistance to my neighbors.</p>
+                    <div style="display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 1.5rem;">
+                        <a href="contact.html" class="btn">Get in Touch</a>
+                        <a href="tel:5712798040" class="btn btn-secondary">📞 Call Cole</a>
+                    </div>
+                </div>
             </div>
         </section>
 
         <section id="testimonials">
             <div class="section-header">
-                <h2>What People Say</h2>
+                <h2>What Your Neighbors Say</h2>
+                <p>Read genuine feedback from Lake Barcroft residents.</p>
             </div>
-            <div class="testimonial-track">
-                <div class="testimonial-card glass">
-                    <p class="testimonial-text">"Cole is amazing with computers, I always go to him when I need tech
-                        help!"</p>
-                    <div class="testimonial-author">
-                        <img src="images/katelyn.jpg" alt="Katelyn">
-                        <strong>Katelyn</strong>
+            <div class="testimonials-container">
+                <div class="testimonial-track">
+                    <div class="testimonial-card">
+                        <p class="testimonial-text">"Cole is amazing with computers, I always go to him when I need tech help!"</p>
+                        <div class="testimonial-author">
+                            <img src="images/katelyn.jpg" alt="Katelyn">
+                            <strong>Katelyn</strong>
+                        </div>
+                    </div>
+                    <div class="testimonial-card">
+                        <p class="testimonial-text">"He is easy to work with, very computer-savvy and patient with questions."</p>
+                        <div class="testimonial-author">
+                            <img src="images/nana.jpg" alt="Sally">
+                            <strong>Sally</strong>
+                        </div>
+                    </div>
+                    <div class="testimonial-card">
+                        <p class="testimonial-text">"His knowledge combined with his ability to determine where the problem is coming from is exactly what you're looking for."</p>
+                        <div class="testimonial-author">
+                            <img src="images/jack.jpg" alt="Jack">
+                            <strong>Jack</strong>
+                        </div>
+                    </div>
+                    <div class="testimonial-card">
+                        <p class="testimonial-text">"Cole was precise, knowledgeable, and fixed my issue quickly. His rate is very reasonable. I would give him 5 stars!"</p>
+                        <div class="testimonial-author">
+                            <div style="width: 52px; height: 52px; border-radius: 50%; background: var(--accent-light); color: var(--accent-color); display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 1.2rem; border: 2px solid var(--accent-border);">B</div>
+                            <strong>Bonnie E.</strong>
+                        </div>
                     </div>
                 </div>
-                <div class="testimonial-card glass">
-                    <p class="testimonial-text">"He is easy to work with, very computer-savvy and patient with
-                        questions."</p>
-                    <div class="testimonial-author">
-                        <img src="images/nana.jpg" alt="Sally">
-                        <strong>Sally</strong>
-                    </div>
-                </div>
-                <div class="testimonial-card glass">
-                    <p class="testimonial-text">"His knowledge combined with his ability to determine where the problem
-                        is coming from is exactly what you're looking for."</p>
-                    <div class="testimonial-author">
-                        <img src="images/jack.jpg" alt="Jack">
-                        <strong>Jack</strong>
-                    </div>
-                </div>
+            </div>
+            <div style="text-align: center; margin-top: 2rem;">
+                <a href="reviews.html" class="btn btn-secondary">Read More Reviews</a>
             </div>
         </section>
     </main>
@@ -122,54 +179,29 @@
         <div class="footer-content">
             <div class="footer-info">
                 <div class="footer-logo">Determan Tech</div>
-                <p>Reliable tech support for the Lake Barcroft community.</p>
-                <p>Email: <a href="mailto:determantechhelp@gmail.com"
-                        style="color: var(--accent-color);">determantechhelp@gmail.com</a></p>
-                <p>Phone: (571) 279-8040</p>
+                <p>Reliable, patient tech support for Lake Barcroft and surrounding communities.</p>
+                <p>Email: <a href="mailto:determantechhelp@gmail.com">determantechhelp@gmail.com</a></p>
+                <p>Phone: <a href="tel:5712798040">(571) 279-8040</a></p>
             </div>
             <div class="footer-links">
-                <h4>Sitemap</h4>
+                <h4>Navigation</h4>
                 <ul>
                     <li><a href="index.html">Home</a></li>
-                    <li><a href="services.html">Services</a></li>
-                    <li><a href="reviews.html">Reviews</a></li>
-                    <li><a href="appointments.html">Appointments</a></li>
+                    <li><a href="services.html">Services &amp; Pricing</a></li>
+                    <li><a href="reviews.html">Customer Reviews</a></li>
+                    <li><a href="appointments.html">Book Appointment</a></li>
+                    <li><a href="contact.html">Contact Me</a></li>
                 </ul>
             </div>
             <div class="footer-links">
-                <h4>Legal</h4>
-                <ul>
-                    <li><a href="#">Privacy Policy</a></li>
-                    <li><a href="#">Terms of Service</a></li>
-                </ul>
+                <h4>Payment &amp; Trust</h4>
+                <p style="font-size: 0.95rem; margin-bottom: 0.75rem;">Cash, Check, Apple Pay, Zelle, or Venmo accepted.</p>
+                <p style="font-size: 0.9rem; color: var(--text-muted);">© 2026 Determan Tech Help. All rights reserved.</p>
             </div>
         </div>
     </footer>
 
-    <script>
-        window.addEventListener('scroll', () => {
-            const nav = document.getElementById('navbar');
-            if (window.scrollY > 50) {
-                nav.classList.add('scrolled');
-            } else {
-                nav.classList.remove('scrolled');
-            }
-        });
-
-        // Intersection Observer for fade-in effects
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
-            });
-        }, { threshold: 0.1 });
-
-        document.querySelectorAll('section').forEach(section => {
-            section.classList.add('fade-in');
-            observer.observe(section);
-        });
-    </script>
+    <script src="nav.js"></script>
 </body>
 
 </html>

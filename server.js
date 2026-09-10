@@ -73,6 +73,20 @@ app.post('/add-event', async (req, res) => {
             return res.status(400).json({ error: "Missing required fields." });
         }
 
+        // Validate that weekdays from 8 AM to 5 PM are not available
+        try {
+            const parts = new Intl.DateTimeFormat('en-US', { timeZone: 'America/New_York', hour: 'numeric', hour12: false, weekday: 'short' }).formatToParts(new Date(date));
+            const weekday = parts.find(p => p.type === 'weekday')?.value;
+            const hour = parseInt(parts.find(p => p.type === 'hour')?.value, 10);
+            const isWeekday = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri'].includes(weekday);
+
+            if (isWeekday && (hour >= 8 && hour < 17)) {
+                return res.status(400).json({ error: "Weekdays from 8:00 AM to 5:00 PM are unavailable. Please choose after 5:00 PM or on weekends." });
+            }
+        } catch (tzErr) {
+            console.warn("Timezone validation error:", tzErr);
+        }
+
         const event = {
             summary: `[PENDING] Tech Support - ${name}`,
             description: `CUSTOMER_EMAIL: ${email}\nProblem: ${problem}\nLocation: ${location}`,
@@ -252,6 +266,9 @@ app.post('/add-review', (req, res) => {
 
         fs.writeFile(REVIEWS_FILE, JSON.stringify(reviews, null, 2), (err) => {
             if (err) return res.status(500).json({ error: 'Failed to save review' });
+
+            const publicReviewsFile = path.join(__dirname, 'public', 'reviews.json');
+            fs.writeFile(publicReviewsFile, JSON.stringify(reviews, null, 2), () => {});
 
             res.json({ message: "Review added!", review: newReview });
         });

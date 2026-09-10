@@ -5,123 +5,40 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Book an Appointment | Determan Tech Help</title>
-    <link href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/main.min.css" rel="stylesheet">
-    <link rel="icon" type="image/png" href="images/techhelp_background.png">
-    <link rel="stylesheet" href="style.css?v=1.1">
+    <meta name="description"
+        content="Book an in-home or remote tech support appointment with Cole Determan in Lake Barcroft, VA. Simple, transparent, and easy scheduling.">
+    <link rel="icon" type="image/png" href="images/techhelp.png">
+    <link rel="stylesheet" href="style.css?v=2.0">
     <style>
-        #calendar {
-            background: rgba(255, 255, 255, 0.02);
-            padding: 2rem;
-            border-radius: 24px;
-            border: 1px solid var(--glass-border);
-            color: white;
-            margin-bottom: 2rem;
-        }
-
-        .fc-theme-standard td,
-        .fc-theme-standard th {
-            border: 1px solid var(--glass-border) !important;
-        }
-
-        .fc-toolbar-title {
-            font-family: 'Outfit', sans-serif !important;
-            font-weight: 800 !important;
-            text-transform: uppercase;
-        }
-
-        .fc-button {
-            background: var(--accent-color) !important;
-            border: none !important;
-            border-radius: 8px !important;
-            font-weight: 600 !important;
-        }
-
-        /* Modern Form Styling */
+        /* Appointments Page Enhancements */
         .appointment-form-container {
-            padding: 4rem;
+            padding: 3rem 2rem;
             margin-top: 2rem;
-        }
-
-        .selected-slot-badge {
-            background: rgba(0, 112, 243, 0.1);
-            border: 1px solid var(--accent-color);
-            padding: 1.5rem;
-            border-radius: 12px;
-            margin-bottom: 3rem;
-            color: var(--accent-color);
-            font-weight: 700;
-            font-size: 1.2rem;
-            text-align: center;
-        }
-
-        .form-group {
-            margin-bottom: 2rem;
-        }
-
-        .form-row {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 2rem;
-            margin-bottom: 2rem;
-        }
-
-        .form-control {
-            width: 100%;
-            background: rgba(255, 255, 255, 0.05) !important;
-            border: 1px solid var(--glass-border) !important;
-            border-radius: 12px !important;
-            color: white !important;
-            padding: 1.25rem !important;
-            font-family: inherit;
-            font-size: 1rem;
-            transition: var(--transition);
-        }
-
-        .form-control:focus {
-            outline: none;
-            border-color: var(--accent-color) !important;
-            background: rgba(255, 255, 255, 0.08) !important;
-            box-shadow: 0 0 20px var(--accent-glow) !important;
-        }
-
-        .form-control option {
-            background-color: #141416;
-            color: white;
-        }
-
-        label {
-            display: block;
-            margin-bottom: 0.75rem;
-            color: var(--text-secondary);
-            font-weight: 600;
-            text-transform: uppercase;
-            font-size: 0.8rem;
-            letter-spacing: 0.05em;
         }
 
         .autocomplete-results {
             position: absolute;
             top: 100%;
             left: 0;
-            background: rgba(20, 20, 22, 0.98);
-            backdrop-filter: blur(20px);
-            border: 1px solid var(--glass-border);
-            border-radius: 12px;
+            background: #ffffff;
+            border: 1.5px solid var(--card-border);
+            border-radius: var(--radius-sm);
             width: 100%;
-            max-height: 250px;
+            max-height: 240px;
             overflow-y: auto;
             z-index: 2000;
-            margin-top: 5px;
+            margin-top: 4px;
             display: none;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8);
+            box-shadow: var(--shadow-lg);
         }
 
         .result-item {
-            padding: 1rem 1.5rem;
+            padding: 0.85rem 1.25rem;
             cursor: pointer;
             transition: var(--transition);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-            font-size: 0.9rem;
+            border-bottom: 1px solid var(--card-border);
+            font-size: 0.95rem;
+            color: var(--text-primary);
         }
 
         .result-item:last-child {
@@ -129,114 +46,8 @@
         }
 
         .result-item:hover {
-            background: var(--accent-color);
-            color: white;
-        }
-
-        /* View Selection Toggles */
-        .view-toggles {
-            display: flex;
-            justify-content: center;
-            gap: 1rem;
-            margin-bottom: 3rem;
-        }
-
-        .view-btn {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid var(--glass-border);
-            padding: 1rem 2rem;
-            border-radius: 50px;
-            color: var(--text-secondary);
-            font-weight: 600;
-            cursor: pointer;
-            transition: var(--transition);
-        }
-
-        .view-btn.active {
-            background: var(--accent-color);
-            color: white;
-            border-color: var(--accent-color);
-            box-shadow: 0 0 20px var(--accent-glow);
-        }
-
-        /* Directions Bar */
-        .directions-bar {
-            display: flex;
-            align-items: center;
-            gap: 1.5rem;
-            padding: 1.5rem 2rem;
-            border-radius: 16px;
-            margin-bottom: 2rem;
-            background: rgba(0, 112, 243, 0.05);
-            border: 1px solid rgba(0, 112, 243, 0.2);
-        }
-
-        .step-num {
-            background: var(--accent-color);
-            color: white;
-            width: 32px;
-            height: 32px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 800;
-            font-size: 0.9rem;
-            flex-shrink: 0;
-        }
-
-        .directions-bar p {
-            margin: 0;
-            font-weight: 600;
-            color: white;
-            font-size: 1.1rem;
-        }
-
-        /* Date & Time Grids */
-        .date-grid, .time-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-            gap: 1.5rem;
-            margin-bottom: 3rem;
-            min-height: 100px;
-        }
-
-        .booking-card {
-            background: rgba(255, 255, 255, 0.08);
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            padding: 2.5rem 1rem;
-            border-radius: 20px;
-            text-align: center;
-            cursor: pointer;
-            transition: var(--transition);
-            color: white;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
-
-        .booking-card:hover {
-            border-color: var(--accent-color);
-            background: rgba(255, 255, 255, 0.08);
-            transform: translateY(-5px);
-        }
-
-        .booking-card.active {
-            background: var(--accent-color);
-            border-color: var(--accent-color);
-            box-shadow: 0 10px 30px var(--accent-glow);
-        }
-
-        .booking-card h3 {
-            font-size: 1.2rem;
-            margin-bottom: 0.5rem;
-            font-weight: 800;
-        }
-
-        .booking-card p {
-            margin: 0;
-            font-size: 0.9rem;
-            opacity: 0.7;
+            background: var(--accent-light);
+            color: var(--accent-color);
         }
 
         .booking-view {
@@ -247,12 +58,30 @@
             display: block;
         }
 
+        #calendar-wrapper {
+            background: #ffffff;
+            border: 1px solid var(--card-border);
+            border-radius: var(--radius-lg);
+            padding: 1.5rem;
+            box-shadow: var(--shadow-md);
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            min-height: 550px;
+        }
+
+        #calendar {
+            width: 100%;
+            min-height: 500px;
+            color: var(--text-primary);
+        }
+
         @media (max-width: 768px) {
-            .view-toggles {
-                flex-direction: column;
+            .appointment-form-container {
+                padding: 2rem 1.25rem;
             }
-            .date-grid, .time-grid {
-                grid-template-columns: 1fr 1fr;
+
+            #calendar-wrapper {
+                padding: 1rem 0.5rem;
             }
         }
     </style>
@@ -261,116 +90,163 @@
 <body>
 
     <div id="loading-overlay"
-        style="display:none;position:fixed;z-index:9999;top:0;left:0;width:100vw;height:100vh;background:rgba(10,10,12,0.95);text-align:center;padding-top:40vh;font-size:1.5em;color:white;">
-        <div style="margin-bottom: 1rem;">Connecting to Secure Calendar...</div>
-        <div style="font-size: 0.9rem; opacity: 0.6;">Please wait around 15 seconds to 1 minute.</div>
+        style="display:none;position:fixed;z-index:9999;top:0;left:0;width:100vw;height:100vh;background:rgba(248, 250, 252, 0.96);text-align:center;padding-top:35vh;font-size:1.35em;color:var(--text-primary);">
+        <div style="font-weight: 800; margin-bottom: 0.75rem; color: var(--accent-color);">Connecting to Calendar...</div>
+        <div style="font-size: 1rem; color: var(--text-secondary);">Please wait a moment while available times load.</div>
     </div>
 
     <nav id="navbar">
         <div class="nav-container">
             <a href="index.html" class="logo">
-                <img src="images/techhelp_background.png" alt="Determan Tech Help">
-                <span>Determan Tech</span>
+                <img src="images/techhelp.png" alt="Determan Tech Help Logo">
+                <div class="logo-text">
+                    <span class="logo-title">Determan Tech</span>
+                    <span class="logo-sub">Friendly Local IT Support</span>
+                </div>
             </a>
-            <div class="nav-links">
-                <a href="services.html">Services</a>
-                <a href="reviews.html">Reviews</a>
-                <a href="appointments.html">Appointments</a>
-                <a href="contact.html">Contact</a>
+
+            <div class="nav-right">
+                <div class="nav-links">
+                    <a href="index.html">Home</a>
+                    <a href="services.html">Services</a>
+                    <a href="reviews.html">Reviews</a>
+                    <a href="appointments.html" class="active">Appointments</a>
+                    <a href="contact.html">Contact</a>
+                </div>
+
+                <a href="tel:5712798040" class="nav-call-btn">
+                    📞 (571) 279-8040
+                </a>
+
+                <button class="menu-toggle" id="menu-toggle" aria-label="Open Navigation Menu" aria-expanded="false">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Drawer Navigation -->
+        <div class="mobile-menu" id="mobile-menu">
+            <div class="mobile-menu-links">
+                <a href="index.html">Home</a>
+                <a href="services.html">Services &amp; Pricing</a>
+                <a href="reviews.html">Customer Reviews</a>
+                <a href="appointments.html" class="active">Book Appointment</a>
+                <a href="contact.html">Contact Me</a>
+            </div>
+            <div class="mobile-menu-action">
+                <p class="mobile-call-label">Need immediate help? Call or text:</p>
+                <a href="tel:5712798040" class="btn btn-call">
+                    📞 (571) 279-8040
+                </a>
             </div>
         </div>
     </nav>
 
     <main>
-        <section class="hero" style="height: 25vh; min-height: 200px;">
-            <div class="hero-bg"></div>
+        <section class="hero" style="min-height: 35vh; padding: 4rem 1.5rem 2rem;">
             <div class="hero-content">
-                <h1 style="font-size: 2.5rem;">Book your <br><span>Appointment</span></h1>
-                <p style="font-size: 0.9rem; opacity: 0.8;">Select a time that works for you. Fast, reliable service.</p>
+                <div class="badge">Online Booking</div>
+                <h1>Book Your <span>Appointment</span></h1>
+                <p>Select a date and time that works best for you. Quick, simple, and friendly in-home or remote help.</p>
             </div>
         </section>
 
-        <section id="booking-section" style="padding-top: 0;">
-            <div class="view-toggles">
-                <button id="show-simple" class="view-btn active">Quick Book (Easy)</button>
-                <button id="show-calendar" class="view-btn">Calendar View</button>
+        <section id="booking-section" style="padding-top: 1rem;">
+            <div style="text-align: center; margin-bottom: 1.75rem;">
+                <div class="badge" style="font-size: 0.95rem; padding: 0.5rem 1.25rem;">
+                    🕒 Available Hours: Weekdays after 5:00 PM • Weekends 9:00 AM – 8:00 PM
+                </div>
             </div>
 
+            <!-- View Mode Switcher -->
+            <div class="view-toggles">
+                <button id="show-simple" class="view-btn active">⚡ Quick Book (Easy Mode)</button>
+                <button id="show-calendar" class="view-btn">📅 Full Calendar View</button>
+            </div>
+
+            <!-- Simple Quick View -->
             <div id="simple-view" class="booking-view active">
-                <div class="directions-bar glass">
+                <div class="directions-bar">
                     <span class="step-num">1</span>
-                    <p>Select a day that works for you:</p>
+                    <p>Select a day that works best for you:</p>
                 </div>
-                <div id="date-cards" class="date-grid" style="min-height: 200px; border: 1px dashed rgba(255,255,255,0.1); padding: 1rem; border-radius: 20px;">
-                    <!-- Dates will be generated here -->
+                <div id="date-cards" class="date-grid">
+                    <!-- Date Cards are generated dynamically -->
                 </div>
 
-                <div id="time-selection" style="display: none; margin-top: 3rem;">
-                    <div class="directions-bar glass">
+                <div id="time-selection" style="display: none; margin-top: 2.5rem;">
+                    <div class="directions-bar">
                         <span class="step-num">2</span>
-                        <p>What time should I arrive?</p>
+                        <p>Select an available arrival time:</p>
                     </div>
                     <div id="time-slots" class="time-grid">
-                        <!-- Times will be generated here -->
+                        <!-- Time Slots are generated dynamically -->
                     </div>
                 </div>
             </div>
 
+            <!-- Calendar View -->
             <div id="calendar-view" class="booking-view">
-                <div class="directions-bar glass mb-4">
-                    <span class="step-num">?</span>
+                <div class="directions-bar mb-4">
+                    <span class="step-num">📅</span>
                     <p>Click on any open time slot in the calendar below:</p>
                 </div>
-                <div class="glass fade-in" style="padding: 2rem; border-radius: 24px;">
+                <div id="calendar-wrapper">
                     <div id="calendar"></div>
                 </div>
             </div>
 
-            <div id="booking-form" class="glass appointment-form-container" style="display: none;">
-                <h2 class="mb-4">Appointment Details</h2>
+            <!-- Booking Form -->
+            <div id="booking-form" class="card appointment-form-container" style="display: none;">
+                <h2 style="margin-bottom: 0.5rem;">Appointment Details</h2>
+                <p style="color: var(--text-secondary); margin-bottom: 1.5rem;">Please provide your contact info and tell me a bit about what you need help with.</p>
+                
                 <div id="selected-time-display" class="selected-slot-badge"></div>
+                
                 <form id="appointmentForm">
                     <input type="hidden" id="selected-date">
                     
                     <div class="form-row">
                         <div class="form-group">
-                            <label for="name">Name</label>
-                            <input type="text" class="form-control" id="name" placeholder="John Doe" required>
+                            <label for="name">Your Name</label>
+                            <input type="text" class="form-control" id="name" placeholder="e.g. Robert Smith" required>
                         </div>
                         <div class="form-group">
-                            <label for="email">Email</label>
-                            <input type="email" class="form-control" id="email" placeholder="john@example.com" required>
+                            <label for="email">Email Address</label>
+                            <input type="email" class="form-control" id="email" placeholder="e.g. robert@example.com" required>
                         </div>
                     </div>
 
                     <div class="form-group" style="position: relative;">
-                        <label for="location">Location</label>
-                        <input type="text" class="form-control" id="location" placeholder="123 Street, Lake Barcroft" required autocomplete="off">
+                        <label for="location">Address / Location</label>
+                        <input type="text" class="form-control" id="location" placeholder="e.g. 123 Lake Barcroft Dr, Falls Church, VA" required autocomplete="off">
                         <div id="location-results" class="autocomplete-results"></div>
                     </div>
 
                     <div class="form-group">
                         <label for="service">Service Needed</label>
                         <select class="form-control" id="service" required>
-                            <option value="General Tech Support">General Tech Support</option>
-                            <option value="Network/WiFi Troubleshooting">Network/WiFi Troubleshooting</option>
-                            <option value="Device Setup">Device Setup</option>
-                            <option value="House Call">House Call</option>
-                            <option value="Other">Other (Specify in comments)</option>
+                            <option value="General Tech Support">General Tech Support (Printer, Email, Slow Device)</option>
+                            <option value="Network/WiFi Troubleshooting">Network &amp; Wi-Fi Troubleshooting</option>
+                            <option value="Device Setup">New Device Setup (Phone, TV, Tablet, PC)</option>
+                            <option value="House Call">General In-Home House Call</option>
+                            <option value="Other">Other (Please describe below)</option>
                         </select>
                     </div>
 
                     <div class="form-group">
-                        <label for="questions">Questions/Comments</label>
-                        <textarea class="form-control" id="questions" rows="3" placeholder="Tell me more about your issue..."></textarea>
+                        <label for="questions">Describe the Tech Issue</label>
+                        <textarea class="form-control" id="questions" rows="3" placeholder="Tell me what you're experiencing, device brand/model, etc..."></textarea>
                     </div>
 
-                    <button type="submit" class="btn w-100" style="padding: 1.5rem;">Submit Appointment Request</button>
+                    <button type="submit" class="btn submit-btn">Submit Appointment Request</button>
                 </form>
             </div>
-            <div id="confirmation-message" class="glass fade-in"
-                style="display:none; margin-top:2rem; padding: 3rem; text-align: center; color: var(--accent-color); font-weight: 800; font-size: 1.5rem;">
-            </div>
+
+            <!-- Confirmation Message Area -->
+            <div id="confirmation-message" style="display:none; margin-top: 2.5rem;"></div>
         </section>
     </main>
 
@@ -378,45 +254,31 @@
         <div class="footer-content">
             <div class="footer-info">
                 <div class="footer-logo">Determan Tech</div>
-                <p>Reliable tech support for the Lake Barcroft community.</p>
-                <p>Email: <a href="mailto:determantechhelp@gmail.com"
-                        style="color: var(--accent-color);">determantechhelp@gmail.com</a></p>
-                <p>Phone: (571) 279-8040</p>
+                <p>Reliable, patient tech support for Lake Barcroft and surrounding communities.</p>
+                <p>Email: <a href="mailto:determantechhelp@gmail.com">determantechhelp@gmail.com</a></p>
+                <p>Phone: <a href="tel:5712798040">(571) 279-8040</a></p>
             </div>
             <div class="footer-links">
-                <h4>Sitemap</h4>
+                <h4>Navigation</h4>
                 <ul>
                     <li><a href="index.html">Home</a></li>
-                    <li><a href="services.html">Services</a></li>
-                    <li><a href="reviews.html">Reviews</a></li>
-                    <li><a href="appointments.html">Appointments</a></li>
+                    <li><a href="services.html">Services &amp; Pricing</a></li>
+                    <li><a href="reviews.html">Customer Reviews</a></li>
+                    <li><a href="appointments.html">Book Appointment</a></li>
+                    <li><a href="contact.html">Contact Me</a></li>
                 </ul>
+            </div>
+            <div class="footer-links">
+                <h4>Payment &amp; Trust</h4>
+                <p style="font-size: 0.95rem; margin-bottom: 0.75rem;">Cash, Check, Apple Pay, Zelle, or Venmo accepted.</p>
+                <p style="font-size: 0.9rem; color: var(--text-muted);">© 2026 Determan Tech Help. All rights reserved.</p>
             </div>
         </div>
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.js"></script>
     <script src="appointments.js"></script>
-    <script>
-        window.addEventListener('scroll', () => {
-            const nav = document.getElementById('navbar');
-            if (window.scrollY > 50) {
-                nav.classList.add('scrolled');
-            } else {
-                nav.classList.remove('scrolled');
-            }
-        });
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
-            });
-        }, { threshold: 0.1 });
-
-        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
-    </script>
+    <script src="nav.js"></script>
 </body>
 
 </html>
