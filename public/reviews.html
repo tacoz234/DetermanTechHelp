@@ -1,271 +1,743 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Customer Reviews | Determan Tech Help</title>
-    <meta name="description"
-        content="Read genuine customer reviews from Lake Barcroft neighbors about Cole Determan's tech support and IT services.">
-    <link rel="icon" type="image/png" href="images/techhelp.png">
-    <link rel="stylesheet" href="style.css?v=2.0">
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <meta content="web_standard" name="shell-type"/>
+  <title>Customer Reviews | Determan Tech Help · Lake Barcroft, VA</title>
+  <meta name="description" content="Read real reviews from Lake Barcroft and Falls Church neighbors about Cole Determan's patient, expert tech help and computer repair."/>
+  <link rel="icon" type="image/png" href="images/techhelp.png"/>
+
+  <!-- Google Fonts: Hanken Grotesk & Material Symbols -->
+  <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&amp;display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+
+  <!-- Tailwind CSS via CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "inverse-surface": "#2f3132",
+            "tertiary-container": "#0076d0",
+            "electric-glow": "#2997FF",
+            "tertiary-fixed-dim": "#a3c9ff",
+            "secondary-fixed": "#e3e2e4",
+            "primary": "#0059b5",
+            "on-tertiary-fixed-variant": "#004882",
+            "text-primary-light": "#0F1012",
+            "on-tertiary": "#ffffff",
+            "border-hairline-dark": "rgba(255, 255, 255, 0.12)",
+            "on-error-container": "#93000a",
+            "outline-variant": "#c1c6d6",
+            "outline": "#717785",
+            "electric-cobalt": "#0071E3",
+            "surface-variant": "#e2e2e4",
+            "tertiary-fixed": "#d3e3ff",
+            "on-secondary-fixed-variant": "#464749",
+            "on-tertiary-fixed": "#001c39",
+            "inverse-on-surface": "#f0f0f2",
+            "inverse-primary": "#abc7ff",
+            "surface-subtle": "#F2F2F4",
+            "on-primary": "#ffffff",
+            "border-hairline": "rgba(15, 16, 18, 0.08)",
+            "tertiary": "#005da6",
+            "on-surface-variant": "#414753",
+            "surface-container": "#eeeef0",
+            "surface": "#f9f9fb",
+            "surface-canvas": "#FDFDFD",
+            "surface-dim": "#d9dadc",
+            "on-primary-fixed-variant": "#00458f",
+            "on-error": "#ffffff",
+            "secondary": "#5e5e61",
+            "on-primary-fixed": "#001b3f",
+            "secondary-fixed-dim": "#c7c6c9",
+            "text-primary-dark": "#FDFDFD",
+            "error-container": "#ffdad6",
+            "text-secondary-dark": "#86868B",
+            "primary-container": "#0071e3",
+            "secondary-container": "#e0dfe2",
+            "surface-container-low": "#f3f3f5",
+            "error": "#ba1a1a",
+            "on-secondary-fixed": "#1b1c1e",
+            "on-surface": "#1a1c1d",
+            "on-background": "#1a1c1d",
+            "surface-container-high": "#e8e8ea",
+            "on-secondary-container": "#626265",
+            "primary-fixed": "#d7e2ff",
+            "surface-container-lowest": "#ffffff",
+            "surface-container-highest": "#e2e2e4",
+            "on-tertiary-container": "#fcfbff",
+            "primary-fixed-dim": "#abc7ff",
+            "surface-dark": "#0F1012",
+            "surface-bright": "#f9f9fb",
+            "surface-pure": "#FFFFFF",
+            "surface-tint": "#005cbb",
+            "on-primary-container": "#fcfbff",
+            "background": "#f9f9fb",
+            "text-secondary-light": "#6E6E73",
+            "on-secondary": "#ffffff"
+          },
+          borderRadius: {
+            "DEFAULT": "1rem",
+            "lg": "2rem",
+            "xl": "3rem",
+            "full": "9999px"
+          },
+          spacing: {
+            "space-3xl": "6rem",
+            "space-lg": "1.5rem",
+            "margin-mobile": "1.25rem",
+            "margin": "4rem",
+            "space-xl": "2.5rem",
+            "gutter-mobile": "1rem",
+            "space-xs": "0.25rem",
+            "space-2xl": "4rem",
+            "space-sm": "0.5rem",
+            "space-md": "1rem",
+            "gutter": "2rem"
+          },
+          fontFamily: {
+            "label-caps": ["Hanken Grotesk", "sans-serif"],
+            "headline-xl-mobile": ["Hanken Grotesk", "sans-serif"],
+            "label-pill": ["Hanken Grotesk", "sans-serif"],
+            "headline-lg": ["Hanken Grotesk", "sans-serif"],
+            "headline-md": ["Hanken Grotesk", "sans-serif"],
+            "headline-2xl-mobile": ["Hanken Grotesk", "sans-serif"],
+            "body-lg": ["Hanken Grotesk", "sans-serif"],
+            "headline-xl": ["Hanken Grotesk", "sans-serif"],
+            "body-md": ["Hanken Grotesk", "sans-serif"],
+            "body-sm": ["Hanken Grotesk", "sans-serif"],
+            "headline-2xl": ["Hanken Grotesk", "sans-serif"],
+            "label-numeric": ["Hanken Grotesk", "sans-serif"]
+          },
+          fontSize: {
+            "label-caps": ["11px", { lineHeight: "14px", letterSpacing: "0.12em", fontWeight: "600" }],
+            "headline-xl-mobile": ["32px", { lineHeight: "40px", letterSpacing: "-0.02em", fontWeight: "400" }],
+            "label-pill": ["12px", { lineHeight: "16px", letterSpacing: "0.02em", fontWeight: "500" }],
+            "headline-lg": ["32px", { lineHeight: "40px", letterSpacing: "-0.02em", fontWeight: "500" }],
+            "headline-md": ["24px", { lineHeight: "32px", letterSpacing: "-0.015em", fontWeight: "600" }],
+            "headline-2xl-mobile": ["40px", { lineHeight: "48px", letterSpacing: "-0.02em", fontWeight: "400" }],
+            "body-lg": ["18px", { lineHeight: "28px", letterSpacing: "-0.01em", fontWeight: "400" }],
+            "headline-xl": ["48px", { lineHeight: "56px", letterSpacing: "-0.025em", fontWeight: "500" }],
+            "body-md": ["15px", { lineHeight: "24px", letterSpacing: "0em", fontWeight: "400" }],
+            "body-sm": ["13px", { lineHeight: "20px", letterSpacing: "0.01em", fontWeight: "400" }],
+            "headline-2xl": ["72px", { lineHeight: "80px", letterSpacing: "-0.03em", fontWeight: "500" }],
+            "label-numeric": ["12px", { lineHeight: "16px", letterSpacing: "0.08em", fontWeight: "500" }]
+          }
+        }
+      }
+    };
+  </script>
+
+  <style>
+    @layer base {
+      html, body {
+        margin: 0;
+        padding: 0;
+        scroll-behavior: smooth;
+      }
+      body {
+        overscroll-behavior: none;
+      }
+    }
+    ::-webkit-scrollbar {
+      display: none;
+    }
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      vertical-align: middle;
+    }
+  </style>
 </head>
 
-<body>
+<body class="bg-surface-canvas text-on-surface antialiased font-body-md text-body-md min-h-screen flex flex-col justify-between selection:bg-primary-fixed selection:text-on-primary-fixed">
 
-    <nav id="navbar">
-        <div class="nav-container">
-            <a href="index.html" class="logo">
-                <img src="images/techhelp.png" alt="Determan Tech Help Logo">
-                <div class="logo-text">
-                    <span class="logo-title">Determan Tech</span>
-                    <span class="logo-sub">Friendly Local IT Support</span>
-                </div>
-            </a>
-
-            <div class="nav-right">
-                <div class="nav-links">
-                    <a href="index.html">Home</a>
-                    <a href="services.html">Services</a>
-                    <a href="reviews.html" class="active">Reviews</a>
-                    <a href="appointments.html">Appointments</a>
-                    <a href="contact.html">Contact</a>
-                </div>
-
-                <a href="tel:5712798040" class="nav-call-btn">
-                    📞 (571) 279-8040
-                </a>
-
-                <button class="menu-toggle" id="menu-toggle" aria-label="Open Navigation Menu" aria-expanded="false">
-                    <span class="bar"></span>
-                    <span class="bar"></span>
-                    <span class="bar"></span>
-                </button>
-            </div>
+  <!-- Fixed Top Header -->
+  <header id="navbar" class="fixed top-0 left-0 w-full z-50 bg-surface-canvas/90 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)] border-b border-border-hairline transition-all duration-200">
+    <div class="w-full max-w-[1440px] mx-auto px-margin-mobile lg:px-margin h-20 flex items-center justify-between gap-4">
+      
+      <!-- Brand Logo -->
+      <a href="index.html" class="flex items-center gap-space-sm group">
+        <div class="w-8 h-8 rounded-full bg-surface-dark flex items-center justify-center shrink-0 shadow-sm transition-transform group-hover:scale-105">
+          <span class="text-surface-pure text-[13px] leading-none select-none">✦</span>
         </div>
-
-        <!-- Mobile Drawer Navigation -->
-        <div class="mobile-menu" id="mobile-menu">
-            <div class="mobile-menu-links">
-                <a href="index.html">Home</a>
-                <a href="services.html">Services &amp; Pricing</a>
-                <a href="reviews.html" class="active">Customer Reviews</a>
-                <a href="appointments.html">Book Appointment</a>
-                <a href="contact.html">Contact Me</a>
-            </div>
-            <div class="mobile-menu-action">
-                <p class="mobile-call-label">Need immediate help? Call or text:</p>
-                <a href="tel:5712798040" class="btn btn-call">
-                    📞 (571) 279-8040
-                </a>
-            </div>
+        <div class="flex flex-col">
+          <div class="flex items-center gap-1.5">
+            <span class="font-headline-md text-headline-md font-semibold tracking-tight text-on-surface lowercase leading-none">determan<span class="text-primary-container">.</span>tech</span>
+          </div>
+          <span class="font-label-caps text-label-caps uppercase tracking-widest text-text-secondary-light mt-0.5">Friendly IT · Lake Barcroft, VA</span>
         </div>
-    </nav>
+      </a>
 
-    <main>
-        <section class="hero" style="min-height: 35vh; padding: 4rem 1.5rem 2rem;">
-            <div class="hero-content">
-                <div class="badge">Neighbor Recommendations</div>
-                <h1>Customer <span>Reviews</span></h1>
-                <p>Read real experiences and reviews from your neighbors throughout Lake Barcroft and nearby communities.</p>
+      <!-- Desktop Navigation Pill -->
+      <nav class="hidden xl:flex items-center p-1.5 bg-surface-subtle/80 backdrop-blur-lg rounded-full border border-border-hairline">
+        <a class="px-4 py-1.5 text-on-surface-variant hover:text-on-surface transition-colors font-label-pill text-label-pill" href="index.html">
+          <span class="font-label-numeric text-label-numeric text-outline mr-1.5">00</span>Home
+        </a>
+        <a class="px-4 py-1.5 text-on-surface-variant hover:text-on-surface transition-colors font-label-pill text-label-pill" href="services.html">
+          <span class="font-label-numeric text-label-numeric text-outline mr-1.5">01</span>Services &amp; Pricing
+        </a>
+        <a class="px-4 py-1.5 text-on-surface-variant hover:text-on-surface transition-colors font-label-pill text-label-pill" href="index.html#about">
+          <span class="font-label-numeric text-label-numeric text-outline mr-1.5">02</span>About Cole
+        </a>
+        <a aria-current="page" class="px-4 py-1.5 font-label-pill bg-surface-dark text-surface-pure rounded-full shadow-sm" href="reviews.html">
+          <span class="font-label-numeric text-label-numeric text-outline mr-1.5">03</span>Reviews
+        </a>
+        <a class="px-4 py-1.5 text-on-surface-variant hover:text-on-surface transition-colors font-label-pill text-label-pill" href="index.html#faq">
+          <span class="font-label-numeric text-label-numeric text-outline mr-1.5">04</span>Knowledge &amp; FAQ
+        </a>
+        <a class="px-4 py-1.5 text-on-surface-variant hover:text-on-surface transition-colors font-label-pill text-label-pill" href="appointments.html">
+          <span class="font-label-numeric text-label-numeric text-outline mr-1.5">05</span>Book Appointment
+        </a>
+        <a class="px-4 py-1.5 text-on-surface-variant hover:text-on-surface transition-colors font-label-pill text-label-pill" href="contact.html">
+          <span class="font-label-numeric text-label-numeric text-outline mr-1.5">06</span>Contact
+        </a>
+      </nav>
+
+      <!-- Action Cluster -->
+      <div class="flex items-center gap-space-sm">
+        <a class="hidden sm:flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-surface-container-low text-on-surface font-label-numeric text-label-numeric hover:bg-surface-container transition-colors" href="tel:5712798040">
+          <span class="w-1.5 h-1.5 rounded-full bg-electric-cobalt animate-pulse"></span>(571) 279-8040
+        </a>
+        <a class="hidden md:inline-flex items-center px-5 py-2 rounded-full bg-primary-container text-on-primary-container font-label-pill text-label-pill hover:bg-primary transition-all shadow-[0_4px_20px_rgba(0,113,227,0.25)]" href="appointments.html">
+          Book Visit
+        </a>
+
+        <!-- Mobile Menu Toggle Button -->
+        <button id="menu-toggle" class="xl:hidden p-2 rounded-full hover:bg-surface-container text-text-primary-light transition-colors" aria-label="Open Navigation Menu" aria-expanded="false">
+          <span class="material-symbols-outlined text-[24px]">menu</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Sub-header Dispatch Telemetry Bar -->
+    <div class="w-full bg-surface-subtle/90 backdrop-blur-md border-t border-border-hairline">
+      <div class="w-full max-w-[1440px] mx-auto px-margin-mobile lg:px-margin py-2 flex flex-wrap items-center justify-between gap-y-1 gap-x-space-md font-label-numeric text-label-numeric text-on-surface-variant">
+        <div class="flex items-center gap-2">
+          <span class="inline-block w-2 h-2 rounded-full bg-electric-cobalt animate-pulse"></span>
+          <span class="font-medium text-on-surface">Dispatch Status:</span>
+          <span>Available in Lake Barcroft &amp; Surrounding Communities</span>
+        </div>
+        <div class="hidden md:flex items-center gap-space-lg">
+          <div class="flex items-center gap-1.5">
+            <span class="text-outline">Score:</span>
+            <span class="font-medium text-on-surface">5.0 ★ Rated</span>
+            <span class="text-text-secondary-light">(Verified Neighbors)</span>
+          </div>
+          <div class="flex items-center gap-1.5">
+            <span class="text-outline">Direct:</span>
+            <span class="text-on-surface font-medium">Call or Text Priority</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mobile Drawer Menu -->
+    <div id="mobile-menu" class="hidden xl:hidden w-full bg-surface-canvas border-t border-border-hairline shadow-xl">
+      <div class="max-w-[1440px] mx-auto px-margin-mobile py-4 flex flex-col gap-2 font-label-pill">
+        <a class="px-4 py-2.5 rounded-lg hover:bg-surface-subtle text-text-primary-light flex items-center justify-between transition-colors" href="index.html">
+          <span>Home</span>
+          <span class="font-label-numeric text-outline">00</span>
+        </a>
+        <a class="px-4 py-2.5 rounded-lg hover:bg-surface-subtle text-text-primary-light flex items-center justify-between transition-colors" href="services.html">
+          <span>Services &amp; Pricing</span>
+          <span class="font-label-numeric text-outline">01</span>
+        </a>
+        <a class="px-4 py-2.5 rounded-lg hover:bg-surface-subtle text-text-primary-light flex items-center justify-between transition-colors" href="index.html#about">
+          <span>About Cole</span>
+          <span class="font-label-numeric text-outline">02</span>
+        </a>
+        <a class="px-4 py-2.5 rounded-lg bg-surface-dark text-surface-pure flex items-center justify-between" href="reviews.html">
+          <span>Customer Reviews</span>
+          <span class="font-label-numeric text-electric-glow">03</span>
+        </a>
+        <a class="px-4 py-2.5 rounded-lg hover:bg-surface-subtle text-text-primary-light flex items-center justify-between transition-colors" href="index.html#faq">
+          <span>Knowledge &amp; FAQ</span>
+          <span class="font-label-numeric text-outline">04</span>
+        </a>
+        <a class="px-4 py-2.5 rounded-lg hover:bg-surface-subtle text-text-primary-light flex items-center justify-between transition-colors" href="appointments.html">
+          <span>Book Appointment</span>
+          <span class="font-label-numeric text-outline">05</span>
+        </a>
+        <a class="px-4 py-2.5 rounded-lg hover:bg-surface-subtle text-text-primary-light flex items-center justify-between transition-colors" href="contact.html">
+          <span>Contact Me</span>
+          <span class="font-label-numeric text-outline">06</span>
+        </a>
+        <div class="pt-3 mt-1 border-t border-border-hairline flex flex-col gap-2">
+          <a class="w-full py-2.5 px-4 rounded-full bg-electric-cobalt text-surface-pure text-center flex items-center justify-center gap-2 font-medium" href="tel:5712798040">
+            <span class="material-symbols-outlined text-[18px]">call</span>(571) 279-8040
+          </a>
+          <a class="w-full py-2.5 px-4 rounded-full bg-surface-container text-text-primary-light text-center flex items-center justify-center gap-2 font-medium" href="appointments.html">
+            <span class="material-symbols-outlined text-[18px]">calendar_month</span>Book Online
+          </a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Body Content -->
+  <main class="w-full pt-28 bg-surface-canvas flex-grow">
+    <div class="flex flex-col w-full">
+
+      <!-- Breadcrumb & Hero Header -->
+      <section class="w-full pt-16 pb-16 px-margin-mobile lg:px-margin bg-surface-canvas">
+        <div class="max-w-[1440px] mx-auto space-y-6">
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-surface-container-low text-text-primary-light border border-border-hairline">
+            <span class="font-label-numeric text-label-numeric text-electric-cobalt">0.1</span>
+            <span class="text-outline text-label-caps">/</span>
+            <span class="font-label-caps text-label-caps uppercase tracking-wider text-text-secondary-light">Resident Trust &amp; Testimonials</span>
+          </div>
+
+          <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-6">
+            <div class="space-y-4 max-w-3xl">
+              <h1 class="font-headline-2xl text-headline-2xl tracking-tighter text-text-primary-light leading-none">
+                Neighbor reviews<br/>
+                <span class="italic text-text-secondary-light font-light">&amp; community trust.</span>
+              </h1>
+              <p class="font-body-lg text-body-lg text-text-secondary-light leading-relaxed">
+                Read real, verified feedback from neighbors across Lake Barcroft, Falls Church, and Northern Virginia who have trusted Cole Determan for their home technology and computing systems.
+              </p>
             </div>
-        </section>
 
-        <section id="reviews" style="padding-top: 1rem;">
-            <!-- Review List Container (Populated dynamically from real reviews) -->
-            <div class="services-grid" id="reviews-container" style="grid-template-columns: 1fr; max-width: 800px; margin: 0 auto 3.5rem;">
-                <div id="reviews-loading" class="card" style="padding: 2.5rem; text-align: center; color: var(--text-secondary);">
-                    Loading customer reviews...
+            <!-- Review Score Card -->
+            <div class="bg-surface-subtle p-6 rounded-lg space-y-3 border border-border-hairline shrink-0 lg:max-w-xs w-full">
+              <div class="flex items-center justify-between">
+                <span class="font-label-caps text-label-caps text-text-secondary-light uppercase">Overall Rating</span>
+                <span class="font-headline-md text-headline-md font-bold text-electric-cobalt">5.0 ★</span>
+              </div>
+              <div class="flex items-center justify-between">
+                <span class="font-label-caps text-label-caps text-text-secondary-light uppercase">Verified Status</span>
+                <span class="font-label-numeric text-label-numeric text-text-primary-light">Local Neighbors</span>
+              </div>
+              <div class="flex items-center justify-between">
+                <span class="font-label-caps text-label-caps text-text-secondary-light uppercase">Recommendation</span>
+                <span class="font-label-numeric text-label-numeric text-text-primary-light">100% Positive</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Editorial Separator Wire -->
+      <div class="w-full max-w-[1440px] mx-auto px-margin-mobile lg:px-margin">
+        <div class="h-px bg-border-hairline w-full"></div>
+      </div>
+
+      <!-- Featured Neighborhood Spotlight Reviews Grid -->
+      <section class="w-full py-16 px-margin-mobile lg:px-margin bg-surface-canvas">
+        <div class="max-w-[1440px] mx-auto space-y-8">
+          <div class="flex items-center gap-2">
+            <span class="font-label-numeric text-label-numeric text-electric-cobalt">0.2</span>
+            <span class="font-label-caps text-label-caps uppercase tracking-widest text-text-secondary-light">Spotlight Neighbors</span>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <!-- Review 1: Katelyn -->
+            <div class="p-8 rounded-lg bg-surface-subtle flex flex-col justify-between space-y-6 border border-border-hairline hover:shadow-md transition-shadow">
+              <div class="space-y-3">
+                <div class="flex text-electric-cobalt gap-1">
+                  <span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+                  <span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+                  <span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+                  <span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+                  <span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
                 </div>
-            </div>
-
-            <!-- Leave a Review Form -->
-            <div class="card" style="padding: 3rem 2rem; max-width: 800px; margin: 0 auto;">
-                <h2 style="text-align: center; margin-bottom: 0.5rem;">Leave a Review</h2>
-                <p style="text-align: center; color: var(--text-secondary); margin-bottom: 2rem;">
-                    Have we worked together recently? I would truly appreciate your feedback!
+                <p class="font-body-md text-body-md text-text-primary-light italic leading-relaxed">
+                  “Cole is amazing with computers, I always go to him when I need tech help!”
                 </p>
-                <form id="review-form">
-                    <div class="form-group">
-                        <label for="review-name">Your Name</label>
-                        <input type="text" id="review-name" placeholder="e.g. Eleanor Vance" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="review-text">Your Experience / Feedback</label>
-                        <textarea id="review-text" rows="4" placeholder="How did Cole help with your technology?" required></textarea>
-                    </div>
-                    <button type="submit" class="btn submit-btn">Submit Review</button>
-                    <div id="review-status" style="margin-top: 1rem; display: none;" class="badge"></div>
-                </form>
+              </div>
+              <div class="pt-4 border-t border-border-hairline flex items-center gap-3">
+                <img src="images/katelyn.jpg" alt="Katelyn" class="w-10 h-10 rounded-full object-cover border border-border-hairline"/>
+                <div>
+                  <p class="font-body-md text-body-md font-semibold text-text-primary-light">Katelyn</p>
+                  <p class="font-label-caps text-label-caps text-text-secondary-light uppercase">Lake Barcroft Neighbor</p>
+                </div>
+              </div>
             </div>
-        </section>
-    </main>
 
-    <footer id="contact">
-        <div class="footer-content">
-            <div class="footer-info">
-                <div class="footer-logo">Determan Tech</div>
-                <p>Reliable, patient tech support for Lake Barcroft and surrounding communities.</p>
-                <p>Email: <a href="mailto:determantechhelp@gmail.com">determantechhelp@gmail.com</a></p>
-                <p>Phone: <a href="tel:5712798040">(571) 279-8040</a></p>
+            <!-- Review 2: Sally -->
+            <div class="p-8 rounded-lg bg-surface-subtle flex flex-col justify-between space-y-6 border border-border-hairline hover:shadow-md transition-shadow">
+              <div class="space-y-3">
+                <div class="flex text-electric-cobalt gap-1">
+                  <span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+                  <span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+                  <span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+                  <span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+                  <span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+                </div>
+                <p class="font-body-md text-body-md text-text-primary-light italic leading-relaxed">
+                  “He is easy to work with, very computer-savvy and patient with questions.”
+                </p>
+              </div>
+              <div class="pt-4 border-t border-border-hairline flex items-center gap-3">
+                <img src="images/nana.jpg" alt="Sally" class="w-10 h-10 rounded-full object-cover border border-border-hairline"/>
+                <div>
+                  <p class="font-body-md text-body-md font-semibold text-text-primary-light">Sally</p>
+                  <p class="font-label-caps text-label-caps text-text-secondary-light uppercase">Falls Church Resident</p>
+                </div>
+              </div>
             </div>
-            <div class="footer-links">
-                <h4>Navigation</h4>
-                <ul>
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="services.html">Services &amp; Pricing</a></li>
-                    <li><a href="reviews.html">Customer Reviews</a></li>
-                    <li><a href="appointments.html">Book Appointment</a></li>
-                    <li><a href="contact.html">Contact Me</a></li>
-                </ul>
+
+            <!-- Review 3: Jack -->
+            <div class="p-8 rounded-lg bg-surface-subtle flex flex-col justify-between space-y-6 border border-border-hairline hover:shadow-md transition-shadow">
+              <div class="space-y-3">
+                <div class="flex text-electric-cobalt gap-1">
+                  <span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+                  <span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+                  <span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+                  <span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+                  <span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+                </div>
+                <p class="font-body-md text-body-md text-text-primary-light italic leading-relaxed">
+                  “His knowledge combined with his ability to determine where the problem is coming from is exactly what you're looking for.”
+                </p>
+              </div>
+              <div class="pt-4 border-t border-border-hairline flex items-center gap-3">
+                <img src="images/jack.jpg" alt="Jack" class="w-10 h-10 rounded-full object-cover border border-border-hairline"/>
+                <div>
+                  <p class="font-body-md text-body-md font-semibold text-text-primary-light">Jack</p>
+                  <p class="font-label-caps text-label-caps text-text-secondary-light uppercase">Lake Barcroft Resident</p>
+                </div>
+              </div>
             </div>
-            <div class="footer-links">
-                <h4>Payment &amp; Trust</h4>
-                <p style="font-size: 0.95rem; margin-bottom: 0.75rem;">Cash, Check, Apple Pay, Zelle, or Venmo accepted.</p>
-                <p style="font-size: 0.9rem; color: var(--text-muted);">© 2026 Determan Tech Help. All rights reserved.</p>
+
+            <!-- Review 4: Bonnie E. -->
+            <div class="p-8 rounded-lg bg-surface-subtle flex flex-col justify-between space-y-6 border border-border-hairline hover:shadow-md transition-shadow">
+              <div class="space-y-3">
+                <div class="flex text-electric-cobalt gap-1">
+                  <span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+                  <span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+                  <span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+                  <span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+                  <span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+                </div>
+                <p class="font-body-md text-body-md text-text-primary-light italic leading-relaxed">
+                  “Cole was precise, knowledgeable, and fixed my issue quickly. His rate is very reasonable. I would give him 5 stars!”
+                </p>
+              </div>
+              <div class="pt-4 border-t border-border-hairline flex items-center gap-3">
+                <div class="w-10 h-10 rounded-full bg-electric-cobalt/15 text-electric-cobalt font-bold flex items-center justify-center border border-electric-cobalt/25 text-[15px]">
+                  B
+                </div>
+                <div>
+                  <p class="font-body-md text-body-md font-semibold text-text-primary-light">Bonnie E.</p>
+                  <p class="font-label-caps text-label-caps text-text-secondary-light uppercase">Verified Reviewer</p>
+                </div>
+              </div>
             </div>
+          </div>
         </div>
-    </footer>
+      </section>
 
-    <script src="nav.js"></script>
-    <script>
-        function escapeHtml(text) {
-            if (!text) return "";
-            return String(text)
-                .replace(/&/g, '&amp;')
-                .replace(/</g, '&lt;')
-                .replace(/>/g, '&gt;')
-                .replace(/"/g, '&quot;')
-                .replace(/'/g, '&#039;');
+      <!-- Chronological Community Reviews Ledger -->
+      <section class="w-full py-16 px-margin-mobile lg:px-margin bg-surface-container-low border-y border-border-hairline">
+        <div class="max-w-[960px] mx-auto space-y-8">
+          <div class="flex items-center justify-between">
+            <div class="space-y-1">
+              <div class="flex items-center gap-2">
+                <span class="font-label-numeric text-label-numeric text-electric-cobalt">0.3</span>
+                <span class="font-label-caps text-label-caps uppercase tracking-widest text-text-secondary-light">Chronological Ledger</span>
+              </div>
+              <h2 class="font-headline-xl text-headline-xl text-text-primary-light">All Neighborhood Feedback</h2>
+            </div>
+            <a href="#leave-review" class="hidden sm:inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-surface-pure border border-border-hairline text-text-primary-light font-label-pill text-label-pill hover:bg-surface-subtle transition-colors">
+              <span class="material-symbols-outlined text-[16px]">edit</span>
+              Leave Feedback
+            </a>
+          </div>
+
+          <!-- Dynamic Container -->
+          <div id="reviews-container" class="space-y-4">
+            <div id="reviews-loading" class="p-8 rounded-lg bg-surface-pure text-center text-text-secondary-light border border-border-hairline">
+              Loading customer reviews...
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Leave a Review Form -->
+      <section id="leave-review" class="w-full py-24 px-margin-mobile lg:px-margin bg-surface-canvas">
+        <div class="max-w-[760px] mx-auto">
+          <div class="bg-surface-pure rounded-xl p-8 lg:p-12 border border-border-hairline shadow-sm space-y-8">
+            <div class="text-center space-y-2 pb-6 border-b border-border-hairline">
+              <span class="font-label-numeric text-label-numeric text-electric-cobalt block">0.4 // COMMUNITY FEEDBACK</span>
+              <h2 class="font-headline-xl text-headline-xl text-text-primary-light">Leave a Review</h2>
+              <p class="font-body-md text-body-md text-text-secondary-light max-w-md mx-auto">
+                Have we worked together recently? I would deeply appreciate your feedback and experience to share with fellow neighbors.
+              </p>
+            </div>
+
+            <form id="review-form" class="space-y-6">
+              <div class="space-y-2">
+                <label for="review-name" class="block font-label-caps text-label-caps text-text-secondary-light uppercase">Your Name</label>
+                <input type="text" id="review-name" placeholder="e.g. Eleanor Vance" required
+                  class="w-full px-4 py-3 rounded-lg bg-surface-subtle border border-border-hairline text-text-primary-light font-body-md text-body-md focus:outline-none focus:border-electric-cobalt focus:ring-1 focus:ring-electric-cobalt transition-colors"/>
+              </div>
+
+              <div class="space-y-2">
+                <label for="review-text" class="block font-label-caps text-label-caps text-text-secondary-light uppercase">Your Experience / Feedback</label>
+                <textarea id="review-text" rows="4" placeholder="How did Cole help solve your tech problem?" required
+                  class="w-full px-4 py-3 rounded-lg bg-surface-subtle border border-border-hairline text-text-primary-light font-body-md text-body-md focus:outline-none focus:border-electric-cobalt focus:ring-1 focus:ring-electric-cobalt transition-colors resize-y"></textarea>
+              </div>
+
+              <button type="submit" class="w-full py-3.5 px-6 rounded-full bg-electric-cobalt text-surface-pure font-label-pill text-label-pill hover:bg-primary transition-colors flex items-center justify-center gap-2 shadow-[0_4px_20px_rgba(0,113,227,0.25)]">
+                <span class="material-symbols-outlined text-[18px]">send</span>
+                Submit Neighbor Review
+              </button>
+
+              <div id="review-status" style="display: none;" class="p-4 rounded-lg text-center font-label-pill text-label-pill"></div>
+            </form>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- Dark Architectural Footer -->
+  <footer class="w-full bg-surface-dark text-on-surface text-surface-pure mt-space-3xl border-t border-border-hairline-dark">
+    <div class="w-full max-w-[1440px] mx-auto px-margin-mobile lg:px-margin pt-space-2xl pb-space-xl">
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-space-xl pb-space-2xl border-b border-border-hairline-dark">
+        <!-- Brand and Credentials -->
+        <div class="md:col-span-4 flex flex-col justify-between space-y-space-md">
+          <div class="space-y-space-sm">
+            <div class="flex items-center gap-2">
+              <div class="w-6 h-6 rounded-full bg-surface-pure flex items-center justify-center">
+                <span class="text-surface-dark text-[11px] leading-none select-none">✦</span>
+              </div>
+              <span class="font-headline-md text-headline-md font-semibold tracking-tight text-surface-pure lowercase">determan<span class="text-electric-glow">.</span>tech</span>
+            </div>
+            <p class="font-body-sm text-body-sm text-text-secondary-dark leading-relaxed max-w-sm">
+              Personal, white-glove technical assistance and home-network architecture for Lake Barcroft and Northern Virginia neighbors. Engineered with scientific clarity and patient guidance.
+            </p>
+          </div>
+          <div class="space-y-1">
+            <p class="font-label-caps text-label-caps text-electric-glow uppercase tracking-wider">Credentials</p>
+            <p class="font-body-sm text-body-sm text-surface-pure">Cole Determan — M.S. Virginia Tech • B.S. JMU Computer Science</p>
+          </div>
+        </div>
+
+        <!-- Telemetry Contact -->
+        <div class="md:col-span-3 space-y-space-sm">
+          <p class="font-label-caps text-label-caps text-text-secondary-dark uppercase tracking-widest">Direct Telemetry</p>
+          <ul class="space-y-space-xs font-body-sm text-body-sm">
+            <li class="flex flex-col">
+              <span class="text-text-secondary-dark font-label-caps text-label-caps">Email</span>
+              <a class="text-surface-pure hover:text-electric-glow transition-colors" href="mailto:determantechhelp@gmail.com">determantechhelp@gmail.com</a>
+            </li>
+            <li class="flex flex-col pt-2">
+              <span class="text-text-secondary-dark font-label-caps text-label-caps">Phone / SMS</span>
+              <a class="text-surface-pure hover:text-electric-glow transition-colors" href="tel:5712798040">(571) 279-8040</a>
+            </li>
+            <li class="flex flex-col pt-2">
+              <span class="text-text-secondary-dark font-label-caps text-label-caps">Hours</span>
+              <span class="text-surface-dim">Mon–Sat 8:30am – 7:00pm</span>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Service Enclave -->
+        <div class="md:col-span-3 space-y-space-sm">
+          <p class="font-label-caps text-label-caps text-text-secondary-dark uppercase tracking-widest">Service Enclave</p>
+          <div class="flex flex-wrap gap-2">
+            <span class="px-2.5 py-1 rounded-full bg-inverse-surface text-surface-pure font-label-pill text-label-pill">Lake Barcroft</span>
+            <span class="px-2.5 py-1 rounded-full bg-inverse-surface text-surface-pure font-label-pill text-label-pill">Falls Church</span>
+            <span class="px-2.5 py-1 rounded-full bg-inverse-surface text-surface-pure font-label-pill text-label-pill">Fairfax County</span>
+            <span class="px-2.5 py-1 rounded-full bg-inverse-surface text-surface-pure font-label-pill text-label-pill">Arlington</span>
+            <span class="px-2.5 py-1 rounded-full bg-inverse-surface text-surface-pure font-label-pill text-label-pill">Bailey's Crossroads</span>
+            <span class="px-2.5 py-1 rounded-full bg-inverse-surface text-surface-pure font-label-pill text-label-pill">Seven Corners</span>
+          </div>
+        </div>
+
+        <!-- Settlement -->
+        <div class="md:col-span-2 space-y-space-sm">
+          <p class="font-label-caps text-label-caps text-text-secondary-dark uppercase tracking-widest">Accepted Settlement</p>
+          <div class="flex flex-col gap-1.5 font-label-pill text-label-pill text-text-secondary-dark">
+            <span>• Apple Pay / Contactless</span>
+            <span>• Zelle / Venmo (@Cole-Determan)</span>
+            <span>• Personal Check</span>
+            <span>• Cash</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="pt-space-md flex flex-col sm:flex-row items-center justify-between gap-4 font-label-numeric text-label-numeric text-text-secondary-dark">
+        <p>© 2026 Determan Tech Help. All rights reserved.</p>
+        <div class="flex items-center gap-space-md">
+          <a href="appointments.html" class="hover:text-surface-pure transition-colors">Resident IT Dispatch</a>
+          <span class="text-outline">•</span>
+          <a href="contact.html" class="hover:text-surface-pure transition-colors">Security &amp; Privacy First</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="nav.js"></script>
+  <script>
+    function escapeHtml(text) {
+      if (!text) return "";
+      return String(text)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;');
+    }
+
+    function renderReviews(reviews) {
+      const container = document.getElementById("reviews-container");
+      if (!container) return;
+
+      if (!Array.isArray(reviews) || reviews.length === 0) {
+        container.innerHTML = `<div class="p-8 rounded-lg bg-surface-pure text-center text-text-secondary-light border border-border-hairline">No reviews found yet. Be the first to leave one below!</div>`;
+        return;
+      }
+
+      container.innerHTML = "";
+      reviews.forEach((review, idx) => {
+        if (!review.name || !review.text) return;
+        if (review.name.toLowerCase().includes("adam p")) return;
+
+        const safeName = escapeHtml(review.name);
+        const safeText = escapeHtml(review.text);
+        const initial = safeName.charAt(0).toUpperCase() || "N";
+
+        const card = document.createElement("div");
+        card.className = "p-6 rounded-lg bg-surface-pure border border-border-hairline shadow-sm space-y-4 hover:shadow-md transition-shadow";
+        card.innerHTML = `
+          <div class="flex items-center justify-between">
+            <div class="flex text-electric-cobalt gap-0.5">
+              <span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
+              <span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
+              <span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
+              <span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
+              <span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
+            </div>
+            <span class="font-label-numeric text-label-numeric text-text-secondary-light">ENTRY #${String(idx + 1).padStart(2, '0')}</span>
+          </div>
+          <p class="font-body-md text-body-md text-text-primary-light italic leading-relaxed">“${safeText}”</p>
+          <div class="pt-3 border-t border-border-hairline flex items-center justify-between">
+            <div class="flex items-center gap-3">
+              <div class="w-8 h-8 rounded-full bg-surface-container flex items-center justify-center font-bold text-text-primary-light text-body-sm border border-border-hairline">
+                ${initial}
+              </div>
+              <span class="font-body-md text-body-md font-semibold text-text-primary-light">${safeName}</span>
+            </div>
+            <span class="inline-flex items-center gap-1 font-label-caps text-label-caps text-electric-cobalt uppercase">
+              <span class="w-1.5 h-1.5 rounded-full bg-electric-cobalt"></span>Verified Neighbor
+            </span>
+          </div>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    async function fetchReviews() {
+      const container = document.getElementById("reviews-container");
+      let reviews = null;
+
+      try {
+        const response = await fetch("/get-reviews");
+        if (response.ok) {
+          reviews = await response.json();
         }
+      } catch (err) {
+        // fallback
+      }
 
-        function renderReviews(reviews) {
-            const container = document.getElementById("reviews-container");
-            if (!container) return;
-
-            if (!Array.isArray(reviews) || reviews.length === 0) {
-                container.innerHTML = `<div class="card" style="padding: 2.5rem; text-align: center; color: var(--text-secondary);">No reviews yet. Be the first to leave one!</div>`;
-                return;
-            }
-
-            container.innerHTML = "";
-            reviews.forEach(review => {
-                if (!review.name || !review.text) return;
-                // Filter out any fake reviews
-                if (review.name.toLowerCase().includes("adam p")) return;
-
-                const card = document.createElement("div");
-                card.className = "card";
-                card.style.padding = "2rem 2.25rem";
-                card.style.marginBottom = "1.5rem";
-
-                const safeName = escapeHtml(review.name);
-                const safeText = escapeHtml(review.text);
-
-                card.innerHTML = `
-                    <p style="font-size: 1.2rem; font-style: italic; color: var(--text-primary); margin-bottom: 1.25rem; line-height: 1.65;">"${safeText}"</p>
-                    <div style="display: flex; align-items: center; gap: 0.5rem;">
-                        <strong style="color: var(--accent-color); font-size: 1.05rem;">— ${safeName}</strong>
-                        <span style="color: var(--text-muted); font-size: 0.9rem;">(Verified Neighbor)</span>
-                    </div>
-                `;
-                container.appendChild(card);
-            });
+      if (!reviews || !Array.isArray(reviews)) {
+        try {
+          const fallbackRes = await fetch("reviews.json");
+          if (fallbackRes.ok) {
+            reviews = await fallbackRes.json();
+          }
+        } catch (err) {
+          console.error("Unable to load reviews:", err);
         }
+      }
 
-        async function fetchReviews() {
-            const container = document.getElementById("reviews-container");
-            let reviews = null;
+      if (reviews && Array.isArray(reviews)) {
+        renderReviews(reviews);
+      } else if (container) {
+        container.innerHTML = `<div class="p-8 rounded-lg bg-surface-pure text-center text-text-secondary-light border border-border-hairline">Unable to load reviews at this moment. Please refresh shortly.</div>`;
+      }
+    }
 
-            // 1. Try server API endpoint /get-reviews
-            try {
-                const response = await fetch("/get-reviews");
-                if (response.ok) {
-                    reviews = await response.json();
-                }
-            } catch (err) {
-                // If API is unreachable (e.g. static local server), attempt static file fallback
-            }
+    // Review Form Submission
+    const reviewForm = document.getElementById("review-form");
+    if (reviewForm) {
+      reviewForm.addEventListener("submit", async function (event) {
+        event.preventDefault();
+        const nameInput = document.getElementById("review-name");
+        const textInput = document.getElementById("review-text");
+        const statusBox = document.getElementById("review-status");
+        const submitBtn = event.target.querySelector("button[type='submit']");
+        const name = nameInput.value.trim();
+        const text = textInput.value.trim();
 
-            // 2. Fallback to static reviews.json
-            if (!reviews || !Array.isArray(reviews)) {
-                try {
-                    const fallbackRes = await fetch("reviews.json");
-                    if (fallbackRes.ok) {
-                        reviews = await fallbackRes.json();
-                    }
-                } catch (err) {
-                    console.error("Unable to load reviews:", err);
-                }
-            }
+        if (!name || !text) return;
 
-            if (reviews && Array.isArray(reviews)) {
-                renderReviews(reviews);
-            } else if (container) {
-                container.innerHTML = `<div class="card" style="padding: 2.5rem; text-align: center; color: var(--text-secondary);">Unable to load reviews at this moment. Please refresh shortly.</div>`;
-            }
+        submitBtn.disabled = true;
+        const originalText = submitBtn.innerHTML;
+        submitBtn.innerText = "Submitting Review...";
+
+        try {
+          const response = await fetch("/add-review", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ name, text })
+          });
+
+          if (response.ok) {
+            statusBox.style.display = "block";
+            statusBox.className = "p-4 rounded-lg text-center font-label-pill text-label-pill bg-surface-subtle text-electric-cobalt border border-electric-cobalt/30";
+            statusBox.innerText = "Thank you! Your review has been submitted successfully.";
+            reviewForm.reset();
+            await fetchReviews();
+          } else {
+            throw new Error("Server error");
+          }
+        } catch (error) {
+          statusBox.style.display = "block";
+          statusBox.className = "p-4 rounded-lg text-center font-label-pill text-label-pill bg-surface-subtle text-electric-cobalt border border-electric-cobalt/30";
+          statusBox.innerText = "Thank you! Your review has been added locally.";
+          reviewForm.reset();
+
+          // Dynamically prepend to reviews
+          const container = document.getElementById("reviews-container");
+          if (container) {
+            const card = document.createElement("div");
+            card.className = "p-6 rounded-lg bg-surface-pure border-2 border-electric-cobalt shadow-sm space-y-4";
+            card.innerHTML = `
+              <div class="flex items-center justify-between">
+                <div class="flex text-electric-cobalt gap-0.5">
+                  <span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
+                  <span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
+                  <span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
+                  <span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
+                  <span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
+                </div>
+                <span class="font-label-numeric text-label-numeric text-electric-cobalt font-medium">JUST SUBMITTED</span>
+              </div>
+              <p class="font-body-md text-body-md text-text-primary-light italic leading-relaxed">“${escapeHtml(text)}”</p>
+              <div class="pt-3 border-t border-border-hairline flex items-center justify-between">
+                <span class="font-body-md text-body-md font-semibold text-text-primary-light">${escapeHtml(name)}</span>
+                <span class="font-label-caps text-label-caps text-electric-cobalt uppercase">Verified Neighbor</span>
+              </div>
+            `;
+            container.prepend(card);
+          }
+        } finally {
+          submitBtn.innerHTML = originalText;
+          submitBtn.disabled = false;
         }
+      });
+    }
 
-        // Handle Review Form Submission
-        document.getElementById("review-form").addEventListener("submit", async function (event) {
-            event.preventDefault();
-            const nameInput = document.getElementById("review-name");
-            const textInput = document.getElementById("review-text");
-            const submitBtn = event.target.querySelector("button[type='submit']");
-            const name = nameInput.value.trim();
-            const text = textInput.value.trim();
-
-            if (!name || !text) return;
-
-            submitBtn.disabled = true;
-            submitBtn.innerText = "Submitting Review...";
-
-            try {
-                const response = await fetch("/add-review", {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({ name, text })
-                });
-
-                if (response.ok) {
-                    submitBtn.innerText = "Review Submitted! Thank you!";
-                    document.getElementById("review-form").reset();
-                    await fetchReviews();
-                } else {
-                    throw new Error("Server response was not ok");
-                }
-            } catch (error) {
-                console.warn("Could not post to /add-review:", error);
-                submitBtn.innerText = "Review Submitted! Thank you!";
-                document.getElementById("review-form").reset();
-                
-                // Dynamically append new review
-                const container = document.getElementById("reviews-container");
-                if (container) {
-                    const card = document.createElement("div");
-                    card.className = "card";
-                    card.style.padding = "2rem 2.25rem";
-                    card.style.marginBottom = "1.5rem";
-                    card.style.border = "2px solid var(--accent-color)";
-                    card.innerHTML = `
-                        <p style="font-size: 1.2rem; font-style: italic; color: var(--text-primary); margin-bottom: 1.25rem; line-height: 1.65;">"${escapeHtml(text)}"</p>
-                        <div style="display: flex; align-items: center; gap: 0.5rem;">
-                            <strong style="color: var(--accent-color); font-size: 1.05rem;">— ${escapeHtml(name)}</strong>
-                            <span style="color: var(--success-color); font-size: 0.9rem; font-weight: 700;">(Just Added!)</span>
-                        </div>
-                    `;
-                    container.prepend(card);
-                }
-            }
-
-            setTimeout(() => {
-                submitBtn.disabled = false;
-                submitBtn.innerText = "Submit Review";
-            }, 3500);
-        });
-
-        document.addEventListener("DOMContentLoaded", fetchReviews);
-    </script>
+    document.addEventListener("DOMContentLoaded", fetchReviews);
+  </script>
 </body>
-
 </html>

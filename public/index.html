@@ -1,207 +1,962 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Determan Tech Help | Friendly Local Tech Support & IT Solutions</title>
-    <meta name="description"
-        content="Friendly, expert tech support and IT solutions for Lake Barcroft and surrounding communities. Computer repair, device setup, Wi-Fi help, and patient one-on-one training from Cole Determan.">
-    <link rel="icon" type="image/png" href="images/techhelp.png">
-    <link rel="stylesheet" href="style.css?v=2.0">
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <meta content="web_standard" name="shell-type"/>
+  <title>Determan Tech Help | Friendly Local IT Support · Lake Barcroft, VA</title>
+  <meta name="description" content="Friendly, expert tech support and IT solutions for Lake Barcroft and surrounding communities. Patient one-on-one computer repair, device setup, and Wi-Fi help from Cole Determan."/>
+  <link rel="icon" type="image/png" href="images/techhelp.png"/>
+
+  <!-- Google Fonts: Hanken Grotesk & Material Symbols -->
+  <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&amp;display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+
+  <!-- Tailwind CSS via CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "inverse-surface": "#2f3132",
+            "tertiary-container": "#0076d0",
+            "electric-glow": "#2997FF",
+            "tertiary-fixed-dim": "#a3c9ff",
+            "secondary-fixed": "#e3e2e4",
+            "primary": "#0059b5",
+            "on-tertiary-fixed-variant": "#004882",
+            "text-primary-light": "#0F1012",
+            "on-tertiary": "#ffffff",
+            "border-hairline-dark": "rgba(255, 255, 255, 0.12)",
+            "on-error-container": "#93000a",
+            "outline-variant": "#c1c6d6",
+            "outline": "#717785",
+            "electric-cobalt": "#0071E3",
+            "surface-variant": "#e2e2e4",
+            "tertiary-fixed": "#d3e3ff",
+            "on-secondary-fixed-variant": "#464749",
+            "on-tertiary-fixed": "#001c39",
+            "inverse-on-surface": "#f0f0f2",
+            "inverse-primary": "#abc7ff",
+            "surface-subtle": "#F2F2F4",
+            "on-primary": "#ffffff",
+            "border-hairline": "rgba(15, 16, 18, 0.08)",
+            "tertiary": "#005da6",
+            "on-surface-variant": "#414753",
+            "surface-container": "#eeeef0",
+            "surface": "#f9f9fb",
+            "surface-canvas": "#FDFDFD",
+            "surface-dim": "#d9dadc",
+            "on-primary-fixed-variant": "#00458f",
+            "on-error": "#ffffff",
+            "secondary": "#5e5e61",
+            "on-primary-fixed": "#001b3f",
+            "secondary-fixed-dim": "#c7c6c9",
+            "text-primary-dark": "#FDFDFD",
+            "error-container": "#ffdad6",
+            "text-secondary-dark": "#86868B",
+            "primary-container": "#0071e3",
+            "secondary-container": "#e0dfe2",
+            "surface-container-low": "#f3f3f5",
+            "error": "#ba1a1a",
+            "on-secondary-fixed": "#1b1c1e",
+            "on-surface": "#1a1c1d",
+            "on-background": "#1a1c1d",
+            "surface-container-high": "#e8e8ea",
+            "on-secondary-container": "#626265",
+            "primary-fixed": "#d7e2ff",
+            "surface-container-lowest": "#ffffff",
+            "surface-container-highest": "#e2e2e4",
+            "on-tertiary-container": "#fcfbff",
+            "primary-fixed-dim": "#abc7ff",
+            "surface-dark": "#0F1012",
+            "surface-bright": "#f9f9fb",
+            "surface-pure": "#FFFFFF",
+            "surface-tint": "#005cbb",
+            "on-primary-container": "#fcfbff",
+            "background": "#f9f9fb",
+            "text-secondary-light": "#6E6E73",
+            "on-secondary": "#ffffff"
+          },
+          borderRadius: {
+            "DEFAULT": "1rem",
+            "lg": "2rem",
+            "xl": "3rem",
+            "full": "9999px"
+          },
+          spacing: {
+            "space-3xl": "6rem",
+            "space-lg": "1.5rem",
+            "margin-mobile": "1.25rem",
+            "margin": "4rem",
+            "space-xl": "2.5rem",
+            "gutter-mobile": "1rem",
+            "space-xs": "0.25rem",
+            "space-2xl": "4rem",
+            "space-sm": "0.5rem",
+            "space-md": "1rem",
+            "gutter": "2rem"
+          },
+          fontFamily: {
+            "label-caps": ["Hanken Grotesk", "sans-serif"],
+            "headline-xl-mobile": ["Hanken Grotesk", "sans-serif"],
+            "label-pill": ["Hanken Grotesk", "sans-serif"],
+            "headline-lg": ["Hanken Grotesk", "sans-serif"],
+            "headline-md": ["Hanken Grotesk", "sans-serif"],
+            "headline-2xl-mobile": ["Hanken Grotesk", "sans-serif"],
+            "body-lg": ["Hanken Grotesk", "sans-serif"],
+            "headline-xl": ["Hanken Grotesk", "sans-serif"],
+            "body-md": ["Hanken Grotesk", "sans-serif"],
+            "body-sm": ["Hanken Grotesk", "sans-serif"],
+            "headline-2xl": ["Hanken Grotesk", "sans-serif"],
+            "label-numeric": ["Hanken Grotesk", "sans-serif"]
+          },
+          fontSize: {
+            "label-caps": ["11px", { lineHeight: "14px", letterSpacing: "0.12em", fontWeight: "600" }],
+            "headline-xl-mobile": ["32px", { lineHeight: "40px", letterSpacing: "-0.02em", fontWeight: "400" }],
+            "label-pill": ["12px", { lineHeight: "16px", letterSpacing: "0.02em", fontWeight: "500" }],
+            "headline-lg": ["32px", { lineHeight: "40px", letterSpacing: "-0.02em", fontWeight: "500" }],
+            "headline-md": ["24px", { lineHeight: "32px", letterSpacing: "-0.015em", fontWeight: "600" }],
+            "headline-2xl-mobile": ["40px", { lineHeight: "48px", letterSpacing: "-0.02em", fontWeight: "400" }],
+            "body-lg": ["18px", { lineHeight: "28px", letterSpacing: "-0.01em", fontWeight: "400" }],
+            "headline-xl": ["48px", { lineHeight: "56px", letterSpacing: "-0.025em", fontWeight: "500" }],
+            "body-md": ["15px", { lineHeight: "24px", letterSpacing: "0em", fontWeight: "400" }],
+            "body-sm": ["13px", { lineHeight: "20px", letterSpacing: "0.01em", fontWeight: "400" }],
+            "headline-2xl": ["72px", { lineHeight: "80px", letterSpacing: "-0.03em", fontWeight: "500" }],
+            "label-numeric": ["12px", { lineHeight: "16px", letterSpacing: "0.08em", fontWeight: "500" }]
+          }
+        }
+      }
+    };
+  </script>
+
+  <style>
+    @layer base {
+      html, body {
+        margin: 0;
+        padding: 0;
+        scroll-behavior: smooth;
+      }
+      body {
+        overscroll-behavior: none;
+      }
+      main > :first-child {
+        margin-top: 0 !important;
+      }
+      main > :last-child {
+        margin-bottom: 0 !important;
+      }
+    }
+    ::-webkit-scrollbar {
+      display: none;
+    }
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      vertical-align: middle;
+    }
+  </style>
 </head>
 
-<body>
+<body class="bg-surface-canvas text-on-surface antialiased font-body-md text-body-md min-h-screen flex flex-col justify-between selection:bg-primary-fixed selection:text-on-primary-fixed">
 
-    <nav id="navbar">
-        <div class="nav-container">
-            <a href="index.html" class="logo">
-                <img src="images/techhelp.png" alt="Determan Tech Help Logo">
-                <div class="logo-text">
-                    <span class="logo-title">Determan Tech</span>
-                    <span class="logo-sub">Friendly Local IT Support</span>
-                </div>
+  <!-- Fixed Top Header -->
+  <header id="navbar" class="fixed top-0 left-0 w-full z-50 bg-surface-canvas/90 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)] border-b border-border-hairline transition-all duration-200">
+    <div class="w-full max-w-[1440px] mx-auto px-margin-mobile lg:px-margin h-20 flex items-center justify-between gap-4">
+      
+      <!-- Logo Branding -->
+      <a href="index.html" class="flex items-center gap-space-sm group">
+        <div class="w-8 h-8 rounded-full bg-surface-dark flex items-center justify-center shrink-0 shadow-sm transition-transform group-hover:scale-105">
+          <span class="text-surface-pure text-[13px] leading-none select-none">✦</span>
+        </div>
+        <div class="flex flex-col">
+          <div class="flex items-center gap-1.5">
+            <span class="font-headline-md text-headline-md font-semibold tracking-tight text-on-surface lowercase leading-none">determan<span class="text-primary-container">.</span>tech</span>
+          </div>
+          <span class="font-label-caps text-label-caps uppercase tracking-widest text-text-secondary-light mt-0.5">Friendly IT · Lake Barcroft, VA</span>
+        </div>
+      </a>
+
+      <!-- Desktop Navigation Pill -->
+      <nav class="hidden xl:flex items-center p-1.5 bg-surface-subtle/80 backdrop-blur-lg rounded-full border border-border-hairline">
+        <a aria-current="page" class="px-4 py-1.5 font-label-pill bg-surface-dark text-surface-pure rounded-full shadow-sm" href="index.html">
+          <span class="font-label-numeric text-label-numeric text-outline mr-1.5">00</span>Home
+        </a>
+        <a class="px-4 py-1.5 text-on-surface-variant hover:text-on-surface transition-colors font-label-pill text-label-pill" href="services.html">
+          <span class="font-label-numeric text-label-numeric text-outline mr-1.5">01</span>Services &amp; Pricing
+        </a>
+        <a class="px-4 py-1.5 text-on-surface-variant hover:text-on-surface transition-colors font-label-pill text-label-pill" href="#about">
+          <span class="font-label-numeric text-label-numeric text-outline mr-1.5">02</span>About Cole
+        </a>
+        <a class="px-4 py-1.5 text-on-surface-variant hover:text-on-surface transition-colors font-label-pill text-label-pill" href="reviews.html">
+          <span class="font-label-numeric text-label-numeric text-outline mr-1.5">03</span>Reviews
+        </a>
+        <a class="px-4 py-1.5 text-on-surface-variant hover:text-on-surface transition-colors font-label-pill text-label-pill" href="#faq">
+          <span class="font-label-numeric text-label-numeric text-outline mr-1.5">04</span>Knowledge &amp; FAQ
+        </a>
+        <a class="px-4 py-1.5 text-on-surface-variant hover:text-on-surface transition-colors font-label-pill text-label-pill" href="appointments.html">
+          <span class="font-label-numeric text-label-numeric text-outline mr-1.5">05</span>Book Appointment
+        </a>
+        <a class="px-4 py-1.5 text-on-surface-variant hover:text-on-surface transition-colors font-label-pill text-label-pill" href="contact.html">
+          <span class="font-label-numeric text-label-numeric text-outline mr-1.5">06</span>Contact
+        </a>
+      </nav>
+
+      <!-- Action Cluster -->
+      <div class="flex items-center gap-space-sm">
+        <a class="hidden sm:flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-surface-container-low text-on-surface font-label-numeric text-label-numeric hover:bg-surface-container transition-colors" href="tel:5712798040">
+          <span class="w-1.5 h-1.5 rounded-full bg-electric-cobalt animate-pulse"></span>(571) 279-8040
+        </a>
+        <a class="hidden md:inline-flex items-center px-5 py-2 rounded-full bg-primary-container text-on-primary-container font-label-pill text-label-pill hover:bg-primary transition-all shadow-[0_4px_20px_rgba(0,113,227,0.25)]" href="appointments.html">
+          Book Visit
+        </a>
+
+        <!-- Mobile Menu Toggle Button -->
+        <button id="menu-toggle" class="xl:hidden p-2 rounded-full hover:bg-surface-container text-text-primary-light transition-colors" aria-label="Open Navigation Menu" aria-expanded="false">
+          <span class="material-symbols-outlined text-[24px]">menu</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Sub-header Dispatch Telemetry Bar -->
+    <div class="w-full bg-surface-subtle/90 backdrop-blur-md border-t border-border-hairline">
+      <div class="w-full max-w-[1440px] mx-auto px-margin-mobile lg:px-margin py-2 flex flex-wrap items-center justify-between gap-y-1 gap-x-space-md font-label-numeric text-label-numeric text-on-surface-variant">
+        <div class="flex items-center gap-2">
+          <span class="inline-block w-2 h-2 rounded-full bg-electric-cobalt animate-pulse"></span>
+          <span class="font-medium text-on-surface">Dispatch Status:</span>
+          <span>Available in Lake Barcroft &amp; Surrounding Communities</span>
+        </div>
+        <div class="hidden md:flex items-center gap-space-lg">
+          <div class="flex items-center gap-1.5">
+            <span class="text-outline">Rate:</span>
+            <span class="font-medium text-on-surface">$50 – $75/hr</span>
+            <span class="text-text-secondary-light">(1-hr min)</span>
+          </div>
+          <div class="flex items-center gap-1.5">
+            <span class="text-outline">Direct:</span>
+            <span class="text-on-surface font-medium">Call or Text Priority</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mobile Drawer Menu -->
+    <div id="mobile-menu" class="hidden xl:hidden w-full bg-surface-canvas border-t border-border-hairline shadow-xl">
+      <div class="max-w-[1440px] mx-auto px-margin-mobile py-4 flex flex-col gap-2 font-label-pill">
+        <a class="px-4 py-2.5 rounded-lg bg-surface-dark text-surface-pure flex items-center justify-between" href="index.html">
+          <span>Home</span>
+          <span class="font-label-numeric text-electric-glow">00</span>
+        </a>
+        <a class="px-4 py-2.5 rounded-lg hover:bg-surface-subtle text-text-primary-light flex items-center justify-between transition-colors" href="services.html">
+          <span>Services &amp; Pricing</span>
+          <span class="font-label-numeric text-outline">01</span>
+        </a>
+        <a class="px-4 py-2.5 rounded-lg hover:bg-surface-subtle text-text-primary-light flex items-center justify-between transition-colors" href="#about">
+          <span>About Cole</span>
+          <span class="font-label-numeric text-outline">02</span>
+        </a>
+        <a class="px-4 py-2.5 rounded-lg hover:bg-surface-subtle text-text-primary-light flex items-center justify-between transition-colors" href="reviews.html">
+          <span>Customer Reviews</span>
+          <span class="font-label-numeric text-outline">03</span>
+        </a>
+        <a class="px-4 py-2.5 rounded-lg hover:bg-surface-subtle text-text-primary-light flex items-center justify-between transition-colors" href="#faq">
+          <span>Knowledge &amp; FAQ</span>
+          <span class="font-label-numeric text-outline">04</span>
+        </a>
+        <a class="px-4 py-2.5 rounded-lg hover:bg-surface-subtle text-text-primary-light flex items-center justify-between transition-colors" href="appointments.html">
+          <span>Book Appointment</span>
+          <span class="font-label-numeric text-outline">05</span>
+        </a>
+        <a class="px-4 py-2.5 rounded-lg hover:bg-surface-subtle text-text-primary-light flex items-center justify-between transition-colors" href="contact.html">
+          <span>Contact Me</span>
+          <span class="font-label-numeric text-outline">06</span>
+        </a>
+        <div class="pt-3 mt-1 border-t border-border-hairline flex flex-col gap-2">
+          <a class="w-full py-2.5 px-4 rounded-full bg-electric-cobalt text-surface-pure text-center flex items-center justify-center gap-2 font-medium" href="tel:5712798040">
+            <span class="material-symbols-outlined text-[18px]">call</span>(571) 279-8040
+          </a>
+          <a class="w-full py-2.5 px-4 rounded-full bg-surface-container text-text-primary-light text-center flex items-center justify-center gap-2 font-medium" href="appointments.html">
+            <span class="material-symbols-outlined text-[18px]">calendar_month</span>Book Online
+          </a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Body Content -->
+  <main class="w-full pt-28 bg-surface-canvas flex-grow">
+    <div class="flex flex-col w-full">
+
+      <!-- Top Ticker Bar -->
+      <section class="w-full bg-surface-subtle border-b border-border-hairline py-2.5 px-margin-mobile lg:px-margin">
+        <div class="max-w-[1440px] mx-auto flex flex-col md:flex-row items-start md:items-center justify-between gap-2 font-label-numeric text-label-numeric text-text-secondary-light">
+          <div class="flex items-center gap-2 flex-wrap">
+            <span class="inline-block w-2 h-2 rounded-full bg-electric-cobalt animate-pulse"></span>
+            <span class="font-medium text-text-primary-light">Dispatched From Lake Barcroft</span>
+            <span class="text-outline">/</span>
+            <span>Serving Falls Church, Arlington, McLean, Bailey's Crossroads &amp; Fairfax County</span>
+          </div>
+          <div class="flex items-center gap-4 text-body-sm">
+            <span class="text-text-primary-light font-medium">Same-Day &amp; Weekend On-Site</span>
+            <span class="text-outline">•</span>
+            <span>1-Hour Minimum Billed Directly</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Hero Section -->
+      <section class="w-full pt-16 pb-24 px-margin-mobile lg:px-margin bg-surface-canvas">
+        <div class="max-w-[1440px] mx-auto">
+          <!-- Breadcrumb badge -->
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-surface-container-low text-text-primary-light mb-8 border border-border-hairline">
+            <span class="font-label-numeric text-label-numeric text-electric-cobalt">0.1</span>
+            <span class="text-outline text-label-caps">/</span>
+            <span class="font-label-caps text-label-caps uppercase tracking-wider text-text-secondary-light">Lake Barcroft, VA &amp; Surrounding Communities</span>
+          </div>
+
+          <!-- Main Headline Grid -->
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start mb-12">
+            <div class="lg:col-span-8 space-y-6">
+              <h1 class="font-headline-2xl text-headline-2xl tracking-tighter text-text-primary-light leading-none">
+                Fixing your tech<br/>
+                <span class="italic text-text-secondary-light font-light">at the speed of light.</span>
+              </h1>
+              <p class="font-body-lg text-body-lg text-text-secondary-light max-w-2xl leading-relaxed">
+                Patient, white-glove technical assistance engineered for your home and office. From sluggish computers and Wi-Fi dead zones to smart device setups, printer troubleshooting, and personal websites — making technology simple, transparent, and stress-free.
+              </p>
+            </div>
+
+            <!-- Metric pill summary card -->
+            <div class="lg:col-span-4 bg-surface-subtle p-6 rounded-lg space-y-4 border border-border-hairline">
+              <div class="flex items-center justify-between pb-3 border-b border-border-hairline">
+                <span class="font-label-caps text-label-caps text-text-secondary-light uppercase">Technician</span>
+                <span class="font-label-numeric text-label-numeric font-medium text-text-primary-light">Cole Determan</span>
+              </div>
+              <div class="flex items-center justify-between pb-3 border-b border-border-hairline">
+                <span class="font-label-caps text-label-caps text-text-secondary-light uppercase">Education</span>
+                <span class="font-label-numeric text-label-numeric font-medium text-text-primary-light">Virginia Tech M.S. (Cand.)</span>
+              </div>
+              <div class="flex items-center justify-between pb-3 border-b border-border-hairline">
+                <span class="font-label-caps text-label-caps text-text-secondary-light uppercase">Base Rate</span>
+                <span class="font-label-numeric text-label-numeric text-electric-cobalt font-semibold">$50 – $75 / hr</span>
+              </div>
+              <div class="flex items-center justify-between">
+                <span class="font-label-caps text-label-caps text-text-secondary-light uppercase">House Call SLA</span>
+                <span class="inline-flex items-center gap-1 font-label-numeric text-label-numeric text-text-primary-light">
+                  <span class="w-1.5 h-1.5 rounded-full bg-electric-cobalt animate-pulse"></span> Available Today
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Action cluster & tag row -->
+          <div class="flex flex-wrap items-center gap-4 pt-6 border-t border-border-hairline">
+            <a class="px-6 py-3 rounded-full bg-electric-cobalt text-surface-pure font-label-pill text-label-pill shadow-[0_4px_20px_rgba(0,113,227,0.25)] hover:bg-primary transition-all flex items-center gap-2" href="appointments.html">
+              <span class="material-symbols-outlined text-[18px]">calendar_month</span>
+              Book an Appointment
+            </a>
+            <a class="px-6 py-3 rounded-full bg-surface-container text-text-primary-light font-label-pill text-label-pill hover:bg-surface-container-high transition-colors flex items-center gap-2" href="tel:5712798040">
+              <span class="material-symbols-outlined text-[18px]">call</span>
+              Call or Text (571) 279-8040
             </a>
 
-            <div class="nav-right">
-                <div class="nav-links">
-                    <a href="index.html" class="active">Home</a>
-                    <a href="services.html">Services</a>
-                    <a href="reviews.html">Reviews</a>
-                    <a href="appointments.html">Appointments</a>
-                    <a href="contact.html">Contact</a>
-                </div>
-
-                <a href="tel:5712798040" class="nav-call-btn">
-                    📞 (571) 279-8040
-                </a>
-
-                <button class="menu-toggle" id="menu-toggle" aria-label="Open Navigation Menu" aria-expanded="false">
-                    <span class="bar"></span>
-                    <span class="bar"></span>
-                    <span class="bar"></span>
-                </button>
+            <!-- Service scope tags -->
+            <div class="flex flex-wrap items-center gap-2 lg:ml-auto">
+              <span class="px-3 py-1 rounded-full bg-surface-container-low text-text-secondary-light font-label-caps text-label-caps uppercase border border-border-hairline">Home Wi-Fi</span>
+              <span class="px-3 py-1 rounded-full bg-surface-container-low text-text-secondary-light font-label-caps text-label-caps uppercase border border-border-hairline">PC &amp; Mac Repair</span>
+              <span class="px-3 py-1 rounded-full bg-surface-container-low text-text-secondary-light font-label-caps text-label-caps uppercase border border-border-hairline">Device Setup</span>
+              <span class="px-3 py-1 rounded-full bg-surface-container-low text-text-secondary-light font-label-caps text-label-caps uppercase border border-border-hairline">Custom Builds</span>
+              <span class="px-3 py-1 rounded-full bg-surface-container-low text-text-secondary-light font-label-caps text-label-caps uppercase border border-border-hairline">Websites</span>
             </div>
+          </div>
         </div>
+      </section>
 
-        <!-- Mobile Drawer Navigation -->
-        <div class="mobile-menu" id="mobile-menu">
-            <div class="mobile-menu-links">
-                <a href="index.html" class="active">Home</a>
-                <a href="services.html">Services &amp; Pricing</a>
-                <a href="reviews.html">Customer Reviews</a>
-                <a href="appointments.html">Book Appointment</a>
-                <a href="contact.html">Contact Me</a>
-            </div>
-            <div class="mobile-menu-action">
-                <p class="mobile-call-label">Need immediate help? Call or text:</p>
-                <a href="tel:5712798040" class="btn btn-call">
-                    📞 (571) 279-8040
-                </a>
-            </div>
-        </div>
-    </nav>
+      <!-- Editorial Separator Wire -->
+      <div class="w-full max-w-[1440px] mx-auto px-margin-mobile lg:px-margin">
+        <div class="h-px bg-border-hairline w-full"></div>
+      </div>
 
-    <main>
-        <section class="hero">
-            <div class="hero-content">
-                <div class="badge">📍 Lake Barcroft, VA &amp; Surrounding Communities</div>
-                <h1>Fixing your tech <br><span>at the speed of light.</span></h1>
-                <p>Expert, patient tech assistance for your home and office. From printers and Wi-Fi to new computer setup, I make technology simple and stress-free.</p>
-                <div class="hero-actions">
-                    <a href="appointments.html" class="btn">Book an Appointment</a>
-                    <a href="tel:5712798040" class="btn btn-secondary">📞 Call or Text (571) 279-8040</a>
-                </div>
+      <!-- Services & Pricing Section -->
+      <section id="services" class="w-full py-24 px-margin-mobile lg:px-margin bg-surface-canvas">
+        <div class="max-w-[1440px] mx-auto space-y-12">
+          <!-- Section Header -->
+          <div class="flex flex-col md:flex-row md:items-end justify-between gap-6">
+            <div class="space-y-2">
+              <div class="flex items-center gap-2">
+                <span class="font-label-numeric text-label-numeric text-electric-cobalt">0.2</span>
+                <span class="font-label-caps text-label-caps uppercase tracking-widest text-text-secondary-light">System Capabilities &amp; Transparent Rates</span>
+              </div>
+              <h2 class="font-headline-xl text-headline-xl text-text-primary-light">Core Services &amp; Transparent Hourly Rates</h2>
             </div>
-        </section>
+            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-surface-container text-text-secondary-light font-label-pill text-label-pill border border-border-hairline">
+              <span class="material-symbols-outlined text-electric-cobalt text-[16px]">info</span>
+              Billed hourly with a 1-hour minimum. Cash, Check, Apple Pay, Zelle, Venmo.
+            </div>
+          </div>
 
-        <section id="services">
-            <div class="section-header">
-                <h2>How Can I Help You?</h2>
-                <p>Friendly, honest, and reliable tech services tailored to your needs.</p>
-            </div>
-            <div class="services-grid">
-                <div class="service-card fade-in">
-                    <div>
-                        <h3>Device Setup &amp; Training</h3>
-                        <p>Patient setup of new phones, tablets, smart TVs, printers, and computers with clear, step-by-step guidance.</p>
-                    </div>
-                    <span class="service-price">$75 / Hour</span>
+          <!-- 4 Architectural Service Cards Grid -->
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <!-- 0.1 Device Setup -->
+            <div class="p-8 rounded-lg bg-surface-subtle flex flex-col justify-between hover:shadow-md transition-shadow group border border-border-hairline">
+              <div class="space-y-4">
+                <div class="flex items-center justify-between">
+                  <span class="font-label-numeric text-label-numeric text-electric-cobalt">0.1 // SETUP</span>
+                  <span class="material-symbols-outlined text-text-secondary-light group-hover:text-electric-cobalt transition-colors">devices</span>
                 </div>
-                <div class="service-card fade-in">
-                    <div>
-                        <h3>Wi-Fi &amp; Internet Troubleshooting</h3>
-                        <p>Eliminate dead zones, boost your connection speed, and get all your household devices online smoothly.</p>
-                    </div>
-                    <span class="service-price">$75 / Hour</span>
-                </div>
-                <div class="service-card fade-in">
-                    <div>
-                        <h3>Computer Repair &amp; Custom PCs</h3>
-                        <p>Diagnose sluggish systems, remove malware, replace parts, or build high-performance computers.</p>
-                    </div>
-                    <span class="service-price">$50 / Hour</span>
-                </div>
-                <div class="service-card fade-in">
-                    <div>
-                        <h3>Personal Websites</h3>
-                        <p>Clean, modern, and personalized websites designed for local businesses, portfolios, or hobbies.</p>
-                    </div>
-                    <span class="service-price">$50 / Hour</span>
-                </div>
-            </div>
-            <div style="text-align: center; margin-top: 3rem;">
-                <a href="services.html" class="btn btn-secondary">View All Services &amp; Pricing</a>
-            </div>
-        </section>
-
-        <section id="about">
-            <div class="about-section fade-in">
-                <div class="about-img">
-                    <img src="images/cole.jpg" alt="Cole Determan - Tech Support Specialist">
-                </div>
-                <div class="about-content">
-                    <h2>Hi, I'm Cole Determan</h2>
-                    <p>I've been a resident of Lake Barcroft my entire life. Ever since I was young, I've had a deep passion for technology—from everyday home electronics to advanced computing systems.</p>
-                    <p>Pursuing my Master's degree in Computer Science &amp; Applications at Virginia Tech with a Bachelor's in Computer Science from James Madison University, I combine deep technical expertise with years of hands-on experience to deliver patient, reliable, and friendly assistance to my neighbors.</p>
-                    <div style="display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 1.5rem;">
-                        <a href="contact.html" class="btn">Get in Touch</a>
-                        <a href="tel:5712798040" class="btn btn-secondary">📞 Call Cole</a>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="testimonials">
-            <div class="section-header">
-                <h2>What Your Neighbors Say</h2>
-                <p>Read genuine feedback from Lake Barcroft residents.</p>
-            </div>
-            <div class="testimonials-container">
-                <div class="testimonial-track">
-                    <div class="testimonial-card">
-                        <p class="testimonial-text">"Cole is amazing with computers, I always go to him when I need tech help!"</p>
-                        <div class="testimonial-author">
-                            <img src="images/katelyn.jpg" alt="Katelyn">
-                            <strong>Katelyn</strong>
-                        </div>
-                    </div>
-                    <div class="testimonial-card">
-                        <p class="testimonial-text">"He is easy to work with, very computer-savvy and patient with questions."</p>
-                        <div class="testimonial-author">
-                            <img src="images/nana.jpg" alt="Sally">
-                            <strong>Sally</strong>
-                        </div>
-                    </div>
-                    <div class="testimonial-card">
-                        <p class="testimonial-text">"His knowledge combined with his ability to determine where the problem is coming from is exactly what you're looking for."</p>
-                        <div class="testimonial-author">
-                            <img src="images/jack.jpg" alt="Jack">
-                            <strong>Jack</strong>
-                        </div>
-                    </div>
-                    <div class="testimonial-card">
-                        <p class="testimonial-text">"Cole was precise, knowledgeable, and fixed my issue quickly. His rate is very reasonable. I would give him 5 stars!"</p>
-                        <div class="testimonial-author">
-                            <div style="width: 52px; height: 52px; border-radius: 50%; background: var(--accent-light); color: var(--accent-color); display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 1.2rem; border: 2px solid var(--accent-border);">B</div>
-                            <strong>Bonnie E.</strong>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div style="text-align: center; margin-top: 2rem;">
-                <a href="reviews.html" class="btn btn-secondary">Read More Reviews</a>
-            </div>
-        </section>
-    </main>
-
-    <footer id="contact">
-        <div class="footer-content">
-            <div class="footer-info">
-                <div class="footer-logo">Determan Tech</div>
-                <p>Reliable, patient tech support for Lake Barcroft and surrounding communities.</p>
-                <p>Email: <a href="mailto:determantechhelp@gmail.com">determantechhelp@gmail.com</a></p>
-                <p>Phone: <a href="tel:5712798040">(571) 279-8040</a></p>
-            </div>
-            <div class="footer-links">
-                <h4>Navigation</h4>
-                <ul>
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="services.html">Services &amp; Pricing</a></li>
-                    <li><a href="reviews.html">Customer Reviews</a></li>
-                    <li><a href="appointments.html">Book Appointment</a></li>
-                    <li><a href="contact.html">Contact Me</a></li>
+                <h3 class="font-headline-md text-headline-md text-text-primary-light leading-snug">Device Setup &amp; Patient Training</h3>
+                <p class="font-body-md text-body-md text-text-secondary-light">
+                  Patient setup of new phones, tablets, smart TVs, printers, and computers with clear, step-by-step guidance.
+                </p>
+                <ul class="pt-4 space-y-2 font-body-sm text-body-sm text-text-secondary-light border-t border-border-hairline">
+                  <li class="flex items-center gap-2"><span class="w-1 h-1 rounded-full bg-electric-cobalt"></span>Printer network binding</li>
+                  <li class="flex items-center gap-2"><span class="w-1 h-1 rounded-full bg-electric-cobalt"></span>Smart TV &amp; audio calibration</li>
+                  <li class="flex items-center gap-2"><span class="w-1 h-1 rounded-full bg-electric-cobalt"></span>iOS &amp; Android data transfer</li>
                 </ul>
+              </div>
+              <div class="pt-8 mt-6 border-t border-border-hairline flex items-baseline justify-between">
+                <span class="font-label-caps text-label-caps text-text-secondary-light uppercase">Rate</span>
+                <span class="font-headline-md text-headline-md font-semibold text-text-primary-light">$75 <span class="font-body-sm text-body-sm font-normal text-text-secondary-light">/ hr</span></span>
+              </div>
             </div>
-            <div class="footer-links">
-                <h4>Payment &amp; Trust</h4>
-                <p style="font-size: 0.95rem; margin-bottom: 0.75rem;">Cash, Check, Apple Pay, Zelle, or Venmo accepted.</p>
-                <p style="font-size: 0.9rem; color: var(--text-muted);">© 2026 Determan Tech Help. All rights reserved.</p>
+
+            <!-- 0.2 Wi-Fi & Internet -->
+            <div class="p-8 rounded-lg bg-surface-subtle flex flex-col justify-between hover:shadow-md transition-shadow group border border-border-hairline">
+              <div class="space-y-4">
+                <div class="flex items-center justify-between">
+                  <span class="font-label-numeric text-label-numeric text-electric-cobalt">0.2 // NETWORK</span>
+                  <span class="material-symbols-outlined text-text-secondary-light group-hover:text-electric-cobalt transition-colors">wifi</span>
+                </div>
+                <h3 class="font-headline-md text-headline-md text-text-primary-light leading-snug">Wi-Fi &amp; Internet Optimization</h3>
+                <p class="font-body-md text-body-md text-text-secondary-light">
+                  Eliminate dead zones, boost connection speeds, configure mesh systems (eero, Orbi, Ubiquiti), and stabilize household IoT.
+                </p>
+                <ul class="pt-4 space-y-2 font-body-sm text-body-sm text-text-secondary-light border-t border-border-hairline">
+                  <li class="flex items-center gap-2"><span class="w-1 h-1 rounded-full bg-electric-cobalt"></span>Verizon &amp; Comcast modem audits</li>
+                  <li class="flex items-center gap-2"><span class="w-1 h-1 rounded-full bg-electric-cobalt"></span>Mesh node channel balancing</li>
+                  <li class="flex items-center gap-2"><span class="w-1 h-1 rounded-full bg-electric-cobalt"></span>Smart thermostat / camera binding</li>
+                </ul>
+              </div>
+              <div class="pt-8 mt-6 border-t border-border-hairline flex items-baseline justify-between">
+                <span class="font-label-caps text-label-caps text-text-secondary-light uppercase">Rate</span>
+                <span class="font-headline-md text-headline-md font-semibold text-text-primary-light">$75 <span class="font-body-sm text-body-sm font-normal text-text-secondary-light">/ hr</span></span>
+              </div>
             </div>
+
+            <!-- 0.3 Computer Repair -->
+            <div class="p-8 rounded-lg bg-surface-subtle flex flex-col justify-between hover:shadow-md transition-shadow group border border-border-hairline">
+              <div class="space-y-4">
+                <div class="flex items-center justify-between">
+                  <span class="font-label-numeric text-label-numeric text-electric-cobalt">0.3 // HARDWARE</span>
+                  <span class="material-symbols-outlined text-text-secondary-light group-hover:text-electric-cobalt transition-colors">computer</span>
+                </div>
+                <h3 class="font-headline-md text-headline-md text-text-primary-light leading-snug">Computer Repair &amp; Custom PCs</h3>
+                <p class="font-body-md text-body-md text-text-secondary-light">
+                  Sluggish system diagnostics, virus and malware removal, thermal cleaning, SSD upgrades, component replacement, and custom builds.
+                </p>
+                <ul class="pt-4 space-y-2 font-body-sm text-body-sm text-text-secondary-light border-t border-border-hairline">
+                  <li class="flex items-center gap-2"><span class="w-1 h-1 rounded-full bg-electric-cobalt"></span>Windows 10/11 &amp; macOS tuning</li>
+                  <li class="flex items-center gap-2"><span class="w-1 h-1 rounded-full bg-electric-cobalt"></span>Solid State Drive (SSD) swaps</li>
+                  <li class="flex items-center gap-2"><span class="w-1 h-1 rounded-full bg-electric-cobalt"></span>Custom gaming/workstation assembly</li>
+                </ul>
+              </div>
+              <div class="pt-8 mt-6 border-t border-border-hairline flex items-baseline justify-between">
+                <span class="font-label-caps text-label-caps text-text-secondary-light uppercase">Rate</span>
+                <span class="font-headline-md text-headline-md font-semibold text-text-primary-light">$50 <span class="font-body-sm text-body-sm font-normal text-text-secondary-light">/ hr</span></span>
+              </div>
+            </div>
+
+            <!-- 0.4 Personal Websites -->
+            <div class="p-8 rounded-lg bg-surface-subtle flex flex-col justify-between hover:shadow-md transition-shadow group border border-border-hairline">
+              <div class="space-y-4">
+                <div class="flex items-center justify-between">
+                  <span class="font-label-numeric text-label-numeric text-electric-cobalt">0.4 // WEB</span>
+                  <span class="material-symbols-outlined text-text-secondary-light group-hover:text-electric-cobalt transition-colors">language</span>
+                </div>
+                <h3 class="font-headline-md text-headline-md text-text-primary-light leading-snug">Personal &amp; Business Websites</h3>
+                <p class="font-body-md text-body-md text-text-secondary-light">
+                  Clean, modern, high-speed, and personalized websites designed for local businesses, portfolios, creators, or hobbyists.
+                </p>
+                <ul class="pt-4 space-y-2 font-body-sm text-body-sm text-text-secondary-light border-t border-border-hairline">
+                  <li class="flex items-center gap-2"><span class="w-1 h-1 rounded-full bg-electric-cobalt"></span>Custom domains &amp; business email</li>
+                  <li class="flex items-center gap-2"><span class="w-1 h-1 rounded-full bg-electric-cobalt"></span>Google Maps &amp; local SEO listing</li>
+                  <li class="flex items-center gap-2"><span class="w-1 h-1 rounded-full bg-electric-cobalt"></span>Mobile-first responsive architecture</li>
+                </ul>
+              </div>
+              <div class="pt-8 mt-6 border-t border-border-hairline flex items-baseline justify-between">
+                <span class="font-label-caps text-label-caps text-text-secondary-light uppercase">Rate</span>
+                <span class="font-headline-md text-headline-md font-semibold text-text-primary-light">$50 <span class="font-body-sm text-body-sm font-normal text-text-secondary-light">/ hr</span></span>
+              </div>
+            </div>
+          </div>
+
+          <div class="text-center pt-4">
+            <a href="services.html" class="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-surface-container hover:bg-surface-container-high text-text-primary-light font-label-pill transition-colors border border-border-hairline">
+              <span>View Full Services Catalog &amp; Payment Options</span>
+              <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+            </a>
+          </div>
         </div>
-    </footer>
+      </section>
 
-    <script src="nav.js"></script>
+      <!-- Interactive Diagnostic & Service Estimator (Augen-styled widget) -->
+      <section id="estimator" class="w-full py-20 px-margin-mobile lg:px-margin bg-surface-container-low border-y border-border-hairline">
+        <div class="max-w-[1440px] mx-auto">
+          <div class="bg-surface-pure rounded-xl p-8 lg:p-12 shadow-sm space-y-10 border border-border-hairline">
+            <!-- Widget Header -->
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-8 border-b border-border-hairline">
+              <div>
+                <div class="flex items-center gap-2">
+                  <span class="font-label-numeric text-label-numeric text-electric-cobalt">TELEMETRY // ESTIMATOR</span>
+                  <span class="font-label-caps text-label-caps text-text-secondary-light uppercase">Calculated Scope</span>
+                </div>
+                <h3 class="font-headline-lg text-headline-lg text-text-primary-light">Diagnostic Scope &amp; Instant Service Planner</h3>
+              </div>
+              <!-- Live Network Meter -->
+              <div class="flex items-center gap-4 bg-surface-subtle px-4 py-2 rounded-full border border-border-hairline">
+                <div class="flex items-center gap-2">
+                  <span class="w-2 h-2 rounded-full bg-electric-cobalt animate-pulse"></span>
+                  <span class="font-label-numeric text-label-numeric text-text-primary-light">Barcroft Base Latency: 12ms</span>
+                </div>
+                <span class="text-outline">/</span>
+                <span class="font-label-numeric text-label-numeric text-text-secondary-light">99.9% Resolved On-Site</span>
+              </div>
+            </div>
+
+            <!-- Interactive Grid -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+              <div class="lg:col-span-7 space-y-6">
+                <p class="font-body-md text-body-md text-text-secondary-light">
+                  Select your primary roadblock to calculate estimated resolution window and cost tier:
+                </p>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3" id="estimator-buttons">
+                  <button class="estimator-btn text-left p-4 rounded-lg bg-surface-dark text-surface-pure transition-all border border-transparent shadow-sm" onclick="setEstimate(this, '$75 / hr', '1.0 – 1.5 hrs', '$75 – $112.50', 'Mesh router re-positioning, interference scan, channel bonding.')">
+                    <span class="font-label-numeric text-label-numeric text-electric-glow block mb-1">ISSUE 01</span>
+                    <span class="font-body-md text-body-md font-medium">Wi-Fi dead zones / slow upstairs</span>
+                  </button>
+                  <button class="estimator-btn text-left p-4 rounded-lg bg-surface-subtle hover:bg-surface-container text-text-primary-light transition-all border border-border-hairline" onclick="setEstimate(this, '$75 / hr', '1.0 hr', '$75.00', 'Driver purging, Bonjour protocol re-bind, static IP assignment.')">
+                    <span class="font-label-numeric text-label-numeric text-outline block mb-1">ISSUE 02</span>
+                    <span class="font-body-md text-body-md font-medium">Printer offline / MacBook airprint</span>
+                  </button>
+                  <button class="estimator-btn text-left p-4 rounded-lg bg-surface-subtle hover:bg-surface-container text-text-primary-light transition-all border border-border-hairline" onclick="setEstimate(this, '$75 / hr', '1.5 – 2.0 hrs', '$112.50 – $150.00', 'Unboxing, bloatware scrub, file migration, cloud backup link.')">
+                    <span class="font-label-numeric text-label-numeric text-outline block mb-1">ISSUE 03</span>
+                    <span class="font-body-md text-body-md font-medium">New PC/Mac setup &amp; data transfer</span>
+                  </button>
+                  <button class="estimator-btn text-left p-4 rounded-lg bg-surface-subtle hover:bg-surface-container text-text-primary-light transition-all border border-border-hairline" onclick="setEstimate(this, '$50 / hr', '1.5 – 2.0 hrs', '$75.00 – $100.00', 'Deep malware removal, thermal dust purge, startup trim.')">
+                    <span class="font-label-numeric text-label-numeric text-outline block mb-1">ISSUE 04</span>
+                    <span class="font-body-md text-body-md font-medium">Sluggish PC / virus &amp; malware</span>
+                  </button>
+                </div>
+              </div>
+
+              <!-- Dynamic Output Card -->
+              <div class="lg:col-span-5 bg-surface-subtle p-8 rounded-lg space-y-6 border border-border-hairline">
+                <div class="flex items-center justify-between pb-4 border-b border-border-hairline">
+                  <span class="font-label-caps text-label-caps text-text-secondary-light uppercase">Estimated Duration</span>
+                  <span class="font-headline-md text-headline-md text-text-primary-light font-semibold" id="est-duration">1.0 – 1.5 hrs</span>
+                </div>
+                <div class="flex items-center justify-between pb-4 border-b border-border-hairline">
+                  <span class="font-label-caps text-label-caps text-text-secondary-light uppercase">Hourly Rate</span>
+                  <span class="font-body-lg text-body-lg text-electric-cobalt font-semibold" id="est-rate">$75 / hr</span>
+                </div>
+                <div class="flex items-center justify-between pb-4 border-b border-border-hairline">
+                  <span class="font-label-caps text-label-caps text-text-secondary-light uppercase">Projected Total</span>
+                  <span class="font-headline-md text-headline-md font-bold text-text-primary-light" id="est-total">$75 – $112.50</span>
+                </div>
+                <p class="font-body-sm text-body-sm text-text-secondary-light italic" id="est-desc">
+                  Mesh router re-positioning, interference scan, channel bonding.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-3">
+                  <a class="flex-1 py-3 px-6 rounded-full bg-text-primary-light text-surface-pure font-label-pill text-label-pill hover:bg-inverse-surface transition-colors flex items-center justify-center gap-2 shadow-sm" href="appointments.html">
+                    <span class="material-symbols-outlined text-[16px]">bolt</span>
+                    Schedule Housecall
+                  </a>
+                  <a class="py-3 px-5 rounded-full bg-surface-container text-text-primary-light font-label-pill text-label-pill hover:bg-surface-container-high transition-colors flex items-center justify-center gap-2" href="tel:5712798040">
+                    <span class="material-symbols-outlined text-[16px]">call</span>
+                    Call Cole
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- About Cole Determan — Editorial Story Section -->
+      <section id="about" class="w-full py-28 px-margin-mobile lg:px-margin bg-surface-canvas">
+        <div class="max-w-[1440px] mx-auto">
+          <div class="flex items-center gap-2 mb-10">
+            <span class="font-label-numeric text-label-numeric text-electric-cobalt">0.3</span>
+            <span class="font-label-caps text-label-caps uppercase tracking-widest text-text-secondary-light">Neighbor &amp; Engineer Profile</span>
+          </div>
+
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+            <!-- Left: Real Photo and Bio Credentials -->
+            <div class="lg:col-span-5 space-y-6">
+              <div class="relative w-full aspect-square rounded-2xl overflow-hidden bg-surface-subtle shadow-md border border-border-hairline">
+                <img class="w-full h-full object-cover" alt="Cole Determan - IT Specialist in Lake Barcroft, VA" src="images/cole.jpg"/>
+                <div class="absolute bottom-4 left-4 right-4 bg-surface-pure/90 backdrop-blur-md p-4 rounded-lg flex items-center justify-between border border-border-hairline">
+                  <div>
+                    <p class="font-headline-md text-headline-md text-text-primary-light font-semibold">Cole Determan</p>
+                    <p class="font-body-sm text-body-sm text-text-secondary-light">Lake Barcroft Resident</p>
+                  </div>
+                  <span class="w-3 h-3 rounded-full bg-electric-cobalt animate-pulse"></span>
+                </div>
+              </div>
+
+              <div class="bg-surface-subtle p-6 rounded-lg space-y-3 border border-border-hairline">
+                <div class="flex items-start gap-3">
+                  <span class="material-symbols-outlined text-electric-cobalt shrink-0 text-[20px]">school</span>
+                  <div>
+                    <p class="font-body-md text-body-md font-medium text-text-primary-light">Virginia Tech</p>
+                    <p class="font-body-sm text-body-sm text-text-secondary-light">M.S. Candidate in Computer Science &amp; Applications</p>
+                  </div>
+                </div>
+                <div class="flex items-start gap-3 pt-3 border-t border-border-hairline">
+                  <span class="material-symbols-outlined text-electric-cobalt shrink-0 text-[20px]">verified</span>
+                  <div>
+                    <p class="font-body-md text-body-md font-medium text-text-primary-light">James Madison University</p>
+                    <p class="font-body-sm text-body-sm text-text-secondary-light">B.S. in Computer Science</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Right: Editorial narrative quote -->
+            <div class="lg:col-span-7 space-y-8">
+              <h2 class="font-headline-xl text-headline-xl text-text-primary-light leading-tight">
+                Hi, I’m Cole.<br/>
+                <span class="italic text-text-secondary-light font-light">Your neighborhood tech specialist.</span>
+              </h2>
+
+              <div class="space-y-6 font-body-lg text-body-lg text-text-secondary-light leading-relaxed">
+                <p>
+                  I’ve been a resident of Lake Barcroft my entire life. Ever since I was young, I’ve had a deep passion for technology — from everyday home electronics to advanced computing systems.
+                </p>
+                <p>
+                  Pursuing my Master’s degree in Computer Science &amp; Applications at Virginia Tech with a Bachelor’s in Computer Science from James Madison University, I combine graduate-level technical rigor with patient, friendly, jargon-free communication.
+                </p>
+                <p class="text-text-primary-light font-medium border-l-2 border-electric-cobalt pl-4 italic">
+                  “My goal isn’t just to patch an error code and leave. It’s to ensure your home systems run effortlessly and you feel completely confident using them.”
+                </p>
+              </div>
+
+              <div class="flex flex-wrap items-center gap-4 pt-4">
+                <a class="px-6 py-3 rounded-full bg-electric-cobalt text-surface-pure font-label-pill text-label-pill hover:bg-primary transition-colors flex items-center gap-2 shadow-[0_4px_20px_rgba(0,113,227,0.25)]" href="tel:5712798040">
+                  <span class="material-symbols-outlined text-[18px]">call</span>
+                  Speak Directly with Cole
+                </a>
+                <a class="px-6 py-3 rounded-full bg-surface-subtle text-text-primary-light font-label-pill text-label-pill hover:bg-surface-container transition-colors border border-border-hairline" href="mailto:determantechhelp@gmail.com">
+                  determantechhelp@gmail.com
+                </a>
+                <a class="px-6 py-3 rounded-full bg-surface-subtle text-text-primary-light font-label-pill text-label-pill hover:bg-surface-container transition-colors border border-border-hairline" href="contact.html">
+                  Send Message
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Cobalt Blue Callout Banner (Augen High-Impact Section) -->
+      <section class="w-full py-16 px-margin-mobile lg:px-margin bg-electric-cobalt text-surface-pure">
+        <div class="max-w-[1440px] mx-auto rounded-xl p-8 lg:p-14 flex flex-col lg:flex-row items-center justify-between gap-8">
+          <div class="space-y-4 max-w-2xl">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-surface-pure/15 text-surface-pure font-label-numeric text-label-numeric">
+              <span>DIRECT DISPATCH</span>
+              <span>•</span>
+              <span>NO CALL CENTER DELAYS</span>
+            </div>
+            <h2 class="font-headline-xl text-headline-xl text-surface-pure font-normal leading-tight">
+              Have an urgent tech roadblock?<br/>
+              <span class="font-semibold text-surface-pure">Direct dispatch is one call away.</span>
+            </h2>
+            <p class="font-body-md text-body-md text-surface-pure/90 leading-relaxed">
+              No automated phone trees or offshore ticket queues. Call or text Cole directly at (571) 279-8040 for immediate triage and rapid on-site appointment scheduling.
+            </p>
+          </div>
+          <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 shrink-0 w-full lg:w-auto">
+            <a class="px-8 py-4 rounded-full bg-surface-pure text-text-primary-light font-label-pill text-label-pill text-center hover:bg-surface-subtle transition-colors flex items-center justify-center gap-2 shadow-lg" href="tel:5712798040">
+              <span class="material-symbols-outlined text-electric-cobalt text-[20px]">phone_in_talk</span>
+              Call Cole: (571) 279-8040
+            </a>
+            <a class="px-8 py-4 rounded-full bg-surface-pure/10 text-surface-pure hover:bg-surface-pure/20 transition-colors font-label-pill text-label-pill text-center flex items-center justify-center gap-2 border border-surface-pure/20" href="sms:5712798040">
+              <span class="material-symbols-outlined text-[20px]">sms</span>
+              Send Text Message
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- Genuine Neighbor Testimonials (0.4 Decimal Review Ledger) -->
+      <section id="testimonials" class="w-full py-24 px-margin-mobile lg:px-margin bg-surface-canvas">
+        <div class="max-w-[1440px] mx-auto space-y-12">
+          <div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+            <div class="space-y-2">
+              <div class="flex items-center gap-2">
+                <span class="font-label-numeric text-label-numeric text-electric-cobalt">0.4</span>
+                <span class="font-label-caps text-label-caps uppercase tracking-widest text-text-secondary-light">Resident Trust &amp; Verified Reviews</span>
+              </div>
+              <h2 class="font-headline-xl text-headline-xl text-text-primary-light">What Your Neighbors Say</h2>
+            </div>
+            <a href="reviews.html" class="inline-flex items-center gap-1.5 text-electric-cobalt hover:underline font-label-pill text-label-pill">
+              <span>Read all customer reviews</span>
+              <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+            </a>
+          </div>
+
+          <!-- Testimonial Grid with Real Photos -->
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <!-- Review 1: Katelyn -->
+            <div class="p-8 rounded-lg bg-surface-subtle flex flex-col justify-between space-y-6 border border-border-hairline hover:shadow-md transition-shadow">
+              <div class="space-y-3">
+                <div class="flex text-electric-cobalt gap-1">
+                  <span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+                  <span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+                  <span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+                  <span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+                  <span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+                </div>
+                <p class="font-body-md text-body-md text-text-primary-light italic leading-relaxed">
+                  “Cole is amazing with computers, I always go to him when I need tech help!”
+                </p>
+              </div>
+              <div class="pt-4 border-t border-border-hairline flex items-center gap-3">
+                <img src="images/katelyn.jpg" alt="Katelyn" class="w-10 h-10 rounded-full object-cover border border-border-hairline"/>
+                <div>
+                  <p class="font-body-md text-body-md font-semibold text-text-primary-light">Katelyn</p>
+                  <p class="font-label-caps text-label-caps text-text-secondary-light uppercase">Lake Barcroft Neighbor</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Review 2: Sally -->
+            <div class="p-8 rounded-lg bg-surface-subtle flex flex-col justify-between space-y-6 border border-border-hairline hover:shadow-md transition-shadow">
+              <div class="space-y-3">
+                <div class="flex text-electric-cobalt gap-1">
+                  <span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+                  <span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+                  <span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+                  <span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+                  <span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+                </div>
+                <p class="font-body-md text-body-md text-text-primary-light italic leading-relaxed">
+                  “He is easy to work with, very computer-savvy and patient with questions.”
+                </p>
+              </div>
+              <div class="pt-4 border-t border-border-hairline flex items-center gap-3">
+                <img src="images/nana.jpg" alt="Sally" class="w-10 h-10 rounded-full object-cover border border-border-hairline"/>
+                <div>
+                  <p class="font-body-md text-body-md font-semibold text-text-primary-light">Sally</p>
+                  <p class="font-label-caps text-label-caps text-text-secondary-light uppercase">Falls Church Resident</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Review 3: Jack -->
+            <div class="p-8 rounded-lg bg-surface-subtle flex flex-col justify-between space-y-6 border border-border-hairline hover:shadow-md transition-shadow">
+              <div class="space-y-3">
+                <div class="flex text-electric-cobalt gap-1">
+                  <span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+                  <span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+                  <span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+                  <span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+                  <span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+                </div>
+                <p class="font-body-md text-body-md text-text-primary-light italic leading-relaxed">
+                  “His knowledge combined with his ability to determine where the problem is coming from is exactly what you're looking for.”
+                </p>
+              </div>
+              <div class="pt-4 border-t border-border-hairline flex items-center gap-3">
+                <img src="images/jack.jpg" alt="Jack" class="w-10 h-10 rounded-full object-cover border border-border-hairline"/>
+                <div>
+                  <p class="font-body-md text-body-md font-semibold text-text-primary-light">Jack</p>
+                  <p class="font-label-caps text-label-caps text-text-secondary-light uppercase">Lake Barcroft Resident</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Review 4: Bonnie E. -->
+            <div class="p-8 rounded-lg bg-surface-subtle flex flex-col justify-between space-y-6 border border-border-hairline hover:shadow-md transition-shadow">
+              <div class="space-y-3">
+                <div class="flex text-electric-cobalt gap-1">
+                  <span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+                  <span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+                  <span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+                  <span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+                  <span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+                </div>
+                <p class="font-body-md text-body-md text-text-primary-light italic leading-relaxed">
+                  “Cole was precise, knowledgeable, and fixed my issue quickly. His rate is very reasonable. I would give him 5 stars!”
+                </p>
+              </div>
+              <div class="pt-4 border-t border-border-hairline flex items-center gap-3">
+                <div class="w-10 h-10 rounded-full bg-electric-cobalt/15 text-electric-cobalt font-bold flex items-center justify-center border border-electric-cobalt/25 text-[15px]">
+                  B
+                </div>
+                <div>
+                  <p class="font-body-md text-body-md font-semibold text-text-primary-light">Bonnie E.</p>
+                  <p class="font-label-caps text-label-caps text-text-secondary-light uppercase">Verified Reviewer</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Frequently Asked Questions Accordion -->
+      <section id="faq" class="w-full py-20 px-margin-mobile lg:px-margin bg-surface-container-low border-t border-border-hairline">
+        <div class="max-w-[1440px] mx-auto space-y-10">
+          <div class="space-y-2">
+            <div class="flex items-center gap-2">
+              <span class="font-label-numeric text-label-numeric text-electric-cobalt">0.5</span>
+              <span class="font-label-caps text-label-caps uppercase tracking-widest text-text-secondary-light">Knowledge Base &amp; Protocols</span>
+            </div>
+            <h2 class="font-headline-xl text-headline-xl text-text-primary-light">Frequently Asked Questions</h2>
+          </div>
+          <div class="space-y-4 max-w-4xl">
+            <!-- FAQ 1 -->
+            <div class="bg-surface-pure rounded-lg p-6 shadow-sm border border-border-hairline">
+              <h3 class="font-headline-md text-headline-md text-text-primary-light font-medium mb-2">What areas do you service?</h3>
+              <p class="font-body-md text-body-md text-text-secondary-light leading-relaxed">
+                I am locally based in Lake Barcroft, VA and provide direct house calls throughout Lake Barcroft, Falls Church, Arlington, Alexandria, Bailey's Crossroads, and Seven Corners. If you live slightly outside these borders in Fairfax County, feel free to reach out.
+              </p>
+            </div>
+            <!-- FAQ 2 -->
+            <div class="bg-surface-pure rounded-lg p-6 shadow-sm border border-border-hairline">
+              <h3 class="font-headline-md text-headline-md text-text-primary-light font-medium mb-2">How does hourly billing work?</h3>
+              <p class="font-body-md text-body-md text-text-secondary-light leading-relaxed">
+                All appointments carry a simple 1-hour minimum charge. After the first hour, billing is calculated fairly in 15-minute increments. There are no hidden trip charges or travel surcharges for Lake Barcroft residents.
+              </p>
+            </div>
+            <!-- FAQ 3 -->
+            <div class="bg-surface-pure rounded-lg p-6 shadow-sm border border-border-hairline">
+              <h3 class="font-headline-md text-headline-md text-text-primary-light font-medium mb-2">Do you assist senior citizens with patience and clear notes?</h3>
+              <p class="font-body-md text-body-md text-text-secondary-light leading-relaxed">
+                Yes, absolutely. A significant portion of my practice involves patient, friendly walkthroughs for seniors. I provide handwritten or printed cheat sheets, simplify passwords safely, and never rush through explanations.
+              </p>
+            </div>
+            <!-- FAQ 4 -->
+            <div class="bg-surface-pure rounded-lg p-6 shadow-sm border border-border-hairline">
+              <h3 class="font-headline-md text-headline-md text-text-primary-light font-medium mb-2">Can you help buy and assemble parts for custom PCs?</h3>
+              <p class="font-body-md text-body-md text-text-secondary-light leading-relaxed">
+                Yes! Whether you need a whisper-quiet office workstation, a flight simulator build, or a gaming rig, I can select fully compatible components within your budget, assemble the machine with proper thermal paste application, and install clean Windows without bloatware.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- Dark Architectural Footer -->
+  <footer class="w-full bg-surface-dark text-on-surface text-surface-pure mt-space-3xl border-t border-border-hairline-dark">
+    <div class="w-full max-w-[1440px] mx-auto px-margin-mobile lg:px-margin pt-space-2xl pb-space-xl">
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-space-xl pb-space-2xl border-b border-border-hairline-dark">
+        <!-- Brand and Credentials -->
+        <div class="md:col-span-4 flex flex-col justify-between space-y-space-md">
+          <div class="space-y-space-sm">
+            <div class="flex items-center gap-2">
+              <div class="w-6 h-6 rounded-full bg-surface-pure flex items-center justify-center">
+                <span class="text-surface-dark text-[11px] leading-none select-none">✦</span>
+              </div>
+              <span class="font-headline-md text-headline-md font-semibold tracking-tight text-surface-pure lowercase">determan<span class="text-electric-glow">.</span>tech</span>
+            </div>
+            <p class="font-body-sm text-body-sm text-text-secondary-dark leading-relaxed max-w-sm">
+              Personal, white-glove technical assistance and home-network architecture for Lake Barcroft and Northern Virginia neighbors. Engineered with scientific clarity and patient guidance.
+            </p>
+          </div>
+          <div class="space-y-1">
+            <p class="font-label-caps text-label-caps text-electric-glow uppercase tracking-wider">Credentials</p>
+            <p class="font-body-sm text-body-sm text-surface-pure">Cole Determan — M.S. Virginia Tech • B.S. JMU Computer Science</p>
+          </div>
+        </div>
+
+        <!-- Telemetry Contact -->
+        <div class="md:col-span-3 space-y-space-sm">
+          <p class="font-label-caps text-label-caps text-text-secondary-dark uppercase tracking-widest">Direct Telemetry</p>
+          <ul class="space-y-space-xs font-body-sm text-body-sm">
+            <li class="flex flex-col">
+              <span class="text-text-secondary-dark font-label-caps text-label-caps">Email</span>
+              <a class="text-surface-pure hover:text-electric-glow transition-colors" href="mailto:determantechhelp@gmail.com">determantechhelp@gmail.com</a>
+            </li>
+            <li class="flex flex-col pt-2">
+              <span class="text-text-secondary-dark font-label-caps text-label-caps">Phone / SMS</span>
+              <a class="text-surface-pure hover:text-electric-glow transition-colors" href="tel:5712798040">(571) 279-8040</a>
+            </li>
+            <li class="flex flex-col pt-2">
+              <span class="text-text-secondary-dark font-label-caps text-label-caps">Hours</span>
+              <span class="text-surface-dim">Mon–Sat 8:30am – 7:00pm</span>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Service Enclave -->
+        <div class="md:col-span-3 space-y-space-sm">
+          <p class="font-label-caps text-label-caps text-text-secondary-dark uppercase tracking-widest">Service Enclave</p>
+          <div class="flex flex-wrap gap-2">
+            <span class="px-2.5 py-1 rounded-full bg-inverse-surface text-surface-pure font-label-pill text-label-pill">Lake Barcroft</span>
+            <span class="px-2.5 py-1 rounded-full bg-inverse-surface text-surface-pure font-label-pill text-label-pill">Falls Church</span>
+            <span class="px-2.5 py-1 rounded-full bg-inverse-surface text-surface-pure font-label-pill text-label-pill">Fairfax County</span>
+            <span class="px-2.5 py-1 rounded-full bg-inverse-surface text-surface-pure font-label-pill text-label-pill">Arlington</span>
+            <span class="px-2.5 py-1 rounded-full bg-inverse-surface text-surface-pure font-label-pill text-label-pill">Bailey's Crossroads</span>
+            <span class="px-2.5 py-1 rounded-full bg-inverse-surface text-surface-pure font-label-pill text-label-pill">Seven Corners</span>
+          </div>
+        </div>
+
+        <!-- Settlement -->
+        <div class="md:col-span-2 space-y-space-sm">
+          <p class="font-label-caps text-label-caps text-text-secondary-dark uppercase tracking-widest">Accepted Settlement</p>
+          <div class="flex flex-col gap-1.5 font-label-pill text-label-pill text-text-secondary-dark">
+            <span>• Apple Pay / Contactless</span>
+            <span>• Zelle / Venmo (@Cole-Determan)</span>
+            <span>• Personal Check</span>
+            <span>• Cash</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="pt-space-md flex flex-col sm:flex-row items-center justify-between gap-4 font-label-numeric text-label-numeric text-text-secondary-dark">
+        <p>© 2026 Determan Tech Help. All rights reserved.</p>
+        <div class="flex items-center gap-space-md">
+          <a href="appointments.html" class="hover:text-surface-pure transition-colors">Resident IT Dispatch</a>
+          <span class="text-outline">•</span>
+          <a href="contact.html" class="hover:text-surface-pure transition-colors">Security &amp; Privacy First</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Interactive Script for Diagnostic Widget and Navigation -->
+  <script>
+    function setEstimate(button, rate, duration, total, desc) {
+      document.getElementById('est-rate').textContent = rate;
+      document.getElementById('est-duration').textContent = duration;
+      document.getElementById('est-total').textContent = total;
+      document.getElementById('est-desc').textContent = desc;
+
+      const buttons = document.querySelectorAll('.estimator-btn');
+      buttons.forEach(btn => {
+        btn.classList.remove('bg-surface-dark', 'text-surface-pure', 'shadow-sm');
+        btn.classList.add('bg-surface-subtle', 'text-text-primary-light', 'border-border-hairline');
+        const num = btn.querySelector('.font-label-numeric');
+        if (num) {
+          num.classList.remove('text-electric-glow');
+          num.classList.add('text-outline');
+        }
+      });
+
+      button.classList.remove('bg-surface-subtle', 'text-text-primary-light', 'border-border-hairline');
+      button.classList.add('bg-surface-dark', 'text-surface-pure', 'shadow-sm');
+      const curNum = button.querySelector('.font-label-numeric');
+      if (curNum) {
+        curNum.classList.remove('text-outline');
+        curNum.classList.add('text-electric-glow');
+      }
+    }
+  </script>
+  <script src="nav.js"></script>
 </body>
-
 </html>

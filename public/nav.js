@@ -4,43 +4,58 @@ document.addEventListener('DOMContentLoaded', () => {
     const menuToggle = document.getElementById('menu-toggle');
     const mobileMenu = document.getElementById('mobile-menu');
 
+    const closeMenu = () => {
+        if (!mobileMenu) return;
+        mobileMenu.classList.remove('is-open');
+        mobileMenu.classList.add('hidden');
+        if (menuToggle) {
+            menuToggle.classList.remove('is-active');
+            menuToggle.setAttribute('aria-expanded', 'false');
+        }
+        document.body.classList.remove('menu-open');
+    };
+
+    const openMenu = () => {
+        if (!mobileMenu) return;
+        mobileMenu.classList.add('is-open');
+        mobileMenu.classList.remove('hidden');
+        if (menuToggle) {
+            menuToggle.classList.add('is-active');
+            menuToggle.setAttribute('aria-expanded', 'true');
+        }
+        document.body.classList.add('menu-open');
+    };
+
     // Toggle Mobile Menu
     if (menuToggle && mobileMenu) {
         menuToggle.addEventListener('click', (e) => {
             e.stopPropagation();
-            const isOpen = mobileMenu.classList.toggle('is-open');
-            menuToggle.classList.toggle('is-active', isOpen);
-            menuToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
-            document.body.classList.toggle('menu-open', isOpen);
+            const isOpen = mobileMenu.classList.contains('is-open');
+            if (isOpen) {
+                closeMenu();
+            } else {
+                openMenu();
+            }
         });
 
-        // Close menu when a link inside mobile menu is clicked
+        // Close menu when any link inside mobile menu is clicked
         mobileMenu.querySelectorAll('a').forEach(link => {
             link.addEventListener('click', () => {
-                mobileMenu.classList.remove('is-open');
-                menuToggle.classList.remove('is-active');
-                menuToggle.setAttribute('aria-expanded', 'false');
-                document.body.classList.remove('menu-open');
+                closeMenu();
             });
         });
 
         // Close menu when clicking anywhere outside
         document.addEventListener('click', (e) => {
             if (mobileMenu.classList.contains('is-open') && !navbar.contains(e.target)) {
-                mobileMenu.classList.remove('is-open');
-                menuToggle.classList.remove('is-active');
-                menuToggle.setAttribute('aria-expanded', 'false');
-                document.body.classList.remove('menu-open');
+                closeMenu();
             }
         });
 
         // Close on ESC key
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape' && mobileMenu.classList.contains('is-open')) {
-                mobileMenu.classList.remove('is-open');
-                menuToggle.classList.remove('is-active');
-                menuToggle.setAttribute('aria-expanded', 'false');
-                document.body.classList.remove('menu-open');
+                closeMenu();
             }
         });
     }
@@ -49,9 +64,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const handleScroll = () => {
         if (!navbar) return;
         if (window.scrollY > 20) {
-            navbar.classList.add('scrolled');
+            navbar.classList.add('scrolled', 'shadow-md');
         } else {
-            navbar.classList.remove('scrolled');
+            navbar.classList.remove('scrolled', 'shadow-md');
         }
     };
     window.addEventListener('scroll', handleScroll, { passive: true });
@@ -69,7 +84,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
         document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
     } else {
-        // Fallback for older browsers
         document.querySelectorAll('.fade-in').forEach(el => el.classList.add('visible'));
     }
 });
