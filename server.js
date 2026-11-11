@@ -88,6 +88,14 @@ const transporter = nodemailer.createTransport({
     }
 });
 
+// Accept only a single plain address (user@domain.tld). Rejects arrays/objects,
+// display names, comments, quotes, angle brackets and list separators before
+// anything reaches nodemailer's address parser.
+const isValidEmail = (value) =>
+    typeof value === 'string' &&
+    value.length <= 254 &&
+    /^[A-Za-z0-9.!#$%&'*+/=?^_`{|}~-]+@[A-Za-z0-9](?:[A-Za-z0-9-]*[A-Za-z0-9])?(?:\.[A-Za-z0-9](?:[A-Za-z0-9-]*[A-Za-z0-9])?)+$/.test(value);
+
 // ✅ Route to Add an Event (Now as a Request)
 app.post('/add-event', async (req, res) => {
     try {
@@ -95,6 +103,9 @@ app.post('/add-event', async (req, res) => {
         const { name, email, date, problem, location } = req.body;
         if (!name || !email || !date || !problem || !location) {
             return res.status(400).json({ error: "Missing required fields." });
+        }
+        if (!isValidEmail(email)) {
+            return res.status(400).json({ error: "Please enter a valid email address." });
         }
 
         // Validate that weekdays from 8 AM to 5 PM are not available
@@ -358,6 +369,9 @@ app.post('/contact', async (req, res) => {
         
         if (!name || !email || !message) {
             return res.status(400).json({ error: "Missing required fields (name, email, message)." });
+        }
+        if (!isValidEmail(email)) {
+            return res.status(400).json({ error: "Please enter a valid email address." });
         }
 
         const mailOptions = {
