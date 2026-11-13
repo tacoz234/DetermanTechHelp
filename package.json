@@ -5,13 +5,13 @@
   "dependencies": {
     "cors": "^2.8.5",
     "dotenv": "^16.4.7",
-    "express": "^4.21.2",
+    "express": "^4.22.3",
     "express-rate-limit": "^7.5.0",
     "gaxios": "^6.7.1",
     "googleapis": "^146.0.0",
     "helmet": "^8.1.0",
-    "mongoose": "^8.12.1",
-    "nodemailer": "^8.0.5"
+    "mongoose": "^8.24.8",
+    "nodemailer": "^10.5.0"
   },
   "scripts": {
     "start": "node server.js",
@@ -28,5 +28,11 @@
     "url": "https://github.com/tacoz234/DetermanTechHelp/issues"
   },
   "homepage": "https://github.com/tacoz234/DetermanTechHelp#readme",
-  "description": ""
+  "description": "",
+  "overrides": {
+    "uuid": "^11.1.1"
+  },
+  "engines": {
+    "node": ">=20"
+  }
 }
